@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Order;
+use App\Enums\UserRole;
 
 class User extends Authenticatable
 {
@@ -32,6 +33,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'role' => UserRole::class,
     ];
     public function products()
     {
@@ -47,4 +49,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class, 'user_id', 'user_id');
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::Admin;
+    }
+
+    public function isPurchaser(): bool
+    {
+        return $this->role === UserRole::Purchaser;
+    }
+
 }
