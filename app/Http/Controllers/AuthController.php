@@ -54,7 +54,7 @@ class AuthController extends Controller
             ])
         ) {
             $request->session()->regenerate();
-            return redirect()->route('auth.register');
+            return redirect()->route('orders.index');
         }
         return redirect()->back()->withErrors('Le mot de passe ou l\'email ne correspond pas');
     }

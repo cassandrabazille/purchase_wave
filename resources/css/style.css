@@ -550,7 +550,7 @@ max-width: 1400px;
   text-align: center;
   }
 
-  .left-nav,
+.left-nav,
 .right-nav {
   width: 100%;
   justify-content: center;
@@ -644,6 +644,7 @@ max-width: 1400px;
 
   .section1 {
     order: 1; /* pour que l'image passe en haut */
+   text-align: center;
   }
 
   .section2 {
@@ -655,6 +656,8 @@ max-width: 1400px;
   .imgpp {
     max-width: 90%;
     height: auto;
+  
+
   }
 
   .greyspace {

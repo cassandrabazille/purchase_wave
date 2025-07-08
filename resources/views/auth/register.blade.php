@@ -5,7 +5,7 @@
 @section('content')
     <main class="flexrow paddingt2">
         <section class="section1">
-            <img src="{{ asset('images/connexion.png') }}" alt="Image Connexion">
+            <img src="{{ asset('images/connexion.png') }}" alt="Image Connexion" class="imgpp">
         </section>
         <section class="section2">
             <h1 class="paddingt2 marginb3">Bienvenue sur PurchaseWave !</h1>
