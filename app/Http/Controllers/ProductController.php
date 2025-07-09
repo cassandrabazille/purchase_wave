@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Product;
 use App\Models\Category;
 
@@ -12,9 +13,9 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-       {
+    {
         $products = Product::all();
-        return view('products.index');
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -28,28 +29,30 @@ class ProductController extends Controller
 
     //  Store a newly created resource in storage.
 
+    public function show(string $id)
+    {
+        $product = Product::findOrFail($id);
+        return view('products.show', compact('product'));
+    }
 
     public function store(Request $request)
     {
-       $validated = $request->validate([
-            'reference' => 'required|date',
-            'slug' => 'required|date|after_or_equal:order_date',
+        $validated = $request->validate([
             'description' => 'required|string|max:1000',
-            'price' => 'required|numeric|min:0',,
-            'image' => 'required|exists:users,id',
+            'price' => 'required|numeric|min:0',
+            'image' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
         ]);
+
 
         $product = Product::create([
-
-            'reference' => $validated['reference'],
-             'slug' => $validated['slug'],
             'description' => $validated['description'],
-            'price' => $validated['description'],
-            'image' => $validated['description'],
-         
+            'price' => $validated['price'],
+            'image' => $validated['image'],
+            'category_id' => $validated['category_id']
         ]);
-        $product->categories()->attach($request->input('categories'));
-        return redirect()->back()->with('success', 'Produit créé avec succès');
+
+        return redirect()->route('products.index')->with('success', 'Produit créé avec succès');
     }
 
 
@@ -59,7 +62,8 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $product = Product::findOrFail($id);
-        return view('products.edit');
+        $categories = Category::all();
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -67,13 +71,21 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-        $category = Category::findOrFail($id);
 
-        $category->update([
-            'name' => $validated['name']
+        $product = Product::findOrFail($id);
+
+        $validated = $request->validate([
+            'description' => 'required|string|max:1000',
+            'price' => 'required|numeric|min:0',
+            'image' => 'required|string|max:255',
+            'category_id' => 'nullable|exists:categories,id',
+        ]);
+
+        $product->update([
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'image' => $validated['image'],
+            'category_id' => $validated['category_id'] ?? null,
         ]);
 
         return redirect()->route('products.index')
@@ -85,11 +97,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $product = Product::findOrFail($id);
+        $product->delete();
         return redirect()->route('products.index')
             ->with('success', 'Le produit a bien été supprimé.');
-
     }
 }
 
