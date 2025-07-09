@@ -2,27 +2,30 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Enums\UserRole;
 use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Order;
-use App\Enums\UserRole;
+use App\Models\Admin;
+use App\Models\Purchaser;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasUuids;
-    protected $primaryKey = "user_id";
+
+    protected $primaryKey = 'user_id';
     public $incrementing = false;
-    protected $keyType = "string";
+    protected $keyType = 'string';
+
     protected $fillable = [
         'name',
         'email',
         'password',
-        'role',
+        'role', // Champ utilisé temporairement
     ];
 
     protected $hidden = [
@@ -33,8 +36,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'role' => UserRole::class,
+        'role' => UserRole::class, // Cast vers enum UserRole
     ];
+
+    // Relations
     public function products()
     {
         return $this->hasMany(Product::class, 'user_id', 'user_id');
@@ -50,6 +55,17 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'user_id', 'user_id');
     }
 
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'user_id', 'user_id');
+    }
+
+    public function purchaser()
+    {
+        return $this->hasOne(Purchaser::class, 'user_id', 'user_id');
+    }
+
+    // Vérifications de rôle basées sur la colonne role (temporaire)
     public function isAdmin(): bool
     {
         return $this->role === UserRole::Admin;
@@ -59,5 +75,4 @@ class User extends Authenticatable
     {
         return $this->role === UserRole::Purchaser;
     }
-
 }
