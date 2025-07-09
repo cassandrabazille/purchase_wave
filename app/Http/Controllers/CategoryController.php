@@ -24,8 +24,6 @@ class CategoryController extends Controller
         return view('categories.create');
     }
 
-
-
     /**
      * Store a newly created resource in storage.
      */
@@ -81,7 +79,7 @@ class CategoryController extends Controller
         ]);
 
         return redirect()->route('categories.index')
-            ->with('success', 'La catégorie a bien été modifiée.'); // alertes à activer visuellement 
+            ->with('success', 'La catégorie a bien été modifiée.'); 
     }
 
     /**

@@ -8,7 +8,7 @@
 
     <div class="cdesachat-container">
     @if(session('success'))
-    <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: : 5px;">
+    <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
       {{ session('success') }}
     </div>
     @endif
@@ -37,7 +37,7 @@
         </form>
            <form action="{{ route('categories.edit', $category->id) }}" method="GET" style="display: inline;">
         <button type="submit" style=" background: none; border: none">
-        <img src="{{ asset('images/edit.png') }}" alt="Icône crayon pour modifier la catégorie la catégorie" />
+        <img src="{{ asset('images/edit.png') }}" alt="Icône crayon pour modifier la catégorie" />
         </button>
         </form>
         <form action="{{ route('categories.destroy', $category) }}" method="POST" class="d-inline"
