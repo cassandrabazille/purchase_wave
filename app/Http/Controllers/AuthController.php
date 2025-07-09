@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Purchaser;
 
 
 class AuthController extends Controller
@@ -28,8 +30,13 @@ class AuthController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'role' => $request->input('role'),
         ]);
+
+        if ($request->input('role') === 'admin') {
+            Admin::create(['user_id' => $user->user_id]);
+        } elseif ($request->input('role') === 'purchaser') {
+            Purchaser::create(['user_id' => $user->user_id]);
+        }
 
         \Auth::login($user);
 
