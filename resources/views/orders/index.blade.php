@@ -20,19 +20,22 @@
         <tr>
         <th>Reference</th>
         <th>Date cde</th>
+        <th>Acheteur*se</th>
         <th>Statut</th>
         <th>Fournisseur</th>
         <th>Montant HT (€)</th>
-        <th>Date de livraison</th>
+        <th>Livraison initiale</th>
+        <th>Livraison confirmée</th>
         <th>Actions</th>
         </tr>
         @foreach ($orders as $order)
       <tr>
       <td>{{$order->reference}}</td>
       <td>{{date('d/m/Y', strtotime($order->order_date))}}</td>
+      <td>{{$order->user->name}}</td>
       <td>{{$order->status}}</td>
-        <td>{{$order->supplier->name ?? 'N/A'}}</td>
-        <td>{{number_format($order->order_amount, 2, ',', ' ')}}</td>
+      <td>{{$order->supplier->name}}</td>
+      <td>{{number_format($order->order_amount, 2, ',', ' ')}}</td>
       <td>{{ $order->expected_delivery_date ? date('d/m/Y', strtotime($order->expected_delivery_date)) : 'N/A' }}
       </td>
       <td>
