@@ -68,5 +68,8 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require": {
+        "doctrine/dbal": "^4.2"
+    }
 }

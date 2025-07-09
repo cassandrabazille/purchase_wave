@@ -12,15 +12,16 @@
                 </a>
             </div>
             <div class="whitebox">
-                <h2 class="padding2">Création de la catégorie</h2>
-                <form action="{{ route('categories.store') }}" method="POST">
+                <h2 class="padding2">Modification de la catégorie</h2>
+                <form action="{{ route('categories.update', $category->id)}}" method="POST">
                     @csrf
-                     @method('PUT')
-                    <p class="marginb2">Nom de la catégoire : <input type="text" name="name"></p>
-                    <p class="marginb2">Descriptif de la catégoire : <input type="text" name="description"></p>
+                    @method('PUT')
+                    <p class="marginb2">Nouveau nom de la catégoire : <input type="text" name="name"
+                            value="{{ old('name', $category->name) }}"></p>
+                    <p class="marginb2">Nouveau descriptif de la catégoire : <input type="text" name="description"
+                            value="{{ old('description', $category->description) }}"></p>
                     <button type="submit">Confirmer</button>
                 </form>
-
                 <!-- etc. -->
             </div>
         </div>

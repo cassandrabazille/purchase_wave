@@ -34,8 +34,8 @@ class ProductController extends Controller
        $validated = $request->validate([
             'reference' => 'required|date',
             'slug' => 'required|date|after_or_equal:order_date',
-            'description' => 'required|numeric|min:0',
-            'price' => 'required|exists:suppliers,id',
+            'description' => 'required|string|max:1000',
+            'price' => 'required|numeric|min:0',,
             'image' => 'required|exists:users,id',
         ]);
 

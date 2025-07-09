@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Category;
 
 class CategoryController extends Controller
 {
-      public function index(Request $request)
+    public function index(Request $request)
     {
         $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        return view('categories.index', compact('categories'));  // compact sert à passer à la vue index la variable $categories pour qu'elle soit disponible dans blade
+
     }
 
     /**
@@ -30,15 +32,16 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
-         $validated = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-             'slug' => 'required|string|max:255',
+            'description' => 'required|string|max:1000'
         ]);
 
         Category::create([
 
             'name' => $validated['name'],
-            'slug' => $validated['slug']
+            'slug' => Str::slug($validated['name']),
+            'description' => $validated['description']
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Catégorie créée avec succès');
@@ -48,7 +51,7 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         $category = Category::findOrFail($id);
-        return view('categories.show');
+        return view('categories.show', compact('category'));
     }
 
 
@@ -58,24 +61,27 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = Category::findOrFail($id);
-        return view('categories.edit');
+        return view('categories.edit', compact('category'));
     }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-          $validated = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'required|string|max:1000'
         ]);
         $category = Category::findOrFail($id);
 
         $category->update([
-         'name' => $validated['name']
+            'name' => $validated['name'],
+            'slug' => Str::slug($validated['name']),
+            'description' => $validated['description']
         ]);
 
         return redirect()->route('categories.index')
-            ->with('success', 'La catégorie a bien été modifiée.');
+            ->with('success', 'La catégorie a bien été modifiée.'); // alertes à activer visuellement 
     }
 
     /**
