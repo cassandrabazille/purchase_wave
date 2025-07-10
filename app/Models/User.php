@@ -11,7 +11,6 @@ use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Order;
 use App\Models\Admin;
-use App\Models\Purchaser;
 
 class User extends Authenticatable
 {
@@ -60,19 +59,5 @@ class User extends Authenticatable
         return $this->hasOne(Admin::class, 'user_id', 'user_id');
     }
 
-    public function purchaser()
-    {
-        return $this->hasOne(Purchaser::class, 'user_id', 'user_id');
-    }
 
-    // Vérifications de rôle basées sur la colonne role (temporaire)
-    public function isAdmin(): bool
-    {
-        return $this->role === UserRole::Admin;
-    }
-
-    public function isPurchaser(): bool
-    {
-        return $this->role === UserRole::Purchaser;
-    }
-}
+  } 

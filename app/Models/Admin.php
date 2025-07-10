@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
-    protected $fillable = ['user_id'];
+    protected $fillable = ['email', 'name', 'password'];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'user_id');
-    }
+    protected $hidden = ['password', 'remember_token'];
+
+    protected $casts =  [
+        'email_verified_at' => 'datetime',
+    ];
 
 }
 

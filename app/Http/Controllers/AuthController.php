@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
-use App\Models\Purchaser;
 
 
 class AuthController extends Controller
@@ -25,20 +24,23 @@ class AuthController extends Controller
             'role' => 'required|string'
         ]);
 
-
-        $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-        ]);
-
         if ($request->input('role') === 'admin') {
-            Admin::create(['user_id' => $user->user_id]);
-        } elseif ($request->input('role') === 'purchaser') {
-            Purchaser::create(['user_id' => $user->user_id]);
-        }
+            $admin = Admin::create([
+                'name'=>$request->input('name'),
+                'email'=>$request->input('email'),
+                'password' => bcrypt($request->input('password')),
+            ]);
 
-        \Auth::login($user);
+            \Auth::login($admin);
+        }
+        else {
+            $user= User::create([
+                  'name'=>$request->input('name'),
+                'email'=>$request->input('email'),
+                'password' => bcrypt($request->input('password')),
+            ]);
+                 \Auth::login($user);
+        }
 
         return redirect()->route('auth.showLogin');
 
