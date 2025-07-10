@@ -19,7 +19,12 @@ Route::post('register', [AuthController::class, 'doRegister'])->name('auth.regis
 //orders
 Route::get('orders.index', [OrderController::class, 'index'])->name('orders.index');
 Route::get('orders.create', [OrderController::class, 'create'])->name('orders.create');
-Route::get('orders.store', [OrderController::class, 'store'])->name('orders.store');
+Route::post('orders.store', [OrderController::class, 'store'])->name('orders.store');
+Route::get('orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+Route::put('orders/{id}', [OrderController::class, 'update'])->name('orders.update');
+Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+Route::delete('orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
+
 
 //categories
 Route::get('categories.index', [CategoryController::class, 'index'])->name('categories.index');
