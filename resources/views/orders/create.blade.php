@@ -14,19 +14,31 @@
             <div class="whitebox">
                 <h2 class="padding2">Création de la commande</h2>
 
-                <form action="POST" {{ route('orders.store') }}>
+                <form action=" {{ route('orders.store') }}" method="POST">
+                    @csrf
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <p class="marginb2">Date de commande : {{ old('order_date', now()->format('d-m-Y')) }}</p>
                     <p>Fournisseur :
-                        <select name="supplier_id" class="marginb2">
+                        <select name="supplier_id" class="marginb2" required>
                             @foreach ($suppliers as $supplier)
-                                <option value="{{$supplier->id}}">{{ $supplier->name }}</option>
+                                <option value="{{$supplier->id}}" {{ old('supplier_id') == $supplier->id ? 'selected' : '' }}>
+                                    {{ $supplier->name }}</option>
                             @endforeach
                         </select>
                     </p>
-                    <p class="marginb2">Montant HT (€) : <input type="text"></p>
-                    <p>Date de livraison : <input type="date" name="delivery_date" min="{{ now()->format('d-m-Y') }}"
-                            class="form-control"></p>
-
+                    <p class="marginb2">Montant HT (€) : <input type="text" name="order_amount"
+                            value="{{ old('order_amount') }}"></p>
+                    <p>Date de livraison : <input type="date" name="expected_delivery_date"
+                            min="{{ now()->format('d-m-Y') }}" class="form-control"></p>
                     <button type="submit">Confirmer</button>
 
                 </form>
