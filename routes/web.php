@@ -1,16 +1,14 @@
 <?php
 
-use App\Http\Controllers\CategorieController;
+
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-// use App\Http\Controllers\UserController;
-// use App\Http\Controllers\CategorieController;
-// use App\Http\Controllers\SupplierController;
-// use App\Http\Controllers\ProduitController;
+
 
 //login & register
 Route::get('login', [AuthController::class, 'showlogin'])->name('auth.showLogin');
@@ -49,3 +47,12 @@ Route::get('suppliers/{id}/edit', [SupplierController::class, 'edit'])->name('su
 Route::put('suppliers/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
 Route::get('suppliers/{id}', [SupplierController::class, 'show'])->name('suppliers.show');
 Route::delete('suppliers/{id}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
+
+//orderitem
+Route::get('orderitems.index', [OrderItemController::class, 'index'])->name('orderitems.index');
+Route::get('orderitems.create', [OrderItemController::class, 'create'])->name('orderitems.create');
+Route::post('orderitems', [OrderItemController::class, 'store'])->name('orderitems.store');
+Route::get('orderitems/{id}/edit', [OrderItemController::class, 'edit'])->name('orderitems.edit');
+Route::put('orderitems/{id}', [OrderItemController::class, 'update'])->name('orderitems.update');
+Route::get('orderitems/{id}', [OrderItemController::class, 'show'])->name('orderitems.show');
+Route::delete('orderitems/{id}', [OrderItemController::class, 'destroy'])->name('orderitems.destroy');
