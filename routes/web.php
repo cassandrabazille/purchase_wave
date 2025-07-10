@@ -4,6 +4,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 // use App\Http\Controllers\UserController;
@@ -40,3 +41,11 @@ Route::put('products/{id}', [ProductController::class, 'update'])->name('product
 Route::get('products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+//supplier
+Route::get('suppliers.index', [SupplierController::class, 'index'])->name('suppliers.index');
+Route::get('suppliers.create', [SupplierController::class, 'create'])->name('suppliers.create');
+Route::post('suppliers.store', [SupplierController::class, 'store'])->name('suppliers.store');
+Route::get('suppliers/{id}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit');
+Route::put('suppliers/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
+Route::get('suppliers/{id}', [SupplierController::class, 'show'])->name('suppliers.show');
+Route::delete('suppliers/{id}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
