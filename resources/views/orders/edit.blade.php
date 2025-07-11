@@ -28,25 +28,11 @@
                             Annulée
                         </option>
                     </select>
-                    <br>
-                    <select name="supplier_id" class="form-select marginb2">
-                        <option value="">-- Sélectionnez un fournisseur --</option>
-                        @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}" {{ old('supplier_id', $order->supplier_id) == $supplier->id ? 'selected' : '' }}>
-                                {{ $supplier->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <p>Nouvelle date de livraison : <input type="date" name="expected_delivery_date"
+                    <p>Nouvelle date de livraison : <input type="date" name="confirmed_delivery_date"
                             min="{{ $order->order_date->format('d-m-Y') }}"
-                            value="{{ old('expected_delivery_date', $order->expected_delivery_date ? $order->expected_delivery_date->format('Y-m-d') : '') }}"
+                            value="{{ old('confirmed_delivery_date', $order->confirmed_delivery_date ? $order->confirmed_delivery_date->format('Y-m-d') : '') }}"
                             class="form-control"></p>
 
-                    <br>
-                    <p> Montant HT(€)
-                        <input type="number" name="order_amount" step="0.01"
-                            value="{{ old('order_amount', $order->order_amount) }}">
-                    </p>
                     <button type="submit">Confirmer</button>
 
                 </form>

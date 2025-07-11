@@ -61,3 +61,5 @@ Route::get('orderitems/{id}/edit', [OrderItemController::class, 'edit'])->name('
 Route::put('orderitems/{id}', [OrderItemController::class, 'update'])->name('orderitems.update');
 Route::get('orderitems/{id}', [OrderItemController::class, 'show'])->name('orderitems.show');
 Route::delete('orderitems/{id}', [OrderItemController::class, 'destroy'])->name('orderitems.destroy');
+
+

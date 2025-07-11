@@ -17,10 +17,10 @@ class OrderItemController extends Controller
     }
     public function create()
     {
-        $orders = Order::all();
+        $order = Order::findOrFail(request('order_id'));
         $products = Product::all();
 
-        return view('orderitems.create', compact('orders', 'products'));
+        return view('orderitems.create', compact('order', 'products'));
 
     }
 
@@ -30,35 +30,38 @@ class OrderItemController extends Controller
         return view('orderitems.show', compact('orderitem'));
     }
 
+    // app/Http/Controllers/OrderItemController.php
     public function store(Request $request)
     {
         $validated = $request->validate([
             'order_id' => 'required|exists:orders,id',
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|numeric|min:0',
-            'unit_price' => 'required|numeric|min:0',
-            'line_total' => 'required|numeric|min:0',
-
+            'items' => 'required|array|min:1',
+            'items.*.product_id' => 'required|exists:products,id',
+            'items.*.quantity' => 'required|integer|min:1',
         ]);
 
+        foreach ($validated['items'] as $item) {
+            $product = Product::find($item['product_id']);
+            $orderitem = OrderItem::create([
+                'order_id' => $validated['order_id'],
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'unit_price' => $product->price,
+                'line_total' => $product->price * $item['quantity'],
+            ]);
 
-        $orderitem = OrderItem::create([
-            'order_id' => $validated['order_id'],
-            'product_id' => $validated['product_id'],
-            'quantity' => $validated['quantity'],
-            'unit_price' => $validated['unit_price'],
-            'line_total' => $validated['line_total'],
-        ]);
+            $orderitem->order->recalculateAmount();
+        }
 
-        return redirect()->route('orderitems.index')->with('success', 'Ligne de commande créée avec succès');
+        return redirect()->route('orders.show', $validated['order_id'])
+            ->with('success', 'Lignes créées avec succès.');
     }
-
     public function edit(string $id)
     {
         $orderitem = OrderItem::findOrFail($id);
         $orders = Order::all();
         $products = Product::all();
-        return view('orderitems.edit', compact('orderitem','orders','products'));
+        return view('orderitems.edit', compact('orderitem', 'orders', 'products'));
     }
 
     public function update(Request $request, string $id)
@@ -66,32 +69,32 @@ class OrderItemController extends Controller
 
         $orderitem = OrderItem::findOrFail($id);
 
+
         $validated = $request->validate([
-            'order_id' => 'required|exists:orders,id',
-            'product_id' => 'required|exists:products,id',
             'quantity' => 'required|numeric|min:0',
             'unit_price' => 'required|numeric|min:0',
-            'line_total' => 'required|numeric|min:0',
-
         ]);
 
+        $lineTotal = $validated['unit_price'] * $validated['quantity'];
         $orderitem->update([
-            'order_id' => $validated['order_id'],
-            'product_id' => $validated['product_id'],
             'quantity' => $validated['quantity'],
             'unit_price' => $validated['unit_price'],
-            'line_total' => $validated['line_total'],
+            'line_total' => $lineTotal,
 
         ]);
 
-        return redirect()->route('orderitems.index')
+        $orderitem->order->recalculateAmount();
+
+        return redirect()->route('orders.show', ['id' => $orderitem->order_id])
             ->with('success', 'La ligne de commande a bien été modifiée.');
     }
     public function destroy(string $id)
     {
         $orderitem = OrderItem::findOrFail($id);
+        $order = $orderitem->order;
         $orderitem->delete();
-        return redirect()->route('orderitems.index')
+        $order->recalculateAmount();
+        return redirect()->route('orders.show', ['id' => $order->id])
             ->with('success', 'La ligne de commande a bien été supprimée.');
 
     }

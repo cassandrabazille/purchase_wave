@@ -11,6 +11,7 @@ class Order extends Model
 
     protected $casts = [
         'order_date' => 'datetime',
+        'confirmed_delivery_date' => 'datetime',
         'expected_delivery_date' => 'datetime',
     ];
     public function supplier()
@@ -36,6 +37,12 @@ class Order extends Model
                 $order->save();
             }
         });
+    }
+
+    public function recalculateAmount() 
+    {
+        $this->order_amount = $this->orderItems()->sum('line_total');
+        $this->save();
     }
 }
 

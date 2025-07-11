@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\ProductController;
+use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Database\Console\ShowCommand;
 use Illuminate\Http\Request;
 use App\Models\Order;
@@ -50,49 +53,45 @@ class OrderController extends Controller
 
     }
 
-    public function show(string $id)
+    public function show($id)
     {
-        $order = Order::findOrFail($id);
-        return view('orders.show', compact('order'));
+        $order = Order::with('supplier')->findOrFail($id);
+        $orderitems = $order->orderItems()->with('product')->get();
+       
+        return view('orders.show', compact('order', 'orderitems'));
     }
 
     public function store(Request $request)
     {
-
-            // Debug 1: Vérifiez l'utilisateur connecté
-    \Log::debug('Authenticated user:', [
-        'id' => auth()->id(),
-        'user' => auth()->user() ? auth()->user()->toArray() : null
-    ]);
+ 
 
         $validated = $request->validate([
             'expected_delivery_date' => 'required|date',
-            'order_amount' => 'required|numeric|min:0',
             'supplier_id' => 'required|exists:suppliers,id',
         ]);
 
-            // Debug 2: Avant création
-    \Log::debug('Data before creation:', [
-        'user_id' => auth()->id(),
-        'supplier_id' => $validated['supplier_id'],
-        'auth_check' => auth()->check()
-    ]);
 
         $order = Order::create([
             'order_date' => now(),
             'expected_delivery_date' => $validated['expected_delivery_date'],
             'confirmed_delivery_date' => null,
             'status' => 'pending',
-            'order_amount' => $validated['order_amount'],
+            'order_amount' => 0,
             'supplier_id' => $validated['supplier_id'],
             'user_id' => auth()->id(),
         ]);
 
-        
-    // Debug 3: Après création
-    \Log::debug('Order created:', $order->toArray());
+            $orderDate=Carbon::parse($order->order_date);
+        $expectedDate = Carbon::parse($validated['expected_delivery_date']);
+      
 
-        return redirect()->route('orders.index')->with('success', 'Ligne de commande créée avec succès');
+        if ($expectedDate->lt($orderDate)) {
+
+            return back()->withErrors(['expected_delivery_date' => 'La date de livraison doit être postérieure ou égale à la date de commande'])->withInput();
+
+        }
+
+        return redirect()->route('orderitems.create', ['order_id' =>$order->id])->with('success', 'Commande créée avec succès');
     }
 
     public function edit(string $id)
@@ -113,29 +112,14 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
 
         $validated = $request->validate([
-            'expected_delivery_date' => 'required|date',
             'confirmed_delivery_date' => 'nullable|date',
-            'order_amount' => 'required|numeric|min:0',
-            'supplier_id' => 'required|exists:suppliers,id',
             'status' => 'required|in:pending,confirmed,shipped,cancelled',
         ]);
 
-        $orderDate=Carbon::parse($order->order_date);
-        $expectedDate = Carbon::parse($validated['expected_delivery_date']);
-      
-
-        if ($expectedDate->lt($orderDate)) {
-
-            return back()->withErrors(['expected_delivery_date' => 'La date de livraison doit être postérieure ou égale à la date de commande'])->withInput();
-
-        }
-
+    
     
         $order->update([
-            'expected_delivery_date' => $validated['expected_delivery_date'],
             'confirmed_delivery_date' => $validated['confirmed_delivery_date'] ?? null,
-            'order_amount' => $validated['order_amount'],
-            'supplier_id' => $validated['supplier_id'],
             'status' => $validated['status'],
         ]);
 

@@ -12,12 +12,12 @@
                 </a>
             </div>
             <div class="whitebox">
-                <h2 class="padding2">Détail de la ligne de commande</h2>
-                <p>Commande rattachée à la ligne: {{ $orderitem->order->reference }}</p>
-                <p>Produit rattaché à la ligne {{ $orderitem->product->reference }}</p>
-                <p>Quantité de produits : {{ $orderitem->quantity }}</p>
-                <p>Prix unitaire du produit : {{ $orderitem->unit_price }}</p>
-                <p>Montant total de la ligne: {{ $orderitem->line_total}}</p>
+                <h2 class="padding2">Détail du produit</h2>
+                <p>Référence du produit : {{ $product->reference }}</p>
+                <p>Descriptif du produit : {{ $product->description }}</p>
+                <p>Prix du produit : {{ $product->price }}</p>
+                <p>Image du produit : {{ $product->image }}</p>
+                <p>Catégorie du produit : {{ $product->category ? $product->category->name : 'Aucune catégorie'}}</p>
                 
             </div>
         </div>

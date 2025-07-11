@@ -25,8 +25,6 @@
                             </ul>
                         </div>
                     @endif
-
-                    <p class="marginb2">Date de commande : {{ old('order_date', now()->format('d-m-Y')) }}</p>
                     <p>Fournisseur :
                         <select name="supplier_id" class="marginb2" required>
                             @foreach ($suppliers as $supplier)
@@ -35,8 +33,6 @@
                             @endforeach
                         </select>
                     </p>
-                    <p class="marginb2">Montant HT (€) : <input type="text" name="order_amount"
-                            value="{{ old('order_amount') }}"></p>
                     <p>Date de livraison : <input type="date" name="expected_delivery_date"
                             min="{{ now()->format('d-m-Y') }}" class="form-control"></p>
                     <button type="submit">Confirmer</button>

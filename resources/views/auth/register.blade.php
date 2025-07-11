@@ -25,12 +25,6 @@
 
                 <p class="password marginb2">Confirmation du mot de passe :</p>
                 <input type="password" name="password_confirmation" class="greyspace marginb3" />
-                <p class="password marginb2">Rôle :
-                    <select name="role" class="marginb2">
-                        <option value="purchaser">Purchaser</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </p>
                 <button type=submit class="margint25">Register</button>
         </section>
     </main>
