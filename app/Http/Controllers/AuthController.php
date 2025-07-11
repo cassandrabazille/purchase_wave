@@ -20,7 +20,6 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:4|confirmed',
-            'role' => 'required|string'
         ]);
 
 
@@ -28,7 +27,6 @@ class AuthController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'role' => $request->input('role'),
         ]);
 
         \Auth::login($user);

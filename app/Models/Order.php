@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\OrderItem;
 class Order extends Model
 {
-    protected $fillable = ['reference', 'order_date', 'expected_delivery_date', 'confirmed_delivery_date', 'status', 'order_amount'];
+    protected $fillable = ['reference', 'order_date', 'expected_delivery_date', 'confirmed_delivery_date', 'status', 'order_amount','user_id','supplier_id'];
 
     protected $casts = [
         'order_date' => 'datetime',

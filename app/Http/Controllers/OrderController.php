@@ -59,12 +59,24 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
+            // Debug 1: Vérifiez l'utilisateur connecté
+    \Log::debug('Authenticated user:', [
+        'id' => auth()->id(),
+        'user' => auth()->user() ? auth()->user()->toArray() : null
+    ]);
+
         $validated = $request->validate([
             'expected_delivery_date' => 'required|date',
             'order_amount' => 'required|numeric|min:0',
             'supplier_id' => 'required|exists:suppliers,id',
         ]);
 
+            // Debug 2: Avant création
+    \Log::debug('Data before creation:', [
+        'user_id' => auth()->id(),
+        'supplier_id' => $validated['supplier_id'],
+        'auth_check' => auth()->check()
+    ]);
 
         $order = Order::create([
             'order_date' => now(),
@@ -76,8 +88,10 @@ class OrderController extends Controller
             'user_id' => auth()->id(),
         ]);
 
+        
+    // Debug 3: Après création
+    \Log::debug('Order created:', $order->toArray());
 
-        $order->update(['reference' => 'ORD-' . $order->id]);
         return redirect()->route('orders.index')->with('success', 'Ligne de commande créée avec succès');
     }
 
