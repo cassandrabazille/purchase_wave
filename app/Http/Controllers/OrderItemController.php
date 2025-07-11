@@ -26,8 +26,9 @@ class OrderItemController extends Controller
 
     public function show(string $id)
     {
+        $product = Product::findOrFail($id);
         $orderitem = OrderItem::findOrFail($id);
-        return view('orderitems.show', compact('orderitem'));
+        return view('orderitems.show', compact('orderitem', 'product'));
     }
 
     // app/Http/Controllers/OrderItemController.php

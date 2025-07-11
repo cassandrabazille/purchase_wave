@@ -11,7 +11,7 @@ use App\Models\OrderItem;
 
 class Product extends Model
 {
-    protected $fillable = ['reference', 'slug', 'description', 'price', 'image'];
+    protected $fillable = ['reference', 'slug', 'description', 'price', 'image', 'category_id'];
 
     public function category()
     {

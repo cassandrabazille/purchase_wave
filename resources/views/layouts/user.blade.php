@@ -27,6 +27,7 @@
         <nav class="right-nav">
             <a class="paddingr53 white" href="{{ route('orders.index') }}">Dashboard</a>
             <a class="paddingr53 white" href="{{ route('orders.index') }}">Commandes</a>
+             <a class="paddingr53 white" href="{{ route('products.index') }}">Produits</a>
 
             <div class="user-info flexrow">
                 <img
