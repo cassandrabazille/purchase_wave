@@ -21,7 +21,6 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:4|confirmed',
-            'role' => 'required|string'
         ]);
 
         if ($request->input('role') === 'admin') {
@@ -30,6 +29,7 @@ class AuthController extends Controller
                 'email'=>$request->input('email'),
                 'password' => bcrypt($request->input('password')),
             ]);
+
 
             \Auth::login($admin);
         }

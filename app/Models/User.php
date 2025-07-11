@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Order;
+<<<<<<< HEAD
 use App\Models\Admin;
+=======
+>>>>>>> US5
 
 class User extends Authenticatable
 {
@@ -51,6 +54,7 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'user_id', 'user_id');
     }
 
+<<<<<<< HEAD
     public function admin()
     {
         return $this->hasOne(Admin::class, 'user_id', 'user_id');
@@ -58,3 +62,6 @@ class User extends Authenticatable
 
 
   } 
+=======
+}
+>>>>>>> US5
