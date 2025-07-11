@@ -77,7 +77,6 @@ class OrderController extends Controller
         ]);
 
 
-        $order->update(['reference' => 'ORD-' . $order->id]);
         return redirect()->route('orders.index')->with('success', 'Ligne de commande créée avec succès');
     }
 

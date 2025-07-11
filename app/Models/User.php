@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use App\Enums\UserRole;
 use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Order;
@@ -24,7 +23,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role', // Champ utilisé temporairement
     ];
 
     protected $hidden = [
@@ -35,7 +33,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'role' => UserRole::class, // Cast vers enum UserRole
     ];
 
     // Relations
