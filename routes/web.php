@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductController;
@@ -70,3 +71,7 @@ Route::get('orderitems/{id}', [OrderItemController::class, 'show'])->name('order
 Route::delete('orderitems/{id}', [OrderItemController::class, 'destroy'])->name('orderitems.destroy');
 
 
+//dashboard
+
+Route::get('dashboard.index', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('index/status', [DashboardController::class, 'showStatus'])->name('dashboard.index.status');
