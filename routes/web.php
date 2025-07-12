@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
@@ -15,6 +16,12 @@ Route::get('login', [AuthController::class, 'showlogin'])->name('auth.showLogin'
 Route::post('login', [AuthController::class, 'doLogin'])->name('auth.login');
 Route::get('register', [AuthController::class, 'showRegister'])->name('auth.showRegister');;
 Route::post('register', [AuthController::class, 'doRegister'])->name('auth.register');
+Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+//account
+Route::get('/account/edit', [AccountController::class, 'edit'])->name('account.edit');
+Route::patch('account/infos', [AccountController::class, 'update'])->name('profile.account.infos');
+Route::patch('account/password', [AccountController::class, 'updatePassword'])->name('profile.account.password');
 
 //orders
 Route::get('orders.index', [OrderController::class, 'index'])->name('orders.index');

@@ -63,6 +63,26 @@ header.flexrow {
   padding: 1rem 2rem;
 }
 
+.user-info {
+  display: flex;
+  align-items: center; 
+  gap: 10px; 
+  position: relative; 
+}
+
+.dropdown {
+  position: relative; 
+}
+
+.dropdown-child {
+  display: none;
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  white-space: nowrap;
+}
+
 .right-nav {
   display: flex;
   align-items: center;
@@ -464,6 +484,35 @@ background-color: #fff;
   flex-wrap: wrap; /* ✅ Pour éviter l'écrasement sur petit écran */
 }
 
+/* ================== ACCOUNT ================== */
+
+/* Conteneur principal */
+.forms-container {
+    display: flex;
+    gap: 20px; /* Espace entre les colonnes */
+    width: 100%;
+}
+
+/* Colonnes de formulaire */
+.form-column {
+    flex: 1; /* Les deux colonnes prennent la même largeur */
+    min-width: 0; /* Empêche le débordement */
+}
+
+/* Adaptation mobile */
+@media (max-width: 768px) {
+    .forms-container {
+        flex-direction: column;
+    }
+}
+
+/* Conservez vos styles existants */
+.whitebox {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
 
 /* ================== RESPONSIVE ================== */

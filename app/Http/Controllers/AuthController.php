@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 
 
 class AuthController extends Controller
@@ -23,26 +24,15 @@ class AuthController extends Controller
             'password' => 'required|min:4|confirmed',
         ]);
 
-        if ($request->input('role') === 'admin') {
-            $admin = Admin::create([
-                'name'=>$request->input('name'),
-                'email'=>$request->input('email'),
-                'password' => bcrypt($request->input('password')),
-            ]);
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ]);
 
+        \Auth::login($user);
 
-            \Auth::login($admin);
-        }
-        else {
-            $user= User::create([
-                  'name'=>$request->input('name'),
-                'email'=>$request->input('email'),
-                'password' => bcrypt($request->input('password')),
-            ]);
-                 \Auth::login($user);
-        }
-
-        return redirect()->route('auth.showLogin');
+        return redirect()->route('orders.index');
 
     }
     public function showLogin()
@@ -53,19 +43,19 @@ class AuthController extends Controller
     public function doLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required',
-            'password' => 'required|min:4'
+            'email' => 'required|string|max:255',
+            'password' => 'required|min:4',
         ]);
-        if (
-            \Auth::attempt([
-                'email' => $request->input('email'),
-                'password' => $request->input('password')
-            ])
-        ) {
+
+        if (\Auth::guard('web')->attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
             return redirect()->route('orders.index');
+        } elseif (\Auth::guard('admin')->attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+            return redirect()->route('admin.index');
+        } else {
+            return redirect()->back()->withErrors('Email ou mot de passe incorrect');
         }
-        return redirect()->back()->withErrors('Le mot de passe ou l\'email ne correspond pas');
     }
 
     public function logout(Request $request)
@@ -74,7 +64,7 @@ class AuthController extends Controller
         \Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('auth.login');
+        return redirect()->route('auth.showLogin');
     }
 
 }
