@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
@@ -72,6 +73,12 @@ Route::delete('orderitems/{id}', [OrderItemController::class, 'destroy'])->name(
 
 
 //dashboard
-
 Route::get('dashboard.index', [DashboardController::class, 'index'])->name('dashboard.index');
 Route::get('index/status', [DashboardController::class, 'showStatus'])->name('dashboard.index.status');
+
+//admin
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin/{user_id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+Route::patch('/admin/{user_id}/update', [AdminController::class, 'update'])->name('admin.update');
+Route::delete('/admin/{user_id}/destroy', [AdminController::class, 'destroy'])->name('admin.destroy');
+

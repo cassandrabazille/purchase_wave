@@ -26,9 +26,9 @@
             <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo PurchaseWave" />
         </nav>
         <nav class="right-nav">
-            <a class="paddingr53 white" href="{{ route('dashboard.index') }}">Dashboard</a>
-            <a class="paddingr53 white" href="{{ route('orders.index') }}">Commandes</a>
-            <a class="paddingr53 white" href="{{ route('products.index') }}">Produits</a>
+            <a class="paddingr53 white" href="{{ route('admin.index') }}">Dashboard</a>
+            <a class="paddingr53 white" href="{{ route('admin.index') }}">Comptes utilisateurs</a>
+         
 
             <div class="user-info flexrow">
                 <img src="{{ asset('images/user-img.png') }}" alt="Image de l'utilisatrice Jane Doe" />
@@ -36,7 +36,7 @@
 
                     <input type="checkbox" id="toggle-dropdown" style="display:none;">
                     <p for="toggle-dropdown" style="cursor:pointer">
-                        {{ Auth::user()->name }} 
+                       {{ Auth::guard('admin')->user()->name }} 
                     </p>
                     <div class="dropdown-child flexcolumn">
                         <a href="{{ route('account.edit') }}"
