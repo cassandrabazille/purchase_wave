@@ -19,7 +19,7 @@
             </div>
               <div class="btn-wrapper">
       <a href={{route('orderitems.create', ['order_id'=>$order->id])}}>
-      <button class="blackbtn textalignr">Créer une nouvelle ligne de commande</button>
+      <button class="blackbtn textalignr">Créer une ligne de commande</button>
       </a>
     </div>
             <div class="whitebox">

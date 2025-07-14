@@ -26,7 +26,7 @@ class DashboardController extends Controller
                 'confirmed_delivery_date',
                 'order_amount'
             ])
-            ->limit(5)
+            ->limit(8)
             ->get();
 
 
@@ -43,7 +43,7 @@ class DashboardController extends Controller
                 \DB::raw('DATEDIFF(NOW(), COALESCE(confirmed_delivery_date, expected_delivery_date)) as days_late'),
                 'order_amount'
             ])
-            ->limit(6)
+            ->limit(8)
             ->get();
 
 

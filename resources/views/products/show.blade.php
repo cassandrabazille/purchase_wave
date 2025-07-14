@@ -13,12 +13,12 @@
             </div>
             <div class="whitebox">
                 <h2 class="padding2">Détail du produit</h2>
-                <p>Référence du produit : {{ $product->reference }}</p>
-                <p>Descriptif du produit : {{ $product->description }}</p>
-                <p>Prix du produit : {{ $product->price }}</p>
+                <p>Référence du produit : <strong>{{ $product->reference }}</strong></p>
+                <p>Descriptif du produit : <strong>{{ $product->description }}</strong></p>
+                 <p>Catégorie du produit : <strong>{{ $product->category ? $product->category->name : 'Aucune catégorie'}}</strong></p>
+                <p>Prix du produit : <strong>{{ $product->price }} €</strong></p>
                 <img src="{{ asset('images/' .$product->image) }}" alt="Image du produit {{ $product->reference }}" class="pdtimg">
-                <p>Catégorie du produit : {{ $product->category ? $product->category->name : 'Aucune catégorie'}}</p>
-                
+
             </div>
         </div>
     </main>

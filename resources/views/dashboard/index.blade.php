@@ -5,7 +5,7 @@
 @section('content')
 
 <main class="flexrow paddingt2">
-    <div class="cdesachat-container">
+    <div class="dashboard-index">
         @if(session('success'))
             <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
                 {{ session('success') }}
@@ -31,9 +31,7 @@
                     <div class="flexcolumn ">
                         @forelse ($upcoming as $index => $order)
                         <div class="order-{{ $index + 1 }}">
-                            <p>{{ $index + 1 }}. {{   $order->reference}}</p>
-                            <p>Date : {{ $order->confirmed_delivery_date->format('d/m/Y') }}</p>
-                            <p>CA : {{ number_format($order->order_amount, 0, ',', ' ') }} €</p>
+                            <p> <strong>{{   $order->reference}}</strong> arrive le  {{ $order->confirmed_delivery_date->format('d/m/Y') }}</p>
                         </div>
                         @empty
                         <p>Aucune livraison prévue</p>
@@ -45,7 +43,7 @@
                      <div class="flexcolumn ">
                         @forelse ($lateDeliveries as $index => $order)
                         <div class="order-{{ $index + 1 }}">
-                            <a href="{{ route('orders.show', $order->id) }}"> <p><strong>{{   $order->reference}} </strong> a  <strong>{{ $order->days_late}} jours</strong> de retard </p></a>
+                            <a href="{{ route('orders.show', $order->id) }}"> <p><strong>{{   $order->reference}} </strong> a <span class="red"><strong>{{ $order->days_late}} jours</strong></span> de retard </p></a>
                         </div>
                         @empty
                         <p>Aucune livraison en retard</p>

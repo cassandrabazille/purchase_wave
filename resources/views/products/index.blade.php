@@ -15,10 +15,10 @@
             @endif
             <div class="btn-wrapper">
                 <a href={{route('products.create')}}>
-                    <button class="blackbtn textalignr">Créer un nouveau produit</button>
+                    <button class="blackbtn textalignr margin2">Créer un nouveau produit</button>
                 </a>
             </div>
-            <div class="whitebox">
+            <div class="products-index">
                 <h2 class="padding2">Produits</h2>
                 <p class="subtitle paddingl2 paddingb2">Liste de tous les produits enregistrés</p>
                 <div class="table-wrapper">
@@ -26,7 +26,9 @@
                         <thead>
                             <tr>
                                 <th>Référence</th>
+                                 <th>Mots clés</th>
                                 <th>Descriptif</th>
+                                <th>Date création</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -34,7 +36,9 @@
                             @foreach ($products as $product)
                                 <tr>
                                     <td>{{$product->reference}}</td>
+                                    <td>{{$product->slug}}</td>
                                     <td>{{$product->description}}</td>
+                                    <td>{{$product->created_at}}</td>
                                     <td>
                                         <div class="crudline flexrow">
                                             <form action="{{ route('products.show', $product->id) }}" method="GET"

@@ -19,14 +19,16 @@
                 <form action="{{ route('profile.account.infos') }}" method="POST">
                     @csrf
                     @method('PATCH')
+                        <div class="form-group">
                     <label> Nom : </label>
                     <input type="text" name="name" value="{{ auth()->user()->name }}">
-                    <br>
+                     </div>
+                       <div class="form-group">
                     <label> Mail : </label>
                     <input type="text" name="email" value="{{ auth()->user()->email  }}">
-                    <br>
+                    </div>
 
-                    <button type="submit">Confirmer</button>
+                    <button type="submit" class="margin2">Confirmer</button>
                 </form>
 
                 </div>
@@ -56,7 +58,7 @@
                     <input type="password" name="password_confirmation" required>
                     <br>
 
-                    <button type="submit">Confirmer</button>
+                    <button type="submit" class="margin2">Confirmer</button>
                 </form>
 </div>
 </div>
