@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         if (\Auth::guard('web')->attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
-            return redirect()->route('orders.index');
+            return redirect()->route('dashboard.index');
         } elseif (\Auth::guard('admin')->attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
             return redirect()->route('admin.index');

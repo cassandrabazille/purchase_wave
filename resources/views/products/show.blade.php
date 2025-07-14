@@ -16,7 +16,7 @@
                 <p>Référence du produit : {{ $product->reference }}</p>
                 <p>Descriptif du produit : {{ $product->description }}</p>
                 <p>Prix du produit : {{ $product->price }}</p>
-                <p>Image du produit : {{ $product->image }}</p>
+                <img src="{{ asset('images/' .$product->image) }}" alt="Image du produit {{ $product->reference }}" class="pdtimg">
                 <p>Catégorie du produit : {{ $product->category ? $product->category->name : 'Aucune catégorie'}}</p>
                 
             </div>

@@ -14,12 +14,20 @@
 
         <div class="dashboard-container flexcolumn gap57">
             <div class="title-and-btn">
-                <h1>Bonjour, voici votre dashboard !</h1>
-            </div>
+                <div class="title">
+                <h1>Bonjour <span class="username-db">{{ $currentUser->name }}</span>, voici votre dashboard !</h1>
+                </div>
+              <div class="btn-wrapper btn-create-dashboard">
+      <a href={{route('orders.create')}}>
+      <button class="blackbtn textalignr ">Créer une nouvelle commande</button>
+      </a>
+    </div>
+    </div>
+           
             <!-- ici toutes tes autres boîtes, sections, composants -->
             <section class="flexrow gap65 marginl45">
                 <div class="box1">
-                    <h2>Livraisons à venir 🚚</h2>
+                    <h2 class="padding2">Livraisons à venir 🚚</h2>
                     <div class="flexcolumn ">
                         @forelse ($upcoming as $index => $order)
                         <div class="order-{{ $index + 1 }}">
@@ -37,9 +45,7 @@
                      <div class="flexcolumn ">
                         @forelse ($lateDeliveries as $index => $order)
                         <div class="order-{{ $index + 1 }}">
-                            <p>{{ $index + 1 }}. {{   $order->reference}}</p>
-                            <p>Retard : {{ $order->days_late}} jours</p>
-                            <p>CA : {{ number_format($order->order_amount, 0, ',', ' ') }} €</p>
+                            <a href="{{ route('orders.show', $order->id) }}"> <p><strong>{{   $order->reference}} </strong> a  <strong>{{ $order->days_late}} jours</strong> de retard </p></a>
                         </div>
                         @empty
                         <p>Aucune livraison en retard</p>
@@ -47,49 +53,65 @@
                     </div>
                 </div>
                 <div class="box3">
-                    <h2 class="padding2">Commandes en attente</h2>
+                    <h2 class ="marginb2">Commandes en attente</h2>
                         <div class="flexcolumn ">
                         @forelse ($latestPendingOrders as $index => $order)
                         <div class="order-{{ $index + 1 }}">
-                            <p>{{ $index + 1 }}. {{   $order->reference}} crée le {{ $order->created_at->format('d-m-Y') }}</p>
-    
+                             <a href="{{ route('orders.show', $order->id) }}"> <p><strong> {{   $order->reference}}</strong> crée le {{ $order->created_at->format('d-m-Y') }}</p></a>
                             <p></p>
                         </div>
                         @empty
                         <p>Aucune commande en attente</p>
                         @endforelse
                     </div>
-                    <a href="{{ route('orders.index') }}" class="btn btn--md btn--centered"> Toutes les
+                    <div class="all-orders-btn">
+                    <a href="{{ route('orders.index') }}" class="blackbtn"> Toutes les
                         commandes</a>
-                    </a>
+                        </div>
+            
                 </div>
             </section>
             <section class="flexrow gap65 marginl45">
                 <div class="box4">
                     <h2 class="padding2">Statuts des commandes</h2>
-                    <p>Commandes en attente de confirmation : {{ $statusCounts['pending']}}</p>
-                    <p>Commandes confirmées : {{ $statusCounts['confirmed']}}</p>
-                    <p>Commandes livrées : {{ $statusCounts['delivered']}}</p>
-                    <p>Commandes annulées : {{ $statusCounts['cancelled']}}</p>
+                    <div class="status-group">
+                    <div class="status-line1">
+                    <div class="status-box1">
+                    <p>En attente : <p>{{ $statusCounts['pending']}}</p></p>
+                    </div>
+                    <div class="status-box2">
+                    <p>Confirmées : <p>{{ $statusCounts['confirmed']}}</p></p>
+                    </div>
+                    </div>
+                       <div class="status-line2">
+                      <div class="status-box3">
+                    <p>Livrées : <p>{{ $statusCounts['delivered']}}</p></p>
+                    </div>
+                        <div class="status-box4">
+                    <p>Annulées : <p>{{ $statusCounts['cancelled']}}</p></p>
+                    </div>
+                    </div>
+                    </div>
                 </div>
                 <div class="box5">
                     <h2 class="padding2">Indicateurs mensuels</h2>
-                    <p>Nombre de commandes ce mois-ci 🧾 : {{ $totalOrders}}</p>
-                    <p>Montant total des commandes 💰 : {{ $totalAmount}} €</p>
-                    <p>Montant moyen d’une commande 📊 : {{ $avgAmount}} €</p>
+                    <div class="monthly-indicators">
+                   <p class="monthly-indicator1">Nombre de commandes passées🧾 : {{ $totalOrders}}</p>
+                    <p class="monthly-indicator2">Montant total acheté 💰 : {{ $totalAmount}} €</p>
+                    <p class="monthly-indicator3">Montant moyen d'achat 📊 : {{ $avgAmount}} €</p>
+                    </div>
                 </div>
                 <div class="box6">
                     <h2 class="padding2">Top fournisseurs {{ $currentYear  }}🏆</h2>
+                    <p class="italic marginl2">par CA</p>
                     <div class="flexrow ">
                         @foreach ($topSuppliers as $index => $supplier)
                             <div class="supplier-{{ $index + 1 }}">
-                                <p>{{ $index + 1 . '.' . $supplier->supplier->name }}</p>
-                                <p>CA : {{ number_format($supplier->total_amount, 0, ',', ' ') }} €</p>
+                                <img src="{{ asset('images/fournisseur' . ($index + 1) . '.png') }}" alt="Logo fournisseur {{ $index +1 }}" class="supplier-img">
+                                <p>{{$supplier->supplier->name }}</p>
+                                <p>{{ number_format($supplier->total_amount, 0, ',', ' ') }} €</p>
                             </div>
-
                         @endforeach
-
-
                     </div>
                 </div>
             </section>

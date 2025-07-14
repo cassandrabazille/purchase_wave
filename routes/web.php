@@ -65,7 +65,7 @@ Route::delete('suppliers/{id}', [SupplierController::class, 'destroy'])->name('s
 //orderitem
 Route::get('orderitems.index', [OrderItemController::class, 'index'])->name('orderitems.index');
 Route::get('orderitems.create', [OrderItemController::class, 'create'])->name('orderitems.create');
-Route::post('orderitems', [OrderItemController::class, 'store'])->name('orderitems.store');
+Route::post('/orderitems', [OrderItemController::class, 'store'])->name('orderitems.store');
 Route::get('orderitems/{id}/edit', [OrderItemController::class, 'edit'])->name('orderitems.edit');
 Route::put('orderitems/{id}', [OrderItemController::class, 'update'])->name('orderitems.update');
 Route::get('orderitems/{id}', [OrderItemController::class, 'show'])->name('orderitems.show');

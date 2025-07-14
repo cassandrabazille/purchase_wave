@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {{-- Vite et CSS --}}
-    @vite('resources/css/style.css')
+    @vite(['resources/css/style.css', 'resources/js/navbar.js'])
 
     {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,31 +23,31 @@
     {{-- Header --}}
     <header class="flexrow">
         <nav class="left-nav">
-            <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo PurchaseWave" />
+            <a href="{{ route('dashboard.index')}} ">
+            <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo PurchaseWave">
+            </a>
         </nav>
         <nav class="right-nav">
             <a class="paddingr53 white" href="{{ route('dashboard.index') }}">Dashboard</a>
             <a class="paddingr53 white" href="{{ route('orders.index') }}">Commandes</a>
             <a class="paddingr53 white" href="{{ route('products.index') }}">Produits</a>
 
-            <div class="user-info flexrow">
-                <img src="{{ asset('images/user-img.png') }}" alt="Image de l'utilisatrice Jane Doe" />
-                <div class="dropdown">
-
-                    <input type="checkbox" id="toggle-dropdown" style="display:none;">
-                    <p for="toggle-dropdown" style="cursor:pointer">
-                        {{ Auth::user()->name }} 
-                    </p>
-                    <div class="dropdown-child flexcolumn">
-                        <a href="{{ route('account.edit') }}"
-                            style="background:none; border:none; cursor:pointer; color:inherit">Mon compte</a>
-                        <form method="POST" action="{{ route('auth.logout') }}" style="display:inline">
-                            @csrf
-                            <button type="submit">Déconnexion</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+     <div class="user-info" onclick="toggleDropdown()">
+    <img src="{{ asset('images/user-img.png') }}" alt="Profil" />
+    <div class="user-dropdown">
+        <p class ="user">{{ Auth::user()->name }}</p>
+        <!-- ↓ Utilisez une classe ET un ID pour plus de fiabilité ↓ -->
+        <ul id="userDropdownMenu" class="dropdown-menu" style="display: none;">
+            <li><a href="{{ route('account.edit') }}" class="account">Mon compte</a></li>
+            <li>
+                <form method="POST" action="{{ route('auth.logout') }}">
+                    @csrf
+                    <button type="submit">Déconnexion</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
         </nav>
     </header>
 
@@ -60,7 +60,7 @@
         <p>© PurchaseWave</p>
     </footer>
 
-    
+
 </body>
 
 </html>

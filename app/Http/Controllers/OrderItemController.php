@@ -37,24 +37,26 @@ class OrderItemController extends Controller
         $validated = $request->validate([
             'order_id' => 'required|exists:orders,id',
             'items' => 'required|array|min:1',
-            'items.*.product_id' => 'required|exists:products,id',
-            'items.*.quantity' => 'required|integer|min:1',
+            'items.0.product_id' => 'required|exists:products,id',
+            'items.0.quantity' => 'required|integer|min:1',
         ]);
 
-        foreach ($validated['items'] as $item) {
-            $product = Product::find($item['product_id']);
-            $orderitem = OrderItem::create([
-                'order_id' => $validated['order_id'],
-                'product_id' => $item['product_id'],
-                'quantity' => $item['quantity'],
-                'unit_price' => $product->price,
-                'line_total' => $product->price * $item['quantity'],
-            ]);
+        $order = Order::findOrFail($validated['order_id']);
+        $item = $validated['items'][0];
+        $product = Product::findOrFail($item['product_id']);
 
-            $orderitem->order->recalculateAmount();
-        }
+        $orderitem = OrderItem::create([
+            'order_id' => $validated['order_id'],
+            'product_id' => $item['product_id'],
+            'quantity' => $item['quantity'],
+            'unit_price' => $product->price,
+            'line_total' => $product->price * $item['quantity'],
+        ]);
 
-        return redirect()->route('orders.show', $validated['order_id'])
+        $orderitem->order->recalculateAmount();
+
+
+        return redirect()->route('orders.show', $order->id)
             ->with('success', 'Lignes créées avec succès.');
     }
     public function edit(string $id)

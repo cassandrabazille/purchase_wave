@@ -1,487 +1,603 @@
 /* ================== CONFIG INITIALE DESKTOP MAX 1400PX ================== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-  font-size: 62.5%;
+    font-size: 62.5%;
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #fff;
-  color: #000;
-  padding: 2rem;
-  margin: 0 auto;
-  width: 100%;
+    font-family: "Poppins", sans-serif;
+    background-color: #fff;
+    color: #000;
+    padding: 2rem;
+    margin: 0 auto;
+    width: 100%;
 }
 
 /* ================== LIENS ================== */
 a {
-  text-decoration: none;
-  color: inherit;
-  font-size: 1.6rem;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.6rem;
 }
 
 /* ================== TYPO ================== */
 h1 {
-  font-size: 3.2rem;
-  font-weight: 700;
+    font-size: 3.2rem;
+    font-weight: 700;
 }
 
 h2 {
-  font-size: 2.1rem;
-  font-weight: 600;
+    font-size: 2.1rem;
+    font-weight: 600;
 }
 
 h3 {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 
 p {
-  font-size: 1.6rem;
-  font-weight: 400;
+    font-size: 1.6rem;
+    font-weight: 400;
 }
 
+.italic {
+    font-style: italic;
+}
 /* ================== STRUCTURE ================== */
 main {
-  /* padding-top: 4rem; */
-  /* display: flex;
-  justify-content: center; */
-  gap: 4rem; 
-  /* flex-wrap: wrap; */
-  /* width: 100%; */
-  /* box-sizing: border-box; */
+    gap: 4rem;
 }
+
+/* ================== header ================== */
 
 header.flexrow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-}
-
-.user-info {
-  display: flex;
-  align-items: center; 
-  gap: 10px; 
-  position: relative; 
-}
-
-.dropdown {
-  position: relative; 
-}
-
-.dropdown-child {
-  display: none;
-  position: absolute;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 10px;
-  white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
 }
 
 .right-nav {
-  display: flex;
-  align-items: center;
-  gap: 5.3rem;
+    display: flex;
+    align-items: center;
+    gap: 5.3rem;
 }
 
-.right-nav a {
-  font-size: 1.6rem;
-  font-weight: 500;
-  /* display: inline-flex; */
-  /* align-items: center; */
-  /* color: black; */
+.right-nav a,
+.user-info p {
+    font-weight: 500;
 }
 
 .user-info {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropdown-menu {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0.4rem;
+    list-style: none;
+    padding: 1.2rem;
+    background-color: white;
+}
+
+.dropdown-menu li {
+    text-align: center;
+}
+
+.account {
+    font-size: 1.4rem;
+}
+
+.dropdown-menu li button {
+    font-weight: normal;
+    margin-top: 1rem;
+    font-size: 1.4rem;
 }
 
 /* ================== IMAGES ================== */
 .imgpp {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .crudline img {
-  width: 2rem;
-  height: 2rem;
-  object-fit: contain;
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
 }
 
 .returnbtn img {
-  width: 4rem;
-  height: 4rem;
-  object-fit: contain;
-  padding-left: 2rem;
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
+    padding-left: 2rem;
 }
 
 /* ================== BOUTONS ================== */
 button {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.6rem;
-  background-color: #1a73e8;
-  width: 150px;
-  height: 50px;
-  border-radius: 34px;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.6rem;
+    background-color: #1a73e8;
+    width: 150px;
+    height: 50px;
+    border-radius: 34px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #155ab6;
+    background-color: #155ab6;
 }
 
 .blackbtn {
-  font-size: 1.4rem;
-  background-color: #000;
-  width: 235px;
-  height: 44px;
-  border-radius: 1rem;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  padding: 0.2rem;
-  margin-right: 4.5rem;
+    font-size: 1.4rem;
+    background-color: #000;
+    width: 235px;
+    height: 44px;
+    border-radius: 1rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0.2rem;
 }
 
 .returnbtn {
-  font-size: 1.4rem;
-  background-color: #000;
-  width: 117px;
-  height: 44px;
-  border-radius: 1rem;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  line-height: 1;
+    font-size: 1.4rem;
+    background-color: #000;
+    width: 117px;
+    height: 44px;
+    border-radius: 1rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    line-height: 1;
 }
 
 .btn {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.4rem;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.4rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
 /* Taille par défaut */
 .btn--md {
-  width: 235px;
-  height: 44px;
-  padding: 0.2rem;
+    width: 235px;
+    height: 44px;
+    padding: 0.2rem;
 }
 
 /* Variante centrée */
 .btn--centered {
-  margin: 2rem auto 0 auto;
-  display: block;
+    margin: 2rem auto 0 auto;
+    display: block;
 }
 /* ================== MODAL PHOTO ================== */
-.photo-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 50vw;
-  height: 50vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  transform: translate(-50%, -50%);
-}
 
-.modal-content {
-  position: relative;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+.pdtimg {
+    width: 300px;
+    height: 200px;
 }
 
 .modal-content img {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 16px;
-  font-size: 24px;
-  cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 /* ================== FLEX UTILITIES ================== */
 .flexrow {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .flexcolumn {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .justifystart {
-  justify-content: flex-start;
+    justify-content: flex-start;
 }
 
 .justifycenter {
-  justify-content: center;
+    justify-content: center;
 }
 
 .justifyend {
-  justify-content: flex-end;
+    justify-content: flex-end;
 }
 
 .alignitmsctr {
-  align-items: center;
+    align-items: center;
 }
 
 .textalignr {
-  text-align: right;
+    text-align: right;
 }
 
 /* ================== ESPACEMENTS ================== */
 .padding2 {
-  padding: 2rem;
+    padding: 2rem;
 }
 
 .paddingt2 {
-  padding-top: 2rem;
+    padding-top: 2rem;
 }
 
 .paddingl1 {
-  padding-left: 1rem;
+    padding-left: 1rem;
 }
 
 .paddingl2 {
-  padding-left: 2rem;
+    padding-left: 2rem;
 }
 
 .paddingl3 {
-  padding-left: 3rem;
+    padding-left: 3rem;
 }
 
 .paddingb2 {
-  padding-bottom: 2rem;
+    padding-bottom: 2rem;
 }
 
 .paddingr53 {
-  padding-right: 5.3rem;
+    padding-right: 5.3rem;
 }
 
 .margint25 {
-  margin-top: 2.5rem;
+    margin-top: 2.5rem;
 }
 
 .margint4 {
-  margin-top: 4rem;
+    margin-top: 4rem;
 }
 
 .marginb2 {
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 
 .marginb3 {
-  margin-bottom: 3rem;
+    margin-bottom: 3rem;
 }
 
+.marginl2 {
+    margin-left: 2rem;
+}
 
 .marginl45 {
-  margin-left: 4.5rem;
+    margin-left: 4.5rem;
 }
 
 .marginr45 {
-  margin-right: 4.5rem;
+    margin-right: 4.5rem;
 }
 
 .gap14 {
-  gap: 1.4rem;
+    gap: 1.4rem;
 }
 
 .gap30 {
-  gap: 3rem;
+    gap: 3rem;
 }
 
-
 .gap57 {
-  gap: 5.7rem;
+    gap: 5.7rem;
 }
 
 .gap65 {
-  gap: 6.5rem;
+    gap: 6.5rem;
 }
 
 .gap76 {
-  gap: 7.6rem;
+    gap: 7.6rem;
 }
 
 /* ================== ATTRIBUTS SPÉCIFIQUES ================== */
 .mail {
-  padding-top: 7.5rem;
-  padding-bottom: 3rem;
+    padding-top: 7.5rem;
+    padding-bottom: 3rem;
 }
 
 .greyspace {
-  width: 511px;
-  height: 60px;
-  background-color: #d9d9d9;
-  border-radius: 6px;
+    width: 511px;
+    height: 60px;
+    background-color: #d9d9d9;
+    border-radius: 6px;
 }
 
 .mdp {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
 /* ================== DASHBOARD ================== */
-.dashboard-container, .cdesachat-container, .lignecdes-container {
-  /* max-width: 95vw; */
-  margin-top: 2rem;
-  background-color: #d9d9d9;
-  border-radius: 1rem;
-  box-shadow: 0 0.4rem 1.5rem rgba(0,0,0,0.1);
 
-  /* box-sizing: border-box; */
+.cdesachat-container {
+    max-width: 1400px;
+    margin-top: 2rem;
+    background-color: #d9d9d9;
+    border-radius: 1rem;
 }
 
 .dashboard-container {
-  max-width: 1400px; /* Limite la largeur maximale */
-  width: 100%;
-  margin: 2rem auto; /* Centre le conteneur */
-  padding: 2rem;
-  background-color: #d9d9d9;
-  border-radius: 1rem;
-  box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.1);
+    margin: 2rem auto; /* Centre le conteneur */
+    padding: 2rem;
+    border-radius: 1rem;
 }
 
+.title {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-create-dashboard {
+    display: flex;
+    justify-content: flex-end;
+}
 .title-and-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 7.6rem;
-  margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 7.6rem;
+    margin-top: 2rem;
 }
 
 .title-and-btn h1 {
-  font-size: 3.2rem;
-  font-weight: 700;
+    font-size: 3.2rem;
+    font-weight: 700;
 }
 
-.box1, .box2, .box3, .box4, .box5, .box6 {
-  flex: 1 1 350px; 
-  max-width: 38rem; 
-  height: 27rem;
-  background-color: #fff;
-  border-radius: 1rem;
-  margin-bottom: 1.5rem;
+.box1,
+.box2,
+.box3,
+.box4,
+.box5,
+.box6 {
+    flex: 1 1 350px;
+    max-width: 38rem;
+    height: 27rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-.box1 p, .box2 p, .box3 p, .box4 p, .box5 p, .box6 p {
-  font-size: 1.4rem;
-  margin: 2rem;
+.box1 p,
+.box2 p,
+.box3 p,
+.box4 p,
+.box5 p {
+    font-size: 1.4rem;
 }
 
-.supplier1, .supplier2, .supplier3 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.5rem;
+.status-box1
+ {
+   background-color: #e0e0e0
+}
+
+
+
+
+.status-box4
+ {
+   background-color: black;
+   color:white;
+}
+
+.status-box1,
+.status-box2,
+.status-box3,
+.status-box4
+ {
+   border-radius: 1rem;
+   padding:1.2rem;
+}
+
+
+
+
+.status-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.status-line1 {
+    display:flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.status-line2 {
+    display:flex;
+    flex-direction: row;
+      gap: 2rem;
+}
+
+
+
+.supplier-1,
+.supplier-2,
+.supplier-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.8rem;
+}
+
+.supplier-img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
 }
 
 .box6 .flexrow {
-  justify-content: center;
-  align-items: flex-start;
-  height: 100%;
-  margin-top: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    margin-top: 2rem;
 }
+
+.box2 {
+    display: flex;
+    flex-direction: column;
+ 
+    align-items: center; /* <-- Ajoute ça pour centrer horizontalement tous les enfants */
+   
+}
+
+.box3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; /* <-- Ajoute ça pour centrer horizontalement tous les enfants */
+    padding: 2rem;
+}
+
+.all-orders-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+   
+}
+
+.username-db {
+    color: #1a73e8;
+}
+
+
+
+.monthly-indicators {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:2rem;
+}
+
+.monthly-indicator1,
+.monthly-indicator2,
+.monthly-indicator3 {
+    padding: 0.6rem 1.2rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+    width: fit-content; 
+}
+
+.monthly-indicator1 {
+    background-color: #e0e0e0;
+}
+
+.monthly-indicator2 {
+    background-color: #1a73e8; 
+}
+
+.monthly-indicator3 {
+    background-color: black; 
+    color:white;
+}
+
+
 
 /* ================== TABLEAU COMMANDES ================== */
 .whitebox {
-background-color: #fff;
-  padding: 3rem;
-  border-radius: 10px;
-  max-width: 1200px; /* ou la largeur maximale que vous souhaitez */
-  width: 100%;
-  margin: 0 auto; /* pour centrer la boîte */
-
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 10px;
+    max-width: 1200px; /* ou la largeur maximale que vous souhaitez */
+    width: 100%;
+    margin: 0 auto; /* pour centrer la boîte */
 }
 
 /* Conteneur scrollable pour les très petits écrans */
 .orderstable {
-  width: 100%;
-  min-width: 700px; 
-  border-collapse: collapse;
-  font-size: 1.6rem;
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+    font-size: 1.6rem;
 }
 
 /* En-têtes du tableau */
 .orderstable th {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  color: #AFAFAF;
-  padding: 1.6rem 2rem; /* ✅ Réduction du padding horizontal */
-  white-space: nowrap;
-  text-align: left;
-  border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #afafaf;
+    padding: 1.6rem 2rem; /* ✅ Réduction du padding horizontal */
+    white-space: nowrap;
+    text-align: left;
+    border: none;
 }
 
 /* Cellules du tableau */
 .orderstable td {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.6);
-  padding: 1.6rem 2rem; /* ✅ Réduction du padding horizontal */
-  white-space: nowrap;
-  text-align: left;
-  border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.6);
+    padding: 1.6rem 2rem; /* ✅ Réduction du padding horizontal */
+    white-space: nowrap;
+    text-align: left;
+    border: none;
 }
 
 /* Ligne avec séparation sauf la dernière */
 .orderstable tr:not(:last-child) {
-  border-bottom: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
 }
 
 /* Sous-titre */
 .subtitle {
-  color: #AFAFAF;
-  font-weight: 400;
-  font-size: 1.8rem;
+    color: #afafaf;
+    font-weight: 400;
+    font-size: 1.8rem;
 }
 
 /* Wrapper de bouton */
 .btn-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 2rem;
-  flex-wrap: wrap; /* ✅ Pour éviter l'écrasement sur petit écran */
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+    flex-wrap: wrap; /* ✅ Pour éviter l'écrasement sur petit écran */
 }
 
 /* ================== ACCOUNT ================== */
@@ -511,341 +627,354 @@ background-color: #fff;
     padding: 20px;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 
 /* ================== RESPONSIVE ================== */
 
 /* -------- Grand desktop : > 1440px -------- */
 @media (min-width: 1441px) {
+    body {
+        padding: 4rem 8rem;
+    }
 
-  body {
-    padding: 4rem 8rem;
-  }
+    h1 {
+        margin-top: 4rem;
+    }
+    .right-nav {
+        gap: 8rem;
+    }
 
-  h1 {
-    margin-top: 4rem;
-  }
-  .right-nav {
-    gap: 8rem;
-  }
+    .box1,
+    .box2,
+    .box3,
+    .box4,
+    .box5,
+    .box6 {
+        width: 48rem;
+        height: 32rem;
+    }
 
+    .whitebox {
+        max-width: 1400px;
+        padding: 4rem;
+    }
 
+    button {
+        width: 200px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
 
-  .box1, .box2, .box3, .box4, .box5, .box6 {
-    width: 48rem;
-    height: 32rem;
-  }
-
-  .whitebox {
-max-width: 1400px;
-    padding: 4rem;
-  }
-
-  button {
-    width: 200px;
-    height: 60px;
-    font-size: 1.8rem;
-  }
-
-  .blackbtn {
-    width: 280px;
-    height: 52px;
-    font-size: 1.6rem;
-  }
+    .blackbtn {
+        width: 280px;
+        height: 52px;
+        font-size: 1.6rem;
+    }
 }
-
 
 /* -------- Tablette : 768px - 1199px -------- */
 @media (max-width: 1199px) and (min-width: 768px) {
-  html {
-    font-size: 56.25%; /* 1rem = 9px */
-  }
-  body {
-    padding: 1.5rem 2rem;
-    min-width: unset;
-  }
-  main {
-    flex-direction: column;
-    gap: 3rem;
-    padding-top: 2rem;
-  }
-  h1 {
-    font-size: 2.4rem;
-    padding-top: 2rem;
-  }
-  h3 {
-    font-size: 1.6rem;
-  }
-  p {
-    font-size: 1.4rem;
-  }
-  button {
-    width: 130px;
-    height: 45px;
-    font-size: 1.4rem;
-  }
-  .greyspace {
-    width: 400px;
-    height: 56px;
-  }
-  header.flexrow {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  width: 100%;
-  text-align: center;
-  }
+    html {
+        font-size: 56.25%; /* 1rem = 9px */
+    }
+    body {
+        padding: 1.5rem 2rem;
+        min-width: unset;
+    }
+    main {
+        flex-direction: column;
+        gap: 3rem;
+        padding-top: 2rem;
+    }
+    h1 {
+        font-size: 2.4rem;
+        padding-top: 2rem;
+    }
+    h3 {
+        font-size: 1.6rem;
+    }
+    p {
+        font-size: 1.4rem;
+    }
+    button {
+        width: 130px;
+        height: 45px;
+        font-size: 1.4rem;
+    }
+    .greyspace {
+        width: 400px;
+        height: 56px;
+    }
+    header.flexrow {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        width: 100%;
+        text-align: center;
+    }
 
-.left-nav,
-.right-nav {
-  width: 100%;
-  justify-content: center;
-  display: flex;
-}
-  .left-nav {
-    margin-bottom: 1rem;
-  }
-  .user-info, .right-nav {
-    flex-direction: row;
-    justify-content: center;
-  }
-  .user-info {
-    gap: 0.2rem;
-  }
-  .right-nav p {
-    font-size: 1.4rem;
-  }
-  .right-nav img {
-    width: 40px;
-    height: 40px;
-  }
-  .dashboard-container {
-    width: 100%;
-    padding: 1.5rem;
-     align-items: center; 
-  }
-  .title-and-btn {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
-    gap: 2rem;
-  }
-  .box1, .box2, .box3, .box4, .box5, .box6 {
-    width: 100%;
-    height: auto;
-    padding: 1rem;
-  }
-  .box6 .flexrow {
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  .supplier1, .supplier2, .supplier3 {
-    flex: 1;
-  }
-  .btn-wrapper {
-    text-align: right;
-    margin-bottom: 16px;
-  }
-  .blackbtn {
-    font-size: 15px;
-    padding: 10px 18px;
-  }
-  .whitebox {
-      padding: 2rem;
-  }
-  .orderstable th, .orderstable td {
-    font-size: 14px;
-    padding: 10px 8px;
-  }
-  .crudline img {
-    width: 20px;
-    height: 20px;
-  }
+    .left-nav,
+    .right-nav {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+    }
+    .left-nav {
+        margin-bottom: 1rem;
+    }
+    .user-info,
+    .right-nav {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .user-info {
+        gap: 0.2rem;
+    }
+    .right-nav p {
+        font-size: 1.4rem;
+    }
+    .right-nav img {
+        width: 40px;
+        height: 40px;
+    }
+    .dashboard-container {
+        width: 100%;
+        padding: 1.5rem;
+        align-items: center;
+    }
+    .title-and-btn {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+        gap: 2rem;
+    }
+    .box1,
+    .box2,
+    .box3,
+    .box4,
+    .box5,
+    .box6 {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+    }
+    .box6 .flexrow {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .supplier1,
+    .supplier2,
+    .supplier3 {
+        flex: 1;
+    }
+    .btn-wrapper {
+        text-align: right;
+        margin-bottom: 16px;
+    }
+    .blackbtn {
+        font-size: 15px;
+        padding: 10px 18px;
+    }
+    .whitebox {
+        padding: 2rem;
+    }
+    .orderstable th,
+    .orderstable td {
+        font-size: 14px;
+        padding: 10px 8px;
+    }
+    .crudline img {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /* -------- Mobile : < 768px -------- */
 @media (max-width: 767px) {
-  html {
-    font-size: 50%; /* 1rem = 8px */
-  }
-  body {
-    padding: 10px;
-    min-width: unset;
-  }
-  main {
-    flex-direction: column;
-    gap: 6rem;
-    padding-top: 2rem;
-  }
+    html {
+        font-size: 50%; /* 1rem = 8px */
+    }
+    body {
+        padding: 10px;
+        min-width: unset;
+    }
+    main {
+        flex-direction: column;
+        gap: 6rem;
+        padding-top: 2rem;
+    }
 
     main.flexrow {
-    flex-direction: column;
-    align-items: center;
-  }
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .section1,
-  .section2 {
-    width: 100%;
-  }
+    .section1,
+    .section2 {
+        width: 100%;
+    }
 
-  .section1 {
-    order: 1; /* pour que l'image passe en haut */
-   text-align: center;
-  }
+    .section1 {
+        order: 1; /* pour que l'image passe en haut */
+        text-align: center;
+    }
 
-  .section2 {
-    order: 2;
-    padding: 1rem;
-    text-align: center;
-  }
+    .section2 {
+        order: 2;
+        padding: 1rem;
+        text-align: center;
+    }
 
-  .imgpp {
-    max-width: 90%;
-    height: auto;
-  
+    .imgpp {
+        max-width: 90%;
+        height: auto;
+    }
 
-  }
+    .greyspace {
+        margin: 1rem auto;
+    }
 
-  .greyspace {
-    margin: 1rem auto;
-  }
+    button {
+        margin: 2rem auto;
+        display: block;
+        width: 120px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin-top: 4rem;
+    }
+    h1 {
+        font-size: 2rem;
+        padding-top: 2rem;
+    }
+    h3 {
+        font-size: 1.4rem;
+    }
+    p {
+        font-size: 1.2rem;
+    }
 
-  button {
-    margin: 2rem auto;
-    display: block;
-       width: 120px;
-    height: 40px;
-    font-size: 1.2rem;
-    margin-top: 4rem;
-  }
-  h1 {
-    font-size: 2rem;
-    padding-top: 2rem;
-  }
-  h3 {
-    font-size: 1.4rem;
-  }
-  p {
-    font-size: 1.2rem;
-  }
+    .mail,
+    .mdp {
+        font-size: 1.4rem;
+    }
+    .greyspace {
+        width: 100%;
+        height: 50px;
+    }
 
-  .mail, .mdp {
-    font-size: 1.4rem;
-  }
-  .greyspace {
-    width: 100%;
-    height: 50px;
-  }
+    header.flexrow {
+        flex-direction: column;
+        padding: 1rem;
+        align-items: center;
+    }
+    .left-nav,
+    .right-nav {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
 
-  header.flexrow {
-   flex-direction: column;
-    padding: 1rem;
-    align-items: center;
-  }
-  .left-nav, .right-nav {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
+    .right-nav {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
 
-  .right-nav {
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-
-  .right-nav a {
-    padding: 0.5rem 0;
-    display: block;
-  }
+    .right-nav a {
+        padding: 0.5rem 0;
+        display: block;
+    }
 
     .left-nav img {
-    max-width: 150px;
-    height: auto;
-  }
+        max-width: 150px;
+        height: auto;
+    }
 
-  .user-info {
-    justify-content: center;
-    margin-top: 1rem;
-  }
-  .dashboard-container {
-    padding: 1rem;
-  }
-  .title-and-btn {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.5rem;
-  }
- .title-and-btn h1 {
-    font-size: 2rem;
-    text-align: center;
-    order: 2; /* Met le titre après le bouton */
-  }
+    .user-info {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    .dashboard-container {
+        padding: 1rem;
+    }
+    .title-and-btn {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    .title-and-btn h1 {
+        font-size: 2rem;
+        text-align: center;
+        order: 2; /* Met le titre après le bouton */
+    }
 
-  .title-and-btn > div {
-    order: 1; /* Met le div avant le titre */
-    width: 100%;
-    text-align: center;
-  }
+    .title-and-btn > div {
+        order: 1; /* Met le div avant le titre */
+        width: 100%;
+        text-align: center;
+    }
 
-  .blackbtn {
-    width: 100%;
-    max-width: 280px;
-    margin: 0 auto;
-    order: 3; /* Met le bouton en dernier */
-  }
- 
-  .whitebox {
-      padding: 1.5rem;
-  }
-  .orderstable th, .orderstable td {
-    font-size: 12px;
-    padding: 8px 6px;
-  }
+    .blackbtn {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        order: 3; /* Met le bouton en dernier */
+    }
+
+    .whitebox {
+        padding: 1.5rem;
+    }
+    .orderstable th,
+    .orderstable td {
+        font-size: 12px;
+        padding: 8px 6px;
+    }
 
     .table-wrapper {
-    overflow-x: auto;               /* active le scroll horizontal */
-    -webkit-overflow-scrolling: touch; /* améliore le scroll sur iOS */
-  }
+        overflow-x: auto; /* active le scroll horizontal */
+        -webkit-overflow-scrolling: touch; /* améliore le scroll sur iOS */
+    }
 
-  .orderstable {
-    min-width: 600px; /* largeur minimale pour contenir le tableau (tu peux ajuster) */
-    width: auto;      /* pour éviter que le tableau s'étire à 100% du wrapper scrollable */
-  }
-  .crudline img {
-    width: 16px;
-    height: 16px;
-  }
-  .blackbtn {
-    width: 100%;
-    font-size: 1.2rem;
-    height: 44px;
-    margin-right: 0;
-  }
-  .returnbtn {
-    width: 100px;
-    height: 40px;
-  }
+    .orderstable {
+        min-width: 600px; /* largeur minimale pour contenir le tableau (tu peux ajuster) */
+        width: auto; /* pour éviter que le tableau s'étire à 100% du wrapper scrollable */
+    }
+    .crudline img {
+        width: 16px;
+        height: 16px;
+    }
+    .blackbtn {
+        width: 100%;
+        font-size: 1.2rem;
+        height: 44px;
+        margin-right: 0;
+    }
+    .returnbtn {
+        width: 100px;
+        height: 40px;
+    }
 
     section.flexrow {
-     flex-direction: column;
-    align-items: center; /* centre les boîtes horizontalement */
-    gap: 40px;
-    margin-left: 0; /* supprime les marges latérales éventuelles */
-  }
+        flex-direction: column;
+        align-items: center; /* centre les boîtes horizontalement */
+        gap: 40px;
+        margin-left: 0; /* supprime les marges latérales éventuelles */
+    }
 
-  .box1, .box2, .box3,
-  .box4, .box5, .box6 {
-     width: 90%; /* ou 100% selon le style désiré */
-    max-width: 500px;
-  }
+    .box1,
+    .box2,
+    .box3,
+    .box4,
+    .box5,
+    .box6 {
+        width: 90%; /* ou 100% selon le style désiré */
+        max-width: 500px;
+    }
 
-  .flexrow > div {
-    margin-left: 0; /* si tu utilises des margins latéraux */
-  }
+    .flexrow > div {
+        margin-left: 0; /* si tu utilises des margins latéraux */
+    }
 }
