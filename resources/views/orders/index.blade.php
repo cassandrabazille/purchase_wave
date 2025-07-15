@@ -3,6 +3,7 @@
 @section('title', 'Page de connexion')
 
 @section('content')
+<div class="container">
 
   <main class="flexrow paddingt2">
     <div class="cdesachat-container">
@@ -77,6 +78,7 @@
   </main>
 @endsection
 
+</div>
 </body>
 
 </html>

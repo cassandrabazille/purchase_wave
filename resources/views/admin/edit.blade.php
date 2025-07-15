@@ -3,6 +3,7 @@
 @section('title', 'Page de connexion')
 
 @section('content')
+
     <main class="flexrow justifycenter paddingt2">
         <div class="lignecdes-container">
             <div class="btn-wrapper">

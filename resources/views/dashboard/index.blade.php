@@ -4,7 +4,9 @@
 
 @section('content')
 
-<main class="flexrow paddingt2">
+<div class="container">
+
+<main class="flex-row paddingt2">
     <div class="dashboard-index">
         @if(session('success'))
             <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
@@ -19,16 +21,16 @@
                 </div>
               <div class="btn-wrapper btn-create-dashboard">
       <a href={{route('orders.create')}}>
-      <button class="blackbtn textalignr ">Créer une nouvelle commande</button>
+      <button class="blackbtn textalign-right">Créer une nouvelle commande</button>
       </a>
     </div>
     </div>
            
             <!-- ici toutes tes autres boîtes, sections, composants -->
-            <section class="flexrow gap65 marginl45">
+            <section class="flex-row gap65 marginl45 margin-top-4rem">
                 <div class="box1">
                     <h2 class="padding2">Livraisons à venir 🚚</h2>
-                    <div class="flexcolumn ">
+                    <div class="flex-column ">
                         @forelse ($upcoming as $index => $order)
                         <div class="order-{{ $index + 1 }}">
                            <a href="{{ route('orders.show', $order->id) }}"> <p> <strong>{{   $order->reference}}</strong> arrive le  {{ $order->confirmed_delivery_date->format('d/m/Y') }}</p></a>
@@ -40,7 +42,7 @@
                 </div>
                 <div class="box2">
                     <h2 class="padding2">Commandes en retard ⚠️</h2>
-                     <div class="flexcolumn ">
+                     <div class="flex-column ">
                         @forelse ($lateDeliveries as $index => $order)
                         <div class="order-{{ $index + 1 }}">
                             <a href="{{ route('orders.show', $order->id) }}"> <p><strong>{{   $order->reference}} </strong> a <span class="red"><strong>{{ $order->days_late}} jours</strong></span> de retard </p></a>
@@ -52,7 +54,7 @@
                 </div>
                 <div class="box3">
                     <h2 class ="marginb2">Commandes en attente</h2>
-                        <div class="flexcolumn ">
+                        <div class="flex-column ">
                         @forelse ($latestPendingOrders as $index => $order)
                         <div class="order-{{ $index + 1 }}">
                              <a href="{{ route('orders.show', $order->id) }}"> <p><strong> {{   $order->reference}}</strong> crée le {{ $order->created_at->format('d-m-Y') }}</p></a>
@@ -69,7 +71,7 @@
             
                 </div>
             </section>
-            <section class="flexrow gap65 marginl45">
+            <section class="flex-row gap65 marginl45">
                 <div class="box4">
                     <h2 class="padding2">Statuts des commandes</h2>
                     <div class="status-group">
@@ -102,7 +104,7 @@
                 <div class="box6">
                     <h2 class="padding2">Top fournisseurs {{ $currentYear  }}🏆</h2>
                     <p class="italic marginl2">par CA</p>
-                    <div class="flexrow ">
+                    <div class="flex-row ">
                         @foreach ($topSuppliers as $index => $supplier)
                             <div class="supplier-{{ $index + 1 }}">
                                 <img src="{{ asset('images/fournisseur' . ($index + 1) . '.png') }}" alt="Logo fournisseur {{ $index +1 }}" class="supplier-img">
@@ -116,4 +118,5 @@
             <!-- etc. -->
         </div>
 </main>
+</div>
 @endsection

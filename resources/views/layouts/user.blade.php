@@ -27,20 +27,27 @@
             <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo PurchaseWave">
             </a>
         </nav>
-        <nav class="right-nav">
-            <a class="paddingr53 white" href="{{ route('dashboard.index') }}">Dashboard</a>
-            <a class="paddingr53 white" href="{{ route('orders.index') }}">Commandes</a>
-            <a class="paddingr53 white" href="{{ route('products.index') }}">Produits</a>
+        <nav class="right-nav align-items-center">
+            <a class="font-weight-500 paddingr53 white" href="{{ route('dashboard.index') }}">Dashboard</a>
+            <a class="font-weight-500 paddingr53 white" href="{{ route('orders.index') }}">Commandes</a>
+             <div class="manage-reference flex-column align-items-center" onclick="toggleReferencesDropdown()">
+                <p class="font-weight-500 dropdown-ref">Gestion des références</p>
+                 <ul id="referencesDropdownMenu" class="ref-dropdown-menu" style="display: none;">
+            <li><a class="font-weight-500 paddingr53 white" href="{{ route('products.index') }}">Produits</a></li>
+            <li><a class="font-weight-500 paddingr53 white" href="{{ route('suppliers.index') }}">Fournisseurs</a></li>
+            <li><a class="font-weight-500 paddingr53 white" href="{{ route('categories.index') }}">Catégories</a></li>
+            </ul>
+            </div>
 
      <div class="user-info" onclick="toggleDropdown()">
     <img src="{{ asset('images/user-img.png') }}" alt="Profil" />
     <div class="user-dropdown">
-        <p class ="user">{{ Auth::user()->name }}</p>
+        <p class ="user font-weight-500">{{ auth('web')->user()->name }}</p>
         <!-- ↓ Utilisez une classe ET un ID pour plus de fiabilité ↓ -->
         <ul id="userDropdownMenu" class="dropdown-menu" style="display: none;">
-            <li><a href="{{ route('account.edit') }}" class="account">Mon compte</a></li>
+            <li><a href="{{ route('profile.edit') }}" class="account">Mon compte</a></li>
             <li>
-                <form method="POST" action="{{ route('auth.logout') }}">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit">Déconnexion</button>
                 </form>

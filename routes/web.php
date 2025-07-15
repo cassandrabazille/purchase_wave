@@ -1,8 +1,8 @@
 <?php
 
 
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AdminController;
+
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
@@ -10,20 +10,59 @@ use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\User\UserAuthController;
+use App\Http\Controllers\User\UserProfileController;
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminProfileController;
 
 
-//login & register
-Route::get('login', [AuthController::class, 'showlogin'])->name('auth.showLogin');
-Route::post('login', [AuthController::class, 'doLogin'])->name('auth.login');
-Route::get('register', [AuthController::class, 'showRegister'])->name('auth.showRegister');;
-Route::post('register', [AuthController::class, 'doRegister'])->name('auth.register');
-Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
+// Utilisateurs
 
-//account
-Route::get('/account/edit', [AccountController::class, 'edit'])->name('account.edit');
-Route::patch('account/infos', [AccountController::class, 'update'])->name('profile.account.infos');
-Route::patch('account/password', [AccountController::class, 'updatePassword'])->name('profile.account.password');
+
+
+// Auth utilisateur (login, register, logout)
+Route::controller(UserAuthController::class)->group(function () {
+    Route::get('login', 'showLogin')->name('login');
+    Route::post('login', 'doLogin')->name('login.post');
+    Route::get('register', 'showRegister')->name('register');
+    Route::post('register', 'doRegister')->name('register.post');
+    Route::post('logout', 'logout')->name('logout');
+});
+
+
+// Profil utilisateur (protégé par middleware 'auth' par défaut)
+// Groupe pour les utilisateurs connectés
+Route::middleware(['auth'])->prefix('profile')->name('profile.')->group(function () {
+    Route::get('/', [UserProfileController::class, 'edit'])->name('edit');
+    Route::post('/update', [UserProfileController::class, 'update'])->name('update');
+    Route::post('/password', [UserProfileController::class, 'updatePassword'])->name('password');
+});
+
+
+
+
+// Admin
+// routes/web.php
+
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::controller(AdminAuthController::class)->group(function () {
+        Route::get('login', 'showLogin')->name('login');
+        Route::post('login', 'doLogin')->name('login.post');
+        Route::post('logout', 'logout')->name('logout');
+    });
+
+    Route::middleware(['auth:admin'])->prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [AdminProfileController::class, 'edit'])->name('edit');
+        Route::post('/update', [AdminProfileController::class, 'update'])->name('update');
+        Route::post('/password', [AdminProfileController::class, 'updatePassword'])->name('password');
+    });
+
+});
+
+
 
 //orders
 Route::get('orders.index', [OrderController::class, 'index'])->name('orders.index');

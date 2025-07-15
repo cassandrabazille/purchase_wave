@@ -11,7 +11,7 @@
             <h1 class="paddingt2 marginb3">Bienvenue sur PurchaseWave !</h1>
             <h3 class="paddingt2 marginb3">Inscrivez-vous pour accéder à la plateforme</h3>
 
-            <form method="POST" action="{{ route('auth.register') }}">
+            <form method="POST" action="{{ route('register.post') }}">
                 @csrf
 
                 <p class="name marginb2">Nom complet :</p>

@@ -3,6 +3,7 @@
 @section('title', 'Page de connexion')
 
 @section('content')
+<div class="container">
     <main class="flexrow justifycenter paddingt2">
         <div class="lignecdes-container">
                           @if(session('success'))
@@ -87,5 +88,5 @@
         </div>
     </main>
 @endsection
-
+</div>
 </html>

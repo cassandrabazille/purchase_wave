@@ -3,7 +3,7 @@
 @section('title', 'Page de connexion')
 
 @section('content')
-
+<div class="container">
     <main class="flexrow paddingt2">
 
         <div class="cdesachat-container">
@@ -24,7 +24,7 @@
                 <div class="table-wrapper">
                     <table class="orderstable">
                         <thead>
-                            <tr>
+                            <tr class="table-header">
                                 <th>Référence</th>
                                  <th>Mots clés</th>
                                 <th>Descriptif</th>
@@ -76,5 +76,6 @@
         </div>
 
     </main>
+    </div>
 @endsection
 

@@ -18,6 +18,12 @@ body {
     width: 100%;
 }
 
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
 /* ================== LIENS ================== */
 a {
     text-decoration: none;
@@ -48,10 +54,7 @@ p {
 .italic {
     font-style: italic;
 }
-/* ================== STRUCTURE ================== */
-main {
-    gap: 4rem;
-}
+
 
 /* ================== header ================== */
 
@@ -68,10 +71,7 @@ header.flexrow {
     gap: 5.3rem;
 }
 
-.right-nav a,
-.user-info p {
-    font-weight: 500;
-}
+
 
 .user-info {
     display: flex;
@@ -85,6 +85,40 @@ header.flexrow {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.ref-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; /* fond blanc */
+    border-radius: 6px;
+    padding: 6px 0;
+    margin-top: 8px;
+    gap: 4px;
+    text-align: center;
+    list-style: none;
+    width: fit-content;
+    align-items: center;
+}
+
+.ref-dropdown-menu li {
+    list-style: none;
+    width: 100%;
+}
+
+.ref-dropdown-menu li a {
+    color: #000; /* texte noir */
+    text-decoration: none;
+    padding: 6px 12px;
+    display: block;
+    font-size: 14px;
+    width: 100%;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+}
+
+.ref-dropdown-menu li a:hover {
+    background-color: #f0f0f0; /* gris clair au hover */
 }
 
 .dropdown-menu {
@@ -127,7 +161,6 @@ header.flexrow {
     object-fit: contain;
     padding-left: 2rem;
 }
-
 
 /* ================== BOUTONS ================== */
 button {
@@ -203,53 +236,57 @@ button:hover {
 }
 
 .crudline {
-  display: flex;
-  gap: 1.5rem; /* réduit l’espace entre icônes */
-  align-items: center;
+    display: flex;
+    gap: 1.5rem; /* réduit l’espace entre icônes */
+    align-items: center;
 }
 
 .crud-icon-link,
 .crud-icon-btn {
-  display: inline-flex;
-  padding: 0;
-  margin: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
+    display: inline-flex;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 .crudline button {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  width: 2rem;    /* même taille que l'image */
-  height: 2rem;   /* même taille que l'image */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 2rem; /* même taille que l'image */
+    height: 2rem; /* même taille que l'image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .crudline button img {
-  vertical-align: middle;
-  width: 2rem;
-  height: 2rem;
-  object-fit: contain;
+    vertical-align: middle;
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
 }
 
 .crud-icon-link img,
 .crud-icon-btn img {
-  width: 2rem;
-  height: 2rem;
-  object-fit: contain;
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
 }
 
 /* ================== MODAL PHOTO ================== */
 
 .pdtimg {
-    width: 300px;
-    height: 200px;
+    max-height: 400px; /* ou 300px, à adapter selon ton design */
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
 }
 
 .modal-content img {
@@ -270,35 +307,47 @@ button:hover {
 }
 
 /* ================== FLEX UTILITIES ================== */
-.flexrow {
+.flex-row {
     display: flex;
     flex-direction: row;
 }
 
-.flexcolumn {
+.flex-column {
     display: flex;
     flex-direction: column;
 }
 
-.justifystart {
+.justify-flex-start {
     justify-content: flex-start;
 }
 
-.justifycenter {
+.justify-center {
     justify-content: center;
 }
 
-.justifyend {
+.justify-flex-end {
     justify-content: flex-end;
 }
 
-.alignitmsctr {
+.space-between {
+    justify-content: space-between;
+}
+
+
+.align-center {
     align-items: center;
 }
 
-.textalignr {
+.textalign-right {
     text-align: right;
 }
+
+/* ================== FONT ================== */
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
 
 /* ================== ESPACEMENTS ================== */
 .padding2 {
@@ -361,6 +410,10 @@ button:hover {
     margin-right: 4.5rem;
 }
 
+.margin-top-4rem {
+    margin-top: 4rem;
+}
+
 .gap14 {
     gap: 1.4rem;
 }
@@ -400,7 +453,6 @@ button:hover {
 }
 
 /* ================== DASHBOARD ================== */
-
 
 .dashboard-container {
     margin: 2rem auto; /* Centre le conteneur */
@@ -456,36 +508,28 @@ button:hover {
     font-size: 1.4rem;
 }
 
-.status-box1
- {
-   background-color: #e0e0e0
+.status-box1 {
+    background-color: #e0e0e0;
 }
 
 .box1 {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-   
+    align-items: center;
 }
 
-
-.status-box4
- {
-   background-color: black;
-   color:white;
+.status-box4 {
+    background-color: black;
+    color: white;
 }
 
 .status-box1,
 .status-box2,
 .status-box3,
-.status-box4
- {
-   border-radius: 1rem;
-   padding:1.2rem;
+.status-box4 {
+    border-radius: 1rem;
+    padding: 1.2rem;
 }
-
-
-
 
 .status-group {
     display: flex;
@@ -495,18 +539,16 @@ button:hover {
 }
 
 .status-line1 {
-    display:flex;
+    display: flex;
     flex-direction: row;
     gap: 2rem;
 }
 
 .status-line2 {
-    display:flex;
+    display: flex;
     flex-direction: row;
-      gap: 2rem;
+    gap: 2rem;
 }
-
-
 
 .supplier-1,
 .supplier-2,
@@ -534,9 +576,8 @@ button:hover {
 .box2 {
     display: flex;
     flex-direction: column;
- 
+
     align-items: center; /* <-- Ajoute ça pour centrer horizontalement tous les enfants */
-   
 }
 
 .box3 {
@@ -551,20 +592,17 @@ button:hover {
     width: 100%;
     display: flex;
     justify-content: center;
-   
 }
 
 .username-db {
     color: #1a73e8;
 }
 
-
-
 .monthly-indicators {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:2rem;
+    gap: 2rem;
 }
 
 .monthly-indicator1,
@@ -574,7 +612,7 @@ button:hover {
     border-radius: 1rem;
     font-weight: 600;
     font-size: 1.4rem;
-    width: fit-content; 
+    width: fit-content;
 }
 
 .monthly-indicator1 {
@@ -582,12 +620,12 @@ button:hover {
 }
 
 .monthly-indicator2 {
-    background-color: #1a73e8; 
+    background-color: #1a73e8;
 }
 
 .monthly-indicator3 {
-    background-color: black; 
-    color:white;
+    background-color: black;
+    color: white;
 }
 
 .red {
@@ -597,8 +635,7 @@ button:hover {
 /* ================== TABLEAU COMMANDES ================== */
 
 .table-header {
-    background-color:#D9D9D9;
-
+    background-color: #d9d9d9;
 }
 
 /* ================== TABLEAU PRODUITS ================== */
@@ -610,14 +647,11 @@ button:hover {
     max-width: 1200px; /* ou la largeur maximale que vous souhaitez */
     width: 100%;
     margin: 0 auto; /* pour centrer la boîte */
- 
 }
 
 .whitebox p {
-  margin-bottom: 1.2rem; /* Ajuste la valeur à ton goût (ex. : 1rem, 1.5rem...) */
+    margin-bottom: 1.2rem; /* Ajuste la valeur à ton goût (ex. : 1rem, 1.5rem...) */
 }
-
-
 
 /* Conteneur scrollable pour les très petits écrans */
 
@@ -628,11 +662,10 @@ button:hover {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
-    border-radius: 1.0rem;
+    border-radius: 1rem;
     box-sizing: border-box;
-     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
-
 
 .orderstable {
     width: 100%;
@@ -646,15 +679,14 @@ button:hover {
     font-size: 1.4rem;
     font-weight: 600;
     color: black;
-    padding: 1.6rem 2rem; 
+    padding: 1.6rem 2rem;
     white-space: nowrap;
     text-align: left;
     border: none;
-      
 }
 
 .orderstable th.go-to-line {
-      max-width: 120px;
+    max-width: 120px;
     white-space: normal !important;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -705,13 +737,11 @@ button:hover {
 .form-column {
     flex: 1; /* Les deux colonnes prennent la même largeur */
     min-width: 0; /* Empêche le débordement */
-    
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
-
 
 /* Adaptation mobile */
 @media (max-width: 768px) {

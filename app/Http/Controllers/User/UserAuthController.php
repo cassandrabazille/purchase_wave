@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 
 
-class AuthController extends Controller
+class UserAuthController extends Controller
 {
-
     public function showRegister()
     {
         return view('auth.register');
@@ -30,11 +29,11 @@ class AuthController extends Controller
             'password' => Hash::make($request->input('password')),
         ]);
 
-        \Auth::login($user);
+        \Auth::guard('web')->login($user);
 
         return redirect()->route('orders.index');
-
     }
+
     public function showLogin()
     {
         return view('auth.login');
@@ -50,21 +49,16 @@ class AuthController extends Controller
         if (\Auth::guard('web')->attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
             return redirect()->route('dashboard.index');
-        } elseif (\Auth::guard('admin')->attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
-            return redirect()->route('admin.index');
-        } else {
-            return redirect()->back()->withErrors('Email ou mot de passe incorrect');
         }
+
+        return redirect()->back()->withErrors('Email ou mot de passe incorrect');
     }
 
     public function logout(Request $request)
     {
-
-        \Auth::logout();
+        \Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('auth.showLogin');
+        return redirect()->route('login');
     }
-
 }
