@@ -31,7 +31,7 @@
                     <div class="flexcolumn ">
                         @forelse ($upcoming as $index => $order)
                         <div class="order-{{ $index + 1 }}">
-                            <p> <strong>{{   $order->reference}}</strong> arrive le  {{ $order->confirmed_delivery_date->format('d/m/Y') }}</p>
+                           <a href="{{ route('orders.show', $order->id) }}"> <p> <strong>{{   $order->reference}}</strong> arrive le  {{ $order->confirmed_delivery_date->format('d/m/Y') }}</p></a>
                         </div>
                         @empty
                         <p>Aucune livraison prévue</p>

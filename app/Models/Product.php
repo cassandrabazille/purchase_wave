@@ -38,6 +38,7 @@ class Product extends Model
         parent::boot();
 
         static::created(function ($product) {
+            $needsSave = false;
 
             if (empty($product->slug)) {
                 $words = explode(' ', $product->description);
@@ -50,13 +51,25 @@ class Product extends Model
                     $slug = $originalSlug . '-' . $count++;
                 }
                 $product->slug = $slug;
+                 $needsSave = true;
             }
 
             if (!$product->reference) {
                 $product->reference = 'WT' . str_pad($product->id, 3, '0', STR_PAD_LEFT);
+                 $needsSave = true;
              
             }
+
+            if (empty($product->image) && !empty($product->slug)){
+                $product->image = $product->slug . '.jpg';
+                $needsSave = true;
+            } 
+            
+            if($needsSave) {
                $product->save();
+               }
         });
     }
+
+    
 }
