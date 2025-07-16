@@ -15,9 +15,11 @@
                     </div>
                 @endif
                 <div class="btn-wrapper">
-                    <a href="{{ url()->previous() }}">
-                        <button class="returnbtn textalignr">
-                            <img src="{{ asset('images/return.png') }}" alt="Retour" />Return
+                     <a href="{{ url()->previous() }}">
+                        <button class="returnbtn text-align-right width-4 height-4 flex items-center">
+                            <img src="{{ asset('images/return.png') }}" alt="Flèches de retour"
+                                class="object-fit-contain padding-left-2 width-4 height-4" />
+                            <span class="ml-2">Return</span>
                         </button>
                     </a>
                 </div>

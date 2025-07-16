@@ -11,7 +11,7 @@ use App\Models\OrderItem;
 
 class Product extends Model
 {
-    protected $fillable = ['reference', 'slug', 'description', 'price', 'image', 'category_id'];
+    protected $fillable = ['reference', 'slug', 'description', 'price', 'image', 'category_id', 'user_id'];
 
     public function category()
     {
@@ -59,11 +59,6 @@ class Product extends Model
                  $needsSave = true;
              
             }
-
-            if (empty($product->image) && !empty($product->slug)){
-                $product->image = $product->slug . '.jpg';
-                $needsSave = true;
-            } 
             
             if($needsSave) {
                $product->save();

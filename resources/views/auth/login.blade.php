@@ -3,7 +3,7 @@
 @section('title', 'Page de connexion')
 
 @section('content')
-    <main class="flexrow paddingt2">
+    <main class="flex-row paddingt2 gap-2">
         <section class="section1">
             <img src="{{ asset('images/connexion.png') }}" alt="Image Connexion" class="imgpp">
         </section>

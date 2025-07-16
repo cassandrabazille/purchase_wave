@@ -31,15 +31,25 @@ class CategoryController extends Controller
     {
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:categories,name',
             'description' => 'required|string|max:1000'
         ]);
+
+        $slug = Str::slug($validated['name']);
+
+        if (Category::where('slug', $slug)->exists()) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['name' => 'Une catégorie avec un slug similaire existe déjà.']);
+        }
+
 
         Category::create([
 
             'name' => $validated['name'],
-            'slug' => Str::slug($validated['name']),
-            'description' => $validated['description']
+            'slug' => $slug,
+            'description' => $validated['description'],
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Catégorie créée avec succès');
@@ -48,7 +58,7 @@ class CategoryController extends Controller
 
     public function show(string $id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::with('user')->findOrFail($id);
         return view('categories.show', compact('category'));
     }
 
@@ -66,11 +76,33 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+
+        $category = Category::findOrFail($id);
+
+
+
+        if ($category->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:1000'
         ]);
-        $category = Category::findOrFail($id);
+
+        $slug = Str::slug($validated['name']);
+
+        $slugExists = Category::where('slug', $slug)
+            ->where('id', '!=', $category->id)
+            ->exists();
+
+        if ($slugExists) {
+
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['name' => 'Une catégorie avec un slug similaire existe déjà.']);
+        }
 
         $category->update([
             'name' => $validated['name'],
@@ -78,8 +110,10 @@ class CategoryController extends Controller
             'description' => $validated['description']
         ]);
 
+
+
         return redirect()->route('categories.index')
-            ->with('success', 'La catégorie a bien été modifiée.'); 
+            ->with('success', 'La catégorie a bien été modifiée.');
     }
 
     /**
@@ -87,7 +121,10 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = Category::findOrFail($id);
+
+        $category = Category::where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
         $category->delete();
         return redirect()->route('categories.index')
             ->with('success', 'La catégorie a bien été supprimée.');

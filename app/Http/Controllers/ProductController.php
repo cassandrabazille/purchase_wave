@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Category;
+
 
 class ProductController extends Controller
 {
@@ -31,7 +32,7 @@ class ProductController extends Controller
 
     public function show(string $id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with('user')->findOrFail($id);
         return view('products.show', compact('product'));
     }
 
@@ -40,17 +41,27 @@ class ProductController extends Controller
         $validated = $request->validate([
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric|min:0',
-            'image' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
             'category_id' => 'required|exists:categories,id',
         ]);
 
 
-        $product = Product::create([
+
+
+        $image = $request->file('image');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->storeAs('products', $imageName, 'public');
+
+
+        Product::create([
             'description' => $validated['description'],
             'price' => $validated['price'],
-            'image' => $validated['image'],
-            'category_id' => $validated['category_id']
+            'image' => 'products/' . $imageName,
+            'category_id' => $validated['category_id'],
+            'user_id' => auth()->id(),
         ]);
+
+
 
         return redirect()->route('products.index')->with('success', 'Produit créé avec succès');
     }
@@ -74,17 +85,38 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
+
+        if ($product->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action');
+        }
+
+
         $validated = $request->validate([
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric|min:0',
-            'image' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'category_id' => 'nullable|exists:categories,id',
         ]);
+
+        $imagePath = $product->image; // Garder l'ancienne image par défaut
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('products', $imageName, 'public');
+
+            // Supprimer l'ancienne image du disque si elle existe
+            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+            $imagePath = 'products/' . $imageName;
+        }
 
         $product->update([
             'description' => $validated['description'],
             'price' => $validated['price'],
-            'image' => $validated['image'],
+            'image' => $imagePath,
             'category_id' => $validated['category_id'] ?? null,
         ]);
 
@@ -97,7 +129,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+
         $product->delete();
         return redirect()->route('products.index')
             ->with('success', 'Le produit a bien été supprimé.');

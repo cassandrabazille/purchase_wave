@@ -55,112 +55,65 @@ p {
     font-style: italic;
 }
 
+/* ================== borders ================== */
 
-/* ================== header ================== */
-
-header.flexrow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
+.black-box-shadow {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.right-nav {
-    display: flex;
-    align-items: center;
-    gap: 5.3rem;
+.border-radius-0-4 {
+    border-radius: 0.4rem;
 }
 
+/* ================== style ================== */
 
+.no-list-style {
+    list-style: none;
+}
 
-.user-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
+.cursor-pointer {
     cursor: pointer;
 }
 
-.user-dropdown {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.ref-dropdown-menu {
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff; /* fond blanc */
-    border-radius: 6px;
-    padding: 6px 0;
-    margin-top: 8px;
-    gap: 4px;
-    text-align: center;
-    list-style: none;
-    width: fit-content;
-    align-items: center;
-}
+/* ================== colors ================== */
 
-.ref-dropdown-menu li {
-    list-style: none;
-    width: 100%;
-}
-
-.ref-dropdown-menu li a {
-    color: #000; /* texte noir */
-    text-decoration: none;
-    padding: 6px 12px;
-    display: block;
-    font-size: 14px;
-    width: 100%;
-    transition: background-color 0.2s ease;
-    border-radius: 4px;
-}
-
-.ref-dropdown-menu li a:hover {
-    background-color: #f0f0f0; /* gris clair au hover */
-}
-
-.dropdown-menu {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 0.4rem;
-    list-style: none;
-    padding: 1.2rem;
+.white-background {
     background-color: white;
 }
 
-.dropdown-menu li {
-    text-align: center;
-}
+/* ================== font-size & weight ================== */
 
-.account {
+.font-size-1-4 {
     font-size: 1.4rem;
 }
 
-.dropdown-menu li button {
-    font-weight: normal;
-    margin-top: 1rem;
-    font-size: 1.4rem;
+.normal-font-weight {
+font-weight: normal;
 }
+ 
+/* ================== size & fit ================== */
 
-/* ================== IMAGES ================== */
-.imgpp {
-    max-width: 100%;
-    height: auto;
-}
-
-.crudline img {
+.width-2 {
     width: 2rem;
+}
+
+.width-4 {
+    width: 4rem;
+}
+
+.height-2 {
     height: 2rem;
+}
+
+.height-4 {
+    height: 4rem;
+}
+
+.object-fit-contain {
     object-fit: contain;
 }
 
-.returnbtn img {
-    width: 4rem;
-    height: 4rem;
-    object-fit: contain;
-    padding-left: 2rem;
-}
 
 /* ================== BOUTONS ================== */
 button {
@@ -278,6 +231,7 @@ button:hover {
     object-fit: contain;
 }
 
+
 /* ================== MODAL PHOTO ================== */
 
 .pdtimg {
@@ -334,12 +288,17 @@ button:hover {
 }
 
 
-.align-center {
+.align-items-center {
+    display: flex;
     align-items: center;
 }
 
-.textalign-right {
+.text-align-right {
     text-align: right;
+}
+
+.text-align-center {
+    text-align: center;
 }
 
 /* ================== FONT ================== */
@@ -354,6 +313,10 @@ button:hover {
     padding: 2rem;
 }
 
+.padding-1 {
+    padding: 1rem;
+}
+
 .paddingt2 {
     padding-top: 2rem;
 }
@@ -362,7 +325,7 @@ button:hover {
     padding-left: 1rem;
 }
 
-.paddingl2 {
+.padding-left-2 {
     padding-left: 2rem;
 }
 
@@ -374,8 +337,25 @@ button:hover {
     padding-bottom: 2rem;
 }
 
+.padding-bottom-05 {
+    padding-bottom: 0.5rem;
+}
+
+
 .paddingr53 {
     padding-right: 5.3rem;
+}
+
+.padding-right-2 {
+    padding-right: 2rem;
+}
+
+.padding-right-5 {
+    padding-right: 5rem;
+}
+
+.padding-left-2 {
+    padding-left: 2rem;
 }
 
 .margin2 {
@@ -410,8 +390,20 @@ button:hover {
     margin-right: 4.5rem;
 }
 
+.margin-top-1 {
+     margin-top: 1rem;
+}
+
 .margin-top-4rem {
     margin-top: 4rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+.gap-7 {
+    gap: 7rem;
 }
 
 .gap14 {

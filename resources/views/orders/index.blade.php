@@ -50,10 +50,10 @@
       <td>
         <div class="crudline flexrow">
         <a href="{{ route('orders.show', $order->id) }}" class="crud-icon-link">
-        <img src="{{ asset('images/view.png') }}" alt="Icône oeil pour voir le détail de la commande" /> 
+        <img src="{{ asset('images/view.png') }}" alt="Icône oeil pour voir le détail de la commande" class="width-2 height-2"/> 
         </a>
         <a href="{{ route('orders.edit', $order->id) }}" class="crud-icon-link">
-        <img src="{{ asset('images/edit.png') }}" alt="Icône crayon pour modifier la commande" />
+        <img src="{{ asset('images/edit.png') }}" alt="Icône crayon pour modifier la commande" class="width-2 height-2"/>
          </a>
         <form action="{{ route('orders.destroy', $order) }}" method="POST"
         onsubmit="return confirm ('Supprimer cette commande ?');">
@@ -61,7 +61,7 @@
         @method('DELETE')
         <button type="submit" class="crud-icon-btn">
         <img
-          src="{{ asset('images/delete.png') }}" alt="Icône croix pour cette commande" />
+          src="{{ asset('images/delete.png') }}" alt="Icône croix pour cette commande" class="width-2 height-2" />
         </button>
         </form>
         </div>
