@@ -15,21 +15,21 @@
     @endif
     <div class="btn-wrapper">
       <a href={{route('categories.create')}}>
-      <button class="blackbtn textalignr">Créer un nouvelle catégorie</button>
+     <button class="black-background white-color font-poppins-ss font-size-1-4 align-items-center justify-center width-27 height-4-4 border-radius-1 black-box-shadow no-border cursor-pointer">Créer une nouvelle catégorie</button>
       </a>
     </div>
-    <div class="whitebox">
+    <div class="border-radius-1 black-box-shadow padding-3">
       <h2 class="padding2">Catégories</h2>
-      <p class="subtitle paddingl2 paddingb2">Liste de toutes les catégories enregistrées</p>
+      <p class="medium-grey-color paddingl2 paddingb2">Liste de toutes les catégories enregistrées</p>
       <div class="table-wrapper">
-      <table class="orderstable">
+      <table class="width-100pct font-size-1-6 border-collapse no-border">
         <tr>
         <th>Name</th>
         </tr>
         @foreach ($categories as $category)
-      <tr>
-      <td>{{$category->name}}</td>
-      <td>
+      <tr class="grey-background">
+      <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$category->name}}</td>
+      <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">
         <div class="crudline flexrow">
         <form action="{{ route('categories.show', $category->id) }}" method="GET" style="display: inline;">
         <button type="submit" style=" background: none; border: none">
@@ -45,7 +45,7 @@
         onsubmit="return confirm ('Supprimer cette catégorie?');">
         @csrf
         @method('DELETE')
-        <button type="submit" style="background: none; border: none"><img
+        <button type="submit" class="cursor-pointer no-border no-background"><img
           src="{{ asset('images/delete.png') }}" alt="Icône croix pour supprimer la catégorie" />
         </button>
         </form>

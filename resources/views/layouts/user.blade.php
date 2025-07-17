@@ -49,7 +49,7 @@
             <li class="no-list-style font-size-1-4">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="font-size-1-4 normal-font-weight margin-top-1" type="submit">Déconnexion</button>
+                    <button class="blue-background hover-blue font-poppins-ss font-size-1-4 white-color normal-font-weight width-15 height-5 margin-top-1 border-radius-3-4 no-border cursor-pointer" type="submit">Déconnexion</button>
                 </form>
             </li>
         </ul>

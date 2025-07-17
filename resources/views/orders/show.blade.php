@@ -13,7 +13,7 @@
     @endif
             <div class="btn-wrapper">
         <a href="{{ url()->previous() }}">
-                        <button class="returnbtn text-align-right width-4 height-4 flex items-center">
+                        <button class="black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 ">
                             <img src="{{ asset('images/return.png') }}" alt="Flèches de retour"
                                 class="object-fit-contain padding-left-2 width-4 height-4" />
                             <span class="ml-2">Return</span>
@@ -25,7 +25,7 @@
       <button class="blackbtn textalignr">Créer une ligne de commande</button>
       </a>
     </div>
-            <div class="whitebox">
+            <div class="border-radius-1 black-box-shadow padding-3">
                 <h2 class="padding2">Détail de la commande </h2>
 
                 <p class="subtitle paddingl2 paddingb2">Liste de tous les produits rattachés à la commande

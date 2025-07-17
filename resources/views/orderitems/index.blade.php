@@ -15,10 +15,10 @@
             @endif
             <div class="btn-wrapper">
                 <a href={{route('orderitems.create')}}>
-                    <button class="blackbtn textalignr">Créer une ligne de commande</button>
+                     <button class="black-background white-color font-poppins-ss font-size-1-4 align-items-center justify-center width-23-5 height-4-4 border-radius-1 black-box-shadow no-border cursor-pointer">Créer une nouvelle ligne de commande</button>
                 </a>
             </div>
-            <div class="whitebox">
+            <div class="border-radius-1 black-box-shadow padding-3">
                 <h2 class="padding2">Détail de la commande</h2>
                 <p class="subtitle paddingl2 paddingb2">Liste de toutes les lignes de commandes enregistrées</p>
                 <div class="table-wrapper">
@@ -60,7 +60,7 @@
                                                 class="d-inline" onsubmit="return confirm ('Supprimer cette ligne de commande ?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" style="background: none; border: none"><img
+                                                <button type="submit" class="cursor-pointer no-border no-background"><img
                                                         src="{{ asset('images/delete.png') }}"
                                                         alt="Icône croix pour cette ligne de commande" />
                                                 </button>

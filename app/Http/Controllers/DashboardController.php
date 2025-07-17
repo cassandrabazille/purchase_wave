@@ -26,7 +26,7 @@ class DashboardController extends Controller
                 'confirmed_delivery_date',
                 'order_amount'
             ])
-            ->limit(8)
+            ->limit(7)
             ->get();
 
 

@@ -6,7 +6,7 @@
 
     <main class="flexrow paddingt2">
 
-        <div class="cdesachat-container">
+        <div class="black-box-shadow border-radius-1">
             @if(session('success'))
                 <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
                     {{ session('success') }}
@@ -17,21 +17,21 @@
                 <h2 class="padding2">Utilisateurs</h2>
                 <p class="subtitle paddingl2 paddingb2">Liste de tous les utilisateurs enregistrés</p>
                 <div class="table-wrapper">
-                    <table class="orderstable">
+                    <table class="width-100pct font-size-1-6 border-collapse no-border">
                         <thead>
-                            <tr>
-                                <th>Nom complet</th>
-                                <th>Mail</th>
-                                <th>Date de création de compte</th>
+                            <tr class="grey-background">
+                                <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Nom complet</th>
+                                <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Mail</th>
+                                <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Date de création de compte</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($users as $user)
                                 <tr>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->created_at}}</td>
-                                    <td>
+                                    <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$user->name}}</td>
+                                    <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$user->email}}</td>
+                                    <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$user->created_at}}</td>
+                                    <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">
                                         <div class="crudline flexrow">
                                             <form action="{{ route('admin.edit', $user->user_id) }}" method="GET"
                                                 style="display: inline;">
@@ -44,7 +44,7 @@
                                                 class="d-inline" onsubmit="return confirm ('Supprimer ce compte utilisateur ?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" style="background: none; border: none"><img
+                                                <button type="submit" class="cursor-pointer no-border no-background"><img
                                                         src="{{ asset('images/delete.png') }}"
                                                         alt="Icône croix pour supprimer le compte utilisateur" />
                                                 </button>

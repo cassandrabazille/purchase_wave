@@ -8,7 +8,7 @@
         <div class="lignecdes-container">
             <div class="btn-wrapper">
                    <a href="{{ url()->previous() }}">
-                        <button class="returnbtn text-align-right width-4 height-4 flex items-center">
+                        <button class="black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 ">
                             <img src="{{ asset('images/return.png') }}" alt="Flèches de retour"
                                 class="object-fit-contain padding-left-2 width-4 height-4" />
                             <span class="ml-2">Return</span>
@@ -18,8 +18,8 @@
             <div class="whitebox">
                 <h2 class="padding2">Mon compte</h2>
                 
-                <div class="forms-container">
-                <div class="form-column whitebox">
+                <div class="flex-row gap-2">
+                <div class="border-radius-1 black-box-shadow padding-3">
                 <form action="{{ route('admin.update',$user->user_id) }}" method="POST">
                     @csrf
                     @method('PATCH')
@@ -36,7 +36,7 @@
                 </div>
                      </div>
 
-                <div class="form-column whitebox">
+                <div class="border-radius-1 black-box-shadow padding-3">
                     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

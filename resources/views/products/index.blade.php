@@ -15,31 +15,31 @@
             @endif
             <div class="btn-wrapper">
                 <a href={{route('products.create')}}>
-                    <button class="blackbtn textalignr margin2">Créer un nouveau produit</button>
+                      <button class="black-background white-color font-poppins-ss font-size-1-4 align-items-center justify-center width-27 height-4-4 border-radius-1 black-box-shadow no-border cursor-pointer">Créer un nouveau produit</button>
                 </a>
             </div>
             <div class="products-index">
                 <h2 class="padding2">Produits</h2>
                 <p class="subtitle paddingl2 paddingb2">Liste de tous les produits enregistrés</p>
                 <div class="table-wrapper">
-                    <table class="orderstable">
+                    <table class="width-100pct font-size-1-6 border-collapse no-border">
                         <thead>
-                            <tr class="table-header">
-                                <th>Référence</th>
-                                 <th>Mots clés</th>
-                                <th>Descriptif</th>
-                                <th>Date création</th>
-                                <th>Actions</th>
+                            <tr class="grey-background">
+                                <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Référence</th>
+                                 <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Mots clés</th>
+                                <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Descriptif</th>
+                                <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Date création</th>
+                                <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($products as $product)
                                 <tr>
-                                    <td>{{$product->reference}}</td>
-                                    <td>{{$product->slug}}</td>
-                                    <td>{{$product->description}}</td>
-                                    <td>{{$product->created_at}}</td>
-                                    <td>
+                                    <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$product->reference}}</td>
+                                    <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$product->slug}}</td>
+                                    <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$product->description}}</td>
+                                    <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$product->created_at}}</td>
+                                    <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">
                                         <div class="crudline flexrow">
                                             <form action="{{ route('products.show', $product->id) }}" method="GET"
                                                 style="display: inline;">
@@ -59,7 +59,7 @@
                                                 class="d-inline" onsubmit="return confirm ('Supprimer ce produit ?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" style="background: none; border: none"><img
+                                                <button type="submit" class="cursor-pointer no-border no-background"><img
                                                         src="{{ asset('images/delete.png') }}"
                                                         alt="Icône croix pour supprimer le produit" />
                                                 </button>

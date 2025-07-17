@@ -25,7 +25,7 @@ class UserProfileController extends Controller
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')->ignore($user->id),
+                Rule::unique('users')->ignore($user->user_id),
             ],
         ]);
 

@@ -47,7 +47,7 @@ class OrderController extends Controller
 
     public function create()
     {
-        $users = User::all();
+        $users = User::all(); // a modifier par id
         $suppliers = Supplier::select(['id', 'name'])->orderBy('name')->get();
         return view('orders.create', compact('users', 'suppliers'));
 
