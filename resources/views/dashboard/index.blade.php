@@ -5,16 +5,13 @@
 @section('content')
 
 <div class="container">
-
-<main class="dashboard-responsive flex-column padding-top-2">
-    <div>
-        @if(session('success'))
-            <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
-                {{ session('success') }}
-            </div>
-        @endif
-        <div class="margin-top-2 grey-background border-radius-1 padding-top-2 padding-right-3-5 gap57 width-120">
-            <div class="margin-top-2 margin-left-4 space-between">
+@if(session('success'))
+    <div class="light-green-background black-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4">
+        {{ session('success') }}
+    </div>
+@endif
+<main class="dashboard-responsive flex-column padding-top-2 grey-background border-radius-1 margin-top-2 padding-top-2 padding-right-3-5 gap57 width-12 ">
+            <div class="margin-top-2 margin-left-4 justify-center space-between">
                 <div>
                 <h1 class="font-size-3-2">Bonjour <span class="blue-color">{{ $currentUser->name }}</span>, voici votre dashboard !</h1>
                 </div>
@@ -111,7 +108,6 @@
                     </div>
                 </div>
             </section>
-        </div>
 </main>
 </div>
 @endsection

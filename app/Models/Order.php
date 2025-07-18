@@ -30,11 +30,12 @@ class Order extends Model
     protected static function boot()
     {
         parent::boot();
-        static::created(function ($order) {
-            if (!$order->reference) {
-                $prefixNumber = 1000;
-                $order->reference = 'ORD-' . ($prefixNumber + $order->id);
-                $order->save();
+      static::created(function ($order) {
+    if (empty($order->reference)) {
+        $prefixNumber = 1000;
+        $order->updateQuietly([
+            'reference' => 'ORD-' . ($prefixNumber + $order->id)
+        ]);
             }
         });
     }

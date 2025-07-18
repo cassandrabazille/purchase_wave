@@ -4,24 +4,27 @@
 
 @section('content')
 <div class="container">
-
-  <main class="flexrow paddingt2">
+  <main class="padding-top-2">
     <div class="black-box-shadow border-radius-1">
-    @if(session('success'))
-    <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
-      {{ session('success') }}
-    </div>
-    @endif
+          @if(session('success'))
+                    <div class="light-green-background black-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4 text-align">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if ($errors->has('unauthorized'))
+                    <div class="light-red-background white-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4">
+                        {{ $errors->first('unauthorized') }}
+                    </div>
+                @endif
     <!-- ici toutes tes autres boîtes, sections, composants -->
     <div class="justify-flex-end padding-3">
       <a href={{route('orders.create')}}>
         <button class="black-background white-color font-poppins-ss font-size-1-4 align-items-center justify-center width-27 height-4-4 border-radius-1 black-box-shadow no-border cursor-pointer">Créer une nouvelle commande</button>
       </a>
     </div>
-
-      <h2 class="padding2">Commandes d'achats</h2>
-      <p class="medium-grey-color paddingl2 paddingb2">Liste de toutes les commandes d’achats enregistrées</p>
-      <div class="table-wrapper">
+      <h2 class="padding-2">Commandes d'achats</h2>
+      <p class="medium-grey-color padding-left-2 padding-bottom-2">Liste de toutes les commandes d’achats enregistrées</p>
+      <div>
       <table class="width-100pct font-size-1-6 border-collapse no-border">
         <tr class="grey-background">
         <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Référence</th>
@@ -48,15 +51,15 @@
         {{ $order->confirmed_delivery_date ? date('d/m/Y', strtotime($order->confirmed_delivery_date)) : 'N/A' }}
       </td>
       <td class="with-bottom-border">
-        <div class="crudline align-items-center gap-1-5">
-        <a href="{{ route('orders.show', $order->id) }}" class="crud-icon-link">
+        <div class="align-items-center gap-1-5">
+        <a href="{{ route('orders.show', $order->id) }}" class="cursor-pointer">
         <img src="{{ asset('images/view.png') }}" alt="Icône oeil pour voir le détail de la commande" class="width-2 height-2"/> 
         </a>
-        <a href="{{ route('orders.edit', $order->id) }}" class="crud-icon-link">
+        <a href="{{ route('orders.edit', $order->id) }}" class="cursor-pointer">
         <img src="{{ asset('images/edit.png') }}" alt="Icône crayon pour modifier la commande" class="width-2 height-2"/>
          </a>
         <form action="{{ route('orders.destroy', $order) }}" method="POST"
-        onsubmit="return confirm ('Supprimer cette commande ?');">
+        onsubmit="return confirm ('Êtes-vous sûr(e) de vouloir supprimer cette commande ? La suppression \'une commande entraîne la perte de toutes les lignes de commandes et informations associées. ');">
         @csrf
         @method('DELETE')
         <button type="submit" class="cursor-pointer no-border no-background">

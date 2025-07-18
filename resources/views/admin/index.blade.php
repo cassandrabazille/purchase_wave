@@ -3,26 +3,24 @@
 @section('title', 'Page de connexion')
 
 @section('content')
-
-    <main class="flexrow paddingt2">
-
+<div class="container">
+    @if(session('success'))
+    <div class="light-green-background black-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4">
+        {{ session('success') }}
+    </div>
+@endif
+    <main class="padding-top-2">
         <div class="black-box-shadow border-radius-1">
-            @if(session('success'))
-                <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            <div class="whitebox">
-                <h2 class="padding2">Utilisateurs</h2>
-                <p class="subtitle paddingl2 paddingb2">Liste de tous les utilisateurs enregistrés</p>
-                <div class="table-wrapper">
+                <h2 class="padding-2">Utilisateurs</h2>
+                <p class="medium-grey-color padding-left-2 padding-bottom-2">Liste de tous les utilisateurs enregistrés</p>
+                <div>
                     <table class="width-100pct font-size-1-6 border-collapse no-border">
                         <thead>
                             <tr class="grey-background">
                                 <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Nom complet</th>
                                 <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Mail</th>
                                 <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Date de création de compte</th>
+                                  <th class="font-size-1-4 font-weight-bold text-align-left padding-1-6-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,10 +30,10 @@
                                     <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$user->email}}</td>
                                     <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">{{$user->created_at}}</td>
                                     <td class="font-size-1-4 text-align-left padding-1-6-2 with-bottom-border">
-                                        <div class="crudline flexrow">
+                                        <div class="align-items-center gap-1-5">
                                             <form action="{{ route('admin.edit', $user->user_id) }}" method="GET"
                                                 style="display: inline;">
-                                                <button type="submit" style=" background: none; border: none">
+                                                <button type="submit" style=" background: none; border: none" class="cursor-pointer">
                                                     <img src="{{ asset('images/edit.png') }}"
                                                         alt="Icône crayon pour modifier le compte utilisateur" />
                                                 </button>
@@ -53,16 +51,14 @@
                                     </td>
                                 </tr>
                             @empty
-                        </tbody>
                         <tr>
                             <td>Aucun utilisateur trouvé</td>
                         </tr>
                         @endforelse
+                              </tbody>
                     </table>
                 </div>
-                <!-- etc. -->
             </div>
-        </div>
-
     </main>
+    </div>
 @endsection

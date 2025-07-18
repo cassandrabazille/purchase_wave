@@ -22,29 +22,29 @@
 
     {{-- Header --}}
     <header class="flex-row space-between align-items-center padding-right-2 padding-left-2">
-        <nav class="left-nav">
+        <nav>
             <a href="{{ route('dashboard.index')}} ">
             <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo PurchaseWave">
             </a>
         </nav>
-        <nav class="right-nav gap-7 align-items-center">
-            <a class="font-weight-500  white" href="{{ route('dashboard.index') }}">Dashboard</a>
-            <a class="font-weight-500  white" href="{{ route('orders.index') }}">Commandes</a>
+        <nav class="gap-7 align-items-center">
+            <a class="font-weight-500" href="{{ route('dashboard.index') }}">Dashboard</a>
+            <a class="font-weight-500" href="{{ route('orders.index') }}">Commandes</a>
              <div class="manage-reference flex-column align-items-center" onclick="toggleReferencesDropdown()">
                 <p class="font-weight-500 dropdown-ref cursor-pointer">Gestion des références</p>
-                 <ul id="referencesDropdownMenu" class="ref-dropdown-menu flex-column text-align-center" style="display: none;">
+                 <ul id="referencesDropdownMenu" class="flex-column text-align-center" style="display: none;">
             <li class="no-list-style padding-bottom-6 "><a class="font-weight-500 white" href="{{ route('products.index') }}">Produits</a></li>
             <li class="no-list-style padding-bottom-6 "><a class="font-weight-500 white" href="{{ route('suppliers.index') }}">Fournisseurs</a></li>
             <li class="no-list-style padding-bottom-6 "><a class="font-weight-500 white" href="{{ route('categories.index') }}">Catégories</a></li>
             </ul>
             </div>
 
-     <div class="user-info flex-row align-items-center gap-2 cursor-pointer" onclick="toggleDropdown()">
+     <div class="flex-row align-items-center gap-2 cursor-pointer" onclick="toggleDropdown()">
     <img src="{{ asset('images/user-img.png') }}" alt="Profil" />
     <div class="user-dropdown flex-column align-items-center">
         <p class ="user font-weight-500">{{ auth('web')->user()->name }}</p>
         <!-- ↓ Utilisez une classe ET un ID pour plus de fiabilité ↓ -->
-        <ul id="userDropdownMenu" class="dropdown-menu white-background cursor-pointer black-box-shadow text-align-center border-radius-0-4 padding-1" style="display: none;">
+        <ul id="userDropdownMenu" class="white-background cursor-pointer black-box-shadow text-align-center border-radius-0-4 padding-1" style="display: none;">
             <li class="no-list-style font-size-1-4"><a href="{{ route('profile.edit') }}" class="account font-size-1-4">Mon compte</a></li>
             <li class="no-list-style font-size-1-4">
                 <form method="POST" action="{{ route('logout') }}">
@@ -64,7 +64,7 @@
     </main>
 
     <footer>
-        <p>© PurchaseWave</p>
+        <p class="margin-2-5">© PurchaseWave</p>
     </footer>
 
 

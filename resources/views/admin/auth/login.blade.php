@@ -3,6 +3,30 @@
 @section('title', 'Page de connexion')
 
 @section('content')
+<div class="container">
+@if(session('success'))
+    <div class="light-green-background black-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4">
+        {{ session('success') }}
+    </div>
+@endif
+
+{{-- Erreur personnalisée pour login invalide --}}
+@if ($errors->has('login'))
+    <div class="light-red-background white-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4 text-center margin-bottom-2">
+        {{ $errors->first('login') }}
+    </div>
+@endif
+
+{{-- Erreurs de validation classiques --}}
+@if ($errors->any())
+    <div class="light-red-background white-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4 text-center margin-bottom-2">
+        <ul class="no-list-style">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <main class="responsive-login flex-row gap-3 margin-top-2" style="height:100vh">
         <section>
             <img src="{{ asset('images/connexion.png') }}"
@@ -26,4 +50,5 @@
             </form>
         </section>
     </main>
+    </div>
 @endsection

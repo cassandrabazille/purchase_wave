@@ -20,7 +20,7 @@ class UserAuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:4|confirmed',
+            'password' => 'required|min:8|confirmed',
         ]);
 
         $user = User::create([
@@ -30,9 +30,12 @@ class UserAuthController extends Controller
         ]);
 
         \Auth::guard('web')->login($user);
+    $request->session()->regenerate();
 
-        return redirect()->route('orders.index');
-    }
+    return redirect()->route('dashboard.index')->with('success', 'Inscription réussie. Bienvenue 👋');
+}
+
+    
 
     public function showLogin()
     {
@@ -43,16 +46,15 @@ class UserAuthController extends Controller
     {
         $request->validate([
             'email' => 'required|string|max:255',
-            'password' => 'required|min:4',
+            'password' => 'required|min:8',
         ]);
 
-        if (\Auth::guard('web')->attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
-            return redirect()->route('dashboard.index');
-        }
+       if (\Auth::guard('web')->attempt($request->only('email', 'password'))) {
+    $request->session()->regenerate();
+    return redirect()->route('dashboard.index')->with('success', 'Connexion réussie. Bienvenue 👋');
+}
+}
 
-        return redirect()->back()->withErrors('Email ou mot de passe incorrect');
-    }
 
     public function logout(Request $request)
     {

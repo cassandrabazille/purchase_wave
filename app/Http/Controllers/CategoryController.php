@@ -80,11 +80,11 @@ class CategoryController extends Controller
 
         $category = Category::findOrFail($id);
 
-
-
-        if ($category->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized action');
-        }
+       
+         if ($category->user_id !== auth()->id()) {
+        return redirect()->route('categories.index')
+            ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à modifier cette catégorie.']);
+    }
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -122,9 +122,11 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
 
-        $category = Category::where('id', $id)
-            ->where('user_id', auth()->id())
-            ->firstOrFail();
+   $category = Category::findOrFail($id);
+          if ($category->user_id !== auth()->id()) {
+        return redirect()->route('categories.index')
+            ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à supprimer cette catégorie.']);
+    }
         $category->delete();
         return redirect()->route('categories.index')
             ->with('success', 'La catégorie a bien été supprimée.');

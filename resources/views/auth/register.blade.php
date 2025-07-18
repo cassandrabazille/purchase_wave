@@ -3,6 +3,17 @@
 @section('title', 'Page d\'inscription')
 
 @section('content')
+{{-- Erreurs de validation --}}
+<div class="container">
+@if ($errors->any())
+    <div class="light-red-background white-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4 text-center ">
+        <ul class="no-list-style">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <main class="responsive-register flex-row gap-3 margin-top-2">
         <section>
             <img src="{{ asset('images/connexion.png') }}"
@@ -25,9 +36,11 @@
                 <p class="margin-bottom-2">Confirmation du mot de passe :</p>
                 <input type="password" name="password_confirmation"
                     class="width-51-1 height-6 border-radius-0-6 grey-background margin-bottom-5" />
-                <br>
+                <div>
                 <button type=submit
                     class="blue-background width-22 height-6 border-radius-2-5 no-border font-poppins-ss font-size-1-4 white-color hover-blue cursor-pointer">Register</button>
+                    </div>
         </section>
     </main>
+    </div>
 @endsection

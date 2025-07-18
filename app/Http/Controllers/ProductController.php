@@ -86,9 +86,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
 
-        if ($product->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized action');
-        }
+         if ($product->user_id !== auth()->id()) {
+        return redirect()->route('products.index')
+            ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à modifier ce produit.']);
+    }
 
 
         $validated = $request->validate([
@@ -129,9 +130,12 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = Product::where('id', $id)
-            ->where('user_id', auth()->id())
-            ->firstOrFail();
+         $product = Product::findOrFail($id);
+          if ($product->user_id !== auth()->id()) {
+        return redirect()->route('products.index')
+            ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à supprimer ce produit.']);
+    }
+
 
         $product->delete();
         return redirect()->route('products.index')

@@ -16,54 +16,34 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-       
-        $users = User::all();
         $suppliers = Supplier::all();
 
-        $ordersQuery = Order::with(['user', 'supplier']);
+        $orders = Order::with(['user', 'supplier'])
+            ->where('user_id', auth()->id())
+            ->get();
 
-        // Filter by user
-        if ($request->has('user')) {
-            $selectedUser = User::find($request->input('user'));
-
-            if ($selectedUser) {
-                $ordersQuery->where('user_id', $selectedUser->id);
-            }
-        }
-
-        // Filter by supplier
-
-        if ($request->has('supplier')) {
-            $selectedSupplier = Supplier::find($request->input('supplier'));
-            if ($selectedSupplier) {
-                $ordersQuery->where('supplier_id', $selectedSupplier->id);
-            }
-        }
-
-        $orders= $ordersQuery->get();
-
-        return view('orders.index', compact('orders', 'suppliers', 'users'));
+        return view('orders.index', compact('orders', 'suppliers'));
     }
 
     public function create()
     {
-        $users = User::all(); // a modifier par id
         $suppliers = Supplier::select(['id', 'name'])->orderBy('name')->get();
-        return view('orders.create', compact('users', 'suppliers'));
+        return view('orders.create', compact('suppliers'));
 
     }
 
     public function show($id)
     {
         $order = Order::with('supplier')->findOrFail($id);
+
         $orderitems = $order->orderItems()->with('product')->get();
-       
+
         return view('orders.show', compact('order', 'orderitems'));
     }
 
     public function store(Request $request)
     {
- 
+
 
         $validated = $request->validate([
             'expected_delivery_date' => 'required|date',
@@ -81,9 +61,9 @@ class OrderController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-            $orderDate=Carbon::parse($order->order_date);
+        $orderDate = Carbon::parse($order->order_date);
         $expectedDate = Carbon::parse($validated['expected_delivery_date']);
-      
+
 
         if ($expectedDate->lt($orderDate)) {
 
@@ -91,16 +71,20 @@ class OrderController extends Controller
 
         }
 
-        return redirect()->route('orderitems.create', ['order_id' =>$order->id])->with('success', 'Commande créée avec succès');
+        return redirect()->route('orderitems.create', ['order_id' => $order->id])->with('success', 'Commande créée avec succès');
     }
 
     public function edit(string $id)
     {
         $order = Order::findOrFail($id);
-        $orders = Order::all();
+
+        if ($order->user_id !== auth()->id()) {
+            abort(403, 'Vous n\'êtes pas autorisé à modifier cette commande.');
+        }
+
         $users = User::all();
         $suppliers = Supplier::orderBy('name')->get();
-        return view('orders.edit', compact('order', 'orders', 'users', 'suppliers'));
+        return view('orders.edit', compact('order', 'users', 'suppliers'));
     }
 
     /**
@@ -111,17 +95,29 @@ class OrderController extends Controller
 
         $order = Order::findOrFail($id);
 
+        if ($order->user_id !== auth()->id()) {
+            abort(403, 'Vous n\'êtes pas autorisé à modifier cette commande.');
+        }
+
         $validated = $request->validate([
             'confirmed_delivery_date' => 'nullable|date',
             'status' => 'required|in:pending,confirmed,shipped,cancelled',
         ]);
 
-    
-    
+        $orderDate = Carbon::parse($order->order_date);
+        $confirmedDate = Carbon::parse($validated['confirmed_delivery_date']);
+
+        if ($confirmedDate->lt($orderDate)) {
+
+            return back()->withErrors(['confirmed_delivery_date' => 'La date de livraison doit être postérieure ou égale à la date de commande'])->withInput();
+
+        }
+
         $order->update([
             'confirmed_delivery_date' => $validated['confirmed_delivery_date'] ?? null,
             'status' => $validated['status'],
         ]);
+
 
         return redirect()->route('orders.index')
             ->with('success', 'La commande a bien été modifiée.');
@@ -133,7 +129,13 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         $order = Order::findOrFail($id);
+
+        if ($order->user_id !== auth()->id()) {
+            abort(403, 'Vous n\'êtes pas autorisé à supprimer cette commande.');
+        }
+
         $order->delete();
+
         return redirect()->route('orders.index')
             ->with('success', 'La commande a bien été supprimée.');
 

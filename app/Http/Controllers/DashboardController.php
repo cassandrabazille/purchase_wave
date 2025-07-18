@@ -16,6 +16,7 @@ class DashboardController extends Controller
         $currentUser = auth()->user();
 
         $upcoming = Order::with(['supplier'])
+            ->where('user_id', $currentUser->user_id)
             ->where('status', 'confirmed')
             ->whereDate('confirmed_delivery_date', '>', now())
             ->orderBy('confirmed_delivery_date', 'asc')
@@ -31,6 +32,7 @@ class DashboardController extends Controller
 
 
         $lateDeliveries = Order::with('supplier')
+         ->where('user_id', $currentUser->user_id)
             ->whereIn('status', ['confirmed', 'pending'])
             ->whereRaw('DATEDIFF(NOW(), COALESCE(confirmed_delivery_date, expected_delivery_date)) > 0')
             ->orderByRaw('COALESCE(confirmed_delivery_date, expected_delivery_date) ASC')
@@ -43,11 +45,12 @@ class DashboardController extends Controller
                 \DB::raw('DATEDIFF(NOW(), COALESCE(confirmed_delivery_date, expected_delivery_date)) as days_late'),
                 'order_amount'
             ])
-            ->limit(8)
+            ->limit(7)
             ->get();
 
 
         $latestPendingOrders = Order::with(['supplier'])
+         ->where('user_id', $currentUser->user_id)
             ->where('status', 'pending')
             ->orderBy('created_at', 'desc')
             ->select([
@@ -62,20 +65,20 @@ class DashboardController extends Controller
 
 
         $statusCounts = [
-            'pending' => Order::where('status', 'pending')->count(),
-            'confirmed' => Order::where('status', 'confirmed')->count(),
-            'delivered' => Order::where('status', 'delivered')->count(),
-            'cancelled' => Order::where('status', 'cancelled')->count(),
+            'pending' => Order::where('user_id',$currentUser->user_id)->where('status', 'pending')->count(),
+            'confirmed' => Order::where('user_id',$currentUser->user_id)->where('status', 'confirmed')->count(),
+            'delivered' => Order::where('user_id',$currentUser->user_id)->where('status', 'delivered')->count(),
+            'cancelled' => Order::where('user_id',$currentUser->user_id)->where('status', 'cancelled')->count(),
         ];
 
-        $orders = Order::all();
 
-        $totalOrders = Order::whereMonth('created_at', now()->month)->count();
-        $totalAmount = Order::whereMonth('created_at', now()->month)->sum('order_amount');
-        $avgAmount = round(Order::whereMonth('created_at', now()->month)->avg('order_amount') ?? 0, 2);
+        $totalOrders = Order::where('user_id',$currentUser->user_id)->whereMonth('created_at', now()->month)->count();
+        $totalAmount = Order::where('user_id',$currentUser->user_id)->whereMonth('created_at', now()->month)->sum('order_amount');
+        $avgAmount = round(Order::where('user_id',$currentUser->user_id)->whereMonth('created_at', now()->month)->avg('order_amount') ?? 0, 2);
 
         $currentYear = now()->year;
         $topSuppliers = Order::with('supplier', )
+           ->where('user_id', $currentUser->user_id)
             ->whereYear('created_at', $currentYear)
             ->selectRaw('supplier_id, SUM(order_amount) as total_amount')
             ->groupBy('supplier_id')
