@@ -119,18 +119,28 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+   public function destroy(string $id)
+{
+    $category = Category::findOrFail($id);
 
-   $category = Category::findOrFail($id);
-          if ($category->user_id !== auth()->id()) {
+    // Vérifie que l'utilisateur est le créateur de la catégorie
+    if ($category->user_id !== auth()->id()) {
         return redirect()->route('categories.index')
             ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à supprimer cette catégorie.']);
     }
-        $category->delete();
+
+    // Vérifie si des produits sont liés à cette catégorie
+    if ($category->products()->exists()) {
         return redirect()->route('categories.index')
-            ->with('success', 'La catégorie a bien été supprimée.');
+            ->withErrors(['error' => 'Impossible de supprimer cette catégorie car des produits y sont associés.']);
     }
+
+    $category->delete();
+
+    return redirect()->route('categories.index')
+        ->with('success', 'La catégorie a bien été supprimée.');
+}
+
 }
 
 

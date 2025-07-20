@@ -8,7 +8,7 @@
             <div>
                 <div class="justify-flex-end padding-2">
                       <a href="{{ url()->previous() }}">
-                    <button class="black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 ">
+                    <button class="responsive-button black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 ">
                             <img src="{{ asset('images/return.png') }}" alt="Flèches de retour"
                                 class="object-fit-contain padding-left-2 width-4 height-4" />
                             <span>Return</span>

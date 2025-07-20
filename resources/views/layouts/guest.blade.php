@@ -19,7 +19,7 @@
 <body>
     {{-- Header pour les pages guest --}}
     <header>
-        <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo de PurchaseWave" />
+        <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo de PurchaseWave" class="margin-left-2"/>
         {{-- Si tu veux un menu ici, tu peux l’ajouter comme dans les pages auth --}}
     </header>
 
@@ -28,8 +28,11 @@
         @yield('content')
     </main>
 
-    <footer>
-        <p>© PurchaseWave</p>
+      <footer>
+        <p class="margin-2-5">© PurchaseWave</p>
     </footer>
+
+
 </body>
+
 </html>

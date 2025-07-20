@@ -21,21 +21,21 @@
 <body>
 
     {{-- Header --}}
-    <header class="flex-row space-between align-items-center padding-right-2 padding-left-2">
+    <header class="responsive-header flex-row space-between align-items-center padding-right-2 padding-left-2">
         <nav>
             <a href="{{ route('dashboard.index')}} ">
             <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo PurchaseWave">
             </a>
         </nav>
-        <nav class="gap-7 align-items-center">
+        <nav class="responsive-header gap-7 align-items-center">
             <a class="font-weight-500" href="{{ route('dashboard.index') }}">Dashboard</a>
             <a class="font-weight-500" href="{{ route('orders.index') }}">Commandes</a>
              <div class="manage-reference flex-column align-items-center" onclick="toggleReferencesDropdown()">
                 <p class="font-weight-500 dropdown-ref cursor-pointer">Gestion des références</p>
                  <ul id="referencesDropdownMenu" class="flex-column text-align-center" style="display: none;">
-            <li class="no-list-style padding-bottom-6 "><a class="font-weight-500 white" href="{{ route('products.index') }}">Produits</a></li>
-            <li class="no-list-style padding-bottom-6 "><a class="font-weight-500 white" href="{{ route('suppliers.index') }}">Fournisseurs</a></li>
-            <li class="no-list-style padding-bottom-6 "><a class="font-weight-500 white" href="{{ route('categories.index') }}">Catégories</a></li>
+            <li class="no-list-style padding-bottom-6 "><a class="font-weight-500" href="{{ route('products.index') }}">Produits</a></li>
+            <li class="no-list-style padding-bottom-6 "><a class="font-weight-500" href="{{ route('suppliers.index') }}">Fournisseurs</a></li>
+            <li class="no-list-style padding-bottom-6 "><a class="font-weight-500" href="{{ route('categories.index') }}">Catégories</a></li>
             </ul>
             </div>
 
@@ -45,11 +45,11 @@
         <p class ="user font-weight-500">{{ auth('web')->user()->name }}</p>
         <!-- ↓ Utilisez une classe ET un ID pour plus de fiabilité ↓ -->
         <ul id="userDropdownMenu" class="white-background cursor-pointer black-box-shadow text-align-center border-radius-0-4 padding-1" style="display: none;">
-            <li class="no-list-style font-size-1-4"><a href="{{ route('profile.edit') }}" class="account font-size-1-4">Mon compte</a></li>
+            <li class="no-list-style font-size-1-4"><a href="{{ route('profile.edit') }}" class="font-weight-500">Mon compte</a></li>
             <li class="no-list-style font-size-1-4">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="blue-background hover-blue font-poppins-ss font-size-1-4 white-color normal-font-weight width-15 height-5 margin-top-1 border-radius-3-4 no-border cursor-pointer" type="submit">Déconnexion</button>
+                    <button class="logout-button blue-background hover-blue font-poppins-ss font-size-1-4 white-color normal-font-weight width-15 height-5 margin-top-1 border-radius-3-4 no-border cursor-pointer" type="submit">Déconnexion</button>
                 </form>
             </li>
         </ul>

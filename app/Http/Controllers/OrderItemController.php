@@ -88,7 +88,7 @@ class OrderItemController extends Controller
 
         $orderitem->order->recalculateAmount();
 
-        return redirect()->route('orders.show', ['id' => $orderitem->order_id])
+        return redirect()->route('orders.show', $orderitem->order_id)
             ->with('success', 'La ligne de commande a bien été modifiée.');
     }
     public function destroy(string $id)
@@ -97,7 +97,7 @@ class OrderItemController extends Controller
         $order = $orderitem->order;
         $orderitem->delete();
         $order->recalculateAmount();
-        return redirect()->route('orders.show', ['id' => $order->id])
+        return redirect()->route('orders.show', $order->id)
             ->with('success', 'La ligne de commande a bien été supprimée.');
 
     }

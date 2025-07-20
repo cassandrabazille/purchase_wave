@@ -10,7 +10,7 @@ use App\Models\User;
 class Supplier extends Model
 {
 
-    protected $fillable = ['name', 'email','telephone', 'address'];
+    protected $fillable = ['name', 'email','telephone', 'address','user_id'];
 
     public function products()
     {

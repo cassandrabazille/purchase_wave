@@ -6,7 +6,7 @@
 {{-- Erreurs de validation --}}
 <div class="container">
 @if ($errors->any())
-    <div class="light-red-background white-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4 text-center ">
+    <div class="light-red-background white-color margin-top-2 border-radius-1 padding-3 font-size-1-4 text-center ">
         <ul class="no-list-style">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -20,7 +20,7 @@
                 alt="Image représentant une femme au téléphone devant son ordinateur, elle porte un tailleur beige et a les cheveux roux">
         </section>
         <section class="margin-top-4">
-            <h1>Bienvenue sur PurchaseWave !</h1>
+            <h1>Bienvenue sur PurchaseWave</h1>
             <h3 class="margin-top-2 margin-bottom-3">Inscrivez-vous pour accéder à la plateforme</h3>
             <form method="POST" action="{{ route('register.post') }}">
                 @csrf
@@ -36,9 +36,9 @@
                 <p class="margin-bottom-2">Confirmation du mot de passe :</p>
                 <input type="password" name="password_confirmation"
                     class="width-51-1 height-6 border-radius-0-6 grey-background margin-bottom-5" />
-                <div>
+                    <div class="responsive-confirm-btn">
                 <button type=submit
-                    class="blue-background width-22 height-6 border-radius-2-5 no-border font-poppins-ss font-size-1-4 white-color hover-blue cursor-pointer">Register</button>
+                    class="responsive-button justify-center align-items-center blue-background width-22 height-6 border-radius-2-5 no-border font-poppins-ss font-size-1-4 white-color hover-blue cursor-pointer">Register</button>
                     </div>
         </section>
     </main>

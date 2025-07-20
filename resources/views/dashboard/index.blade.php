@@ -6,96 +6,112 @@
 
 <div class="container">
 @if(session('success'))
-    <div class="light-green-background black-color margin-top-2 border-radius-3-4 padding-3 font-size-1-4">
+    <div class="light-green-background black-color margin-top-2 border-radius-1 padding-3 font-size-1-4">
         {{ session('success') }}
     </div>
 @endif
 <main class="dashboard-responsive flex-column padding-top-2 grey-background border-radius-1 margin-top-2 padding-top-2 padding-right-3-5 gap57 width-12 ">
-            <div class="margin-top-2 margin-left-4 justify-center space-between">
+            <div class="responsive-title-and-btn space-between align-items-center padding-top-2">
                 <div>
-                <h1 class="font-size-3-2">Bonjour <span class="blue-color">{{ $currentUser->name }}</span>, voici votre dashboard !</h1>
+                <h1 class="margin-left-4">Bonjour <span class="blue-color">{{ $currentUser->name }}</span>, voici votre dashboard !</h1>
                 </div>
               <div>
       <a href={{route('orders.create')}}>
-      <button class="black-background white-color font-poppins-ss font-size-1-4 align-items-center justify-center width-27 height-4-4 border-radius-1 black-box-shadow no-border cursor-pointer">Créer une nouvelle commande</button>
+      <button class="responsive-button black-background white-color font-poppins-ss font-size-1-4 align-items-center justify-center width-27 height-4-4 border-radius-1 black-box-shadow no-border cursor-pointer">Créer une nouvelle commande</button>
       </a>
     </div>
     </div>
-            <section class="flex-row gap-7 margin-left-4 margin-top-4 " >
-                <div class="flex-column align-items-center white-background border-radius-1 height-27 width-38 font-size-1-4">
-                    <h2 class="padding-2">Livraisons à venir 🚚</h2>
-                    <div class="flex-column ">
-                        @forelse ($upcoming as $index => $order)
-                        <div class="order-{{ $index + 1 }}">
-                           <a href="{{ route('orders.show', $order->id) }}"> <p> <strong>{{$order->reference}}</strong> arrive le {{ $order->confirmed_delivery_date->format('d/m/Y') }}</p></a>
-                        </div>
-                        @empty
-                        <p>Aucune livraison prévue</p>
-                        @endforelse
-                    </div>
+   <section class="flex-row gap-7 margin-left-4">
+    {{-- Commandes en attente --}}
+    <div class="flex-column align-items-center space-between white-background border-radius-1 height-32 width-38 font-size-1-4">
+        <h2 class="margin-bottom-2 margin-top-2">Commandes en attente</h2>
+        <div class="flex-column">
+            @forelse ($latestPendingOrders as $index => $order)
+                <div class="order-{{ $index + 1 }}">
+                    <a href="{{ route('orders.show', $order->id) }}">
+                        <p><strong>{{ $order->reference }}</strong> crée le {{ $order->created_at->format('d-m-Y') }}</p>
+                    </a>
                 </div>
-                <div class="flex-column align-items-center white-background border-radius-1 height-27 width-38 font-size-1-4">
-                    <h2 class="padding-2 flex-nowrap ">Commandes en retard</h2>
-                     <div class="flex-column ">
-                        @forelse ($lateDeliveries as $index => $order)
-                        <div class="order-{{ $index + 1 }}">
-                            <a href="{{ route('orders.show', $order->id) }}"> <p><strong>{{$order->reference}} </strong> a <span class="red-color"><strong>{{ $order->days_late}} jours</strong></span> de retard </p></a>
-                        </div>
-                        @empty
-                        <p>Aucune livraison en retard</p>
-                        @endforelse
-                    </div>
+            @empty
+                <p>Aucune commande en attente</p>
+            @endforelse
+        </div>
+
+        <div class="all-orders-btn margin-top-2 margin-bottom-2">
+            <a href="{{ route('orders.index') }}" class="responsive-button black-background white-color font-poppins-ss font-size-1-4 align-items-center justify-center width-22 height-4-4 border-radius-1 black-box-shadow no-border cursor-pointer">
+                Toutes les commandes
+            </a>
+        </div>
+    </div>
+
+    {{-- Commandes en retard --}}
+    <div class="flex-column align-items-center white-background border-radius-1 height-32 width-38 font-size-1-4">
+        <h2 class="margin-bottom-2 margin-top-2">Non expédiées - en retard</h2>
+        <p class="margin-bottom-2 italic">En attente de date de confirmation</p>
+       
+        <div class="flex-column">
+         
+            @forelse ($lateDeliveries as $index => $order)
+                <div class="order-{{ $index + 1 }}">
+                    <a href="{{ route('orders.show', $order->id) }}">
+                        <p><strong>{{ $order->reference }}</strong> a <span class="red-color"><strong>{{ $order->days_late }} jours</strong></span> de retard</p>
+                    </a>
                 </div>
-                <div class="flex-column align-items-center space-between white-background border-radius-1 height-27 width-38 font-size-1-4 padding-2">
-                    <h2 class ="marginb2">Commandes en attente</h2>
-                        <div class="flex-column ">
-                        @forelse ($latestPendingOrders as $index => $order)
-                        <div class="order-{{ $index + 1 }}">
-                             <a href="{{ route('orders.show', $order->id) }}"> <p><strong> {{$order->reference}}</strong> crée le {{ $order->created_at->format('d-m-Y') }}</p></a>
-                            <p></p>
-                        </div>
-                        @empty
-                        <p>Aucune commande en attente</p>
-                        @endforelse
-                    </div>
-                    <div class="all-orders-btn">
-                    <a href="{{ route('orders.index') }}" class="black-background white-color font-poppins-ss font-size-1-4 align-items-center justify-center width-22 height-4-4 border-radius-1 black-box-shadow no-border cursor-pointer"> Toutes les
-                        commandes</a>
-                        </div>
+            @empty
+                <p>Aucune livraison en retard</p>
+            @endforelse
+        </div>
+    </div>
+
+    {{-- Livraisons à venir --}}
+    <div class="flex-column align-items-center white-background border-radius-1 height-32 width-38 font-size-1-4">
+        <h2 class="margin-bottom-2 margin-top-2">Livraisons à venir 🚚</h2>
+        <div class="flex-column">
+            @forelse ($upcoming as $index => $order)
+                <div class="order-{{ $index + 1 }}">
+                    <a href="{{ route('orders.show', $order->id) }}">
+                        <p><strong>{{ $order->reference }}</strong> arrive le {{ $order->confirmed_delivery_date->format('d/m/Y') }}</p>
+                    </a>
                 </div>
-            </section>
+            @empty
+                <p>Aucune livraison prévue</p>
+            @endforelse
+        </div>
+    </div>
+</section>
+
             <section class="flex-row gap-7 margin-left-4 margin-top-4 padding-bottom-4">
-                <div class="white-background border-radius-1 height-27 width-38 font-size-1-4">
-                    <h2 class="padding-2">Statuts des commandes</h2>
+                <div class="white-background border-radius-1 height-32 width-38 font-size-1-4">
+                    <h2 class="margin-bottom-2 margin-top-2 text-align-center">Statuts des commandes</h2>
                     <div class="flex-column align-items-center text-align-center">
                     <div class="flex-row gap-2">
                     <div class="grey-background border-radius-1 padding-1">
-                    <p>En attente : <p>{{ $statusCounts['pending']}}</p></p>
+                    <p>En attente : <p>{{ $statusCounts['en attente']}}</p></p>
                     </div>
                     <div class="black-background white-color border-radius-1 padding-1">
-                    <p>Confirmées : <p>{{ $statusCounts['confirmed']}}</p></p>
+                    <p>Expédiée : <p>{{ $statusCounts['expédiée']}}</p></p>
                     </div>
                     </div>
                        <div class="flex-row gap-2">
                       <div class="border-radius-1 padding-1">
-                    <p>Livrées : <p>{{ $statusCounts['delivered']}}</p></p>
+                    <p>Livrées : <p>{{ $statusCounts['livrée']}}</p></p>
                     </div>
                         <div class="border-radius-1 padding-1">
-                    <p>Annulées : <p>{{ $statusCounts['cancelled']}}</p></p>
+                    <p>Annulées : <p>{{ $statusCounts['annulée']}}</p></p>
                     </div>
                     </div>
                     </div>
                 </div>
-                <div class="white-background border-radius-1 height-27 width-38 font-size-1-4">
-                    <h2 class="padding-2">Indicateurs mensuels</h2>
+                <div class="white-background border-radius-1 height-32 width-38 font-size-1-4">
+                    <h2 class="margin-bottom-2 text-align-center margin-top-2">Indicateurs mensuels</h2>
                     <div class="flex-column align-items-center gap-2">
                    <p class="grey-background border-radius-1 font-size-1-4 bold-font-weight padding-O-6-1-2">Nombre de commandes passées🧾 : {{ $totalOrders}}</p>
-                    <p class="blue-background border-radius-1 font-size-1-4 bold-font-weight padding-O-6-1-2">Montant total acheté 💰 : {{ $totalAmount}} €</p>
-                    <p class="black-background white-color border-radius-1 font-size-1-4 bold-font-weight padding-O-6-1-2">Montant moyen d'achat 📊 : {{ $avgAmount}} €</p>
+                    <p class="blue-background white-color border-radius-1 font-size-1-4 bold-font-weight padding-O-6-1-2">Montant total acheté 💰 : {{ number_format($totalAmount, 2) }} €</p>
+                    <p class="black-background white-color border-radius-1 font-size-1-4 bold-font-weight padding-O-6-1-2">Montant moyen d'achat 📊 : {{ number_format($avgAmount, 2) }} €</p>
                     </div>
                 </div>
-                <div class="white-background border-radius-1 height-27 width-38  font-size-1-4">
-                    <h2 class="padding-2">Top fournisseurs {{ $currentYear  }}🏆</h2>
+                <div class="white-background border-radius-1 height-32 width-38  font-size-1-4">
+                    <h2 class="margin-bottom-2 margin-top-2 text-align-center">Top fournisseurs {{ $currentYear  }}🏆</h2>
                     <p class="italic margin-left-2">par CA</p>
                     <div class="flex-row margin-left-1 margin-top-2 ">
                         @foreach ($topSuppliers as $index => $supplier)

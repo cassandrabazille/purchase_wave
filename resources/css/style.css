@@ -51,6 +51,14 @@ p {
     font-weight: 400;
 }
 
+th {
+    font-size: 1.6rem;
+}
+
+td {
+    font-size: 1.4rem;
+}
+
 .italic {
     font-style: italic;
 }
@@ -134,11 +142,11 @@ p {
 }
 
 .light-green-background {
-    background-color: #7FBE96;
+    background-color: #7fbe96;
 }
 
 .light-red-background {
-    background-color: #D86F6F;
+    background-color: #d86f6f;
 }
 
 .hover-blue:hover {
@@ -195,7 +203,6 @@ p {
     width: 51.1rem;
 }
 
-
 .width-120 {
     width: 120rem;
 }
@@ -215,7 +222,6 @@ p {
 .max-width-70pct {
     max-width: 70%;
 }
-
 
 .max-width-100pct {
     max-width: 100%;
@@ -257,6 +263,10 @@ p {
     height: 27rem;
 }
 
+.height-32 {
+    height: 32rem;
+}
+
 .max-height-40 {
     max-height: 40rem;
 }
@@ -269,8 +279,11 @@ p {
     overflow-wrap: break-word;
 }
 
-.word-break {
-    word-break: break-word;
+.max-2-lines {
+    display: block;
+    overflow: hidden;
+    line-height: 1.2em;
+    max-height: 2.4em;
 }
 
 .flex-wrap {
@@ -399,6 +412,10 @@ p {
 
 .padding-bottom-2 {
     padding-bottom: 2rem;
+}
+
+.padding-bottom-3 {
+    padding-bottom: 3rem;
 }
 
 .padding-bottom-4 {
@@ -546,46 +563,45 @@ p {
 /* -------- Mobile : < 768px -------- */
 @media (max-width: 767px) {
     html {
-        font-size: 50%; /* 1rem = 8px */
+        font-size: 62.5%;
     }
     body {
-        padding: 10px;
-        min-width: unset;
-    }
-    main {
-        flex-direction: column;
-        gap: 6rem;
-        padding-top: 2rem;
+        padding: 0.5rem;
+       
     }
 
     h1 {
-        font-size: 2rem;
-        padding-top: 2rem;
-    }
-    h3 {
-        font-size: 1.4rem;
-    }
-    p {
-        font-size: 1.2rem;
+        font-size: 2.4rem;
     }
 
-    header.flexrow {
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.8rem;
+    }
+    p {
+        font-size: 1.6rem;
+    }
+
+    .responsive-header {
         flex-direction: column;
         padding: 1rem;
         align-items: center;
+        gap: 2rem;
     }
-   
-  
+
+    header .font-weight-500 {
+        font-weight: 600;
+    }
+
     .responsive-login,
     .responsive-register {
         flex-direction: column;
     }
-
-    .responsive-login,
+    .responsive-login img,
     .responsive-register img {
-        max-width: 100%;
-        height: auto;
-        display: block; /*évite les marges blanches non voulues*/
+        width: 40rem;
     }
 
     .responsive-login section,
@@ -595,8 +611,8 @@ p {
     }
 
     .responsive-login input,
-    .responsive-register input  {
-        width: 90%; 
+    .responsive-register input {
+        width: 90%;
     }
 
     .responsive-login button,
@@ -604,27 +620,44 @@ p {
         width: 90%;
     }
 
-     .dashboard-responsive section.flex-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    margin-left: 0;
-  }
+    .dashboard-responsive section.flex-row {
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .dashboard-responsive {
-    width: 90%;
-  }
+    .responsive-title-and-btn {
+        flex-direction: column;
+      
+    }
 
-  .dashboard-responsive .all-orders-btn,
-  .dashboard-responsive button {
-    width: 100%;
-  }
+   .responsive-create-btn {
+    justify-content: center;
+   }
+
+    .dashboard-responsive h1 {
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+
+    .responsive-account {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .responsive-confirm-btn {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 /* -------- Tablette : 768px - 1199px -------- */
-@media (min-width: 768px) and (max-width: 1199px)  {
+@media (min-width: 768px) and (max-width: 1199px) {
     html {
-        font-size: 56.25%; 
+        font-size: 56.25%;
     }
     body {
         padding: 1.5rem 2rem;
@@ -636,62 +669,75 @@ p {
         padding-top: 2rem;
     }
     h1 {
-        font-size: 2.4rem;
+        font-size: 2.8rem;
         padding-top: 2rem;
     }
+
+    h2 {
+        font-size: 2.4rem;
+    }
+
     h3 {
+        font-size: 2rem;
+    }
+    p,
+    a,
+    button {
         font-size: 1.6rem;
     }
-    p {
-        font-size: 1.4rem;
-    }
 
-    header.flexrow {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 0.5rem;
-        width: 100%;
-        text-align: center;
-    }
-
-
-    .responsive-login,
-    .responsive-register {
-        flex-direction: row;
-        gap: 2rem;
-        justify-content: center;
-        align-items: flex-start;
+    .responsive-header {
+        gap: 3rem;
     }
 
     .responsive-login section,
     .responsive-register section {
         flex: 1;
+        margin-top: 0;
     }
 
     .responsive-login img,
     .responsive-register img {
-        max-width: 100%;
-        height: auto;
-        display: block;
+        width: 40rem;
+        height: 57rem;
     }
 
-     .responsive-login input,
+    .responsive-login input,
     .responsive-register input {
-        width: 80%;
+        width: 90%;
     }
 
-  .dashboard-responsive section.flex-row {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    margin-left: 0;
-  }
+    .responsive-button {
+        font-size: 1.6rem;
+        width: auto;
+        height: 6rem;
+        padding: 2rem;
+    }
 
-  .dashboard-responsive {
-    width: 45%;
-  }
-    
+    .responsive-button img {
+        width: 4.3rem;
+        height: 4.3rem;
+    }
+
+    .responsive-title-and-btn {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    .dashboard-responsive section.flex-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: 0;
+    }
+
+    .dashboard-responsive {
+        width: 95%;
+    }
+
+    .hide-tablet {
+        display: none;
+    }
 }
 
 /* -------- Grand desktop : > 1440px -------- */
@@ -701,18 +747,71 @@ p {
     }
 
     h1 {
-        margin-top: 4rem;
+        font-size: 3.8rem;
     }
 
-     .container {
-    max-width: 1600px;
-    margin: 0 auto;
-  }
+    h2 {
+        font-size: 2.5rem;
+    }
 
-    .responsive-login {
-        max-width: 1200px;
+    h3 {
+        font-size: 2.2rem;
+    }
+
+    th {
+        font-size: 1.9rem;
+    }
+
+    p,
+    a,
+    td {
+        font-size: 1.8rem;
+    }
+
+    header {
+        margin-right: 8rem;
+    }
+
+    .logout-button {
+        font-size: 1.8rem;
+        height: 6rem;
+        padding: 0 2rem;
+    }
+
+    .responsive-button {
+        font-size: 1.8rem;
+        width: auto;
+        height: 6rem;
+        padding: 2rem;
+    }
+
+    .responsive-button img {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+    .pencil-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .eye-icon {
+        width: 2.7rem;
+        height: 2.7rem;
+    }
+
+    .delete-icon {
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+
+    .container {
+        max-width: 1600px;
         margin: 0 auto;
-        gap: 4rem;
+    }
+
+    .box-responsive {
+        max-width: 70rem;
     }
 
     .responsive-login section {
@@ -726,20 +825,17 @@ p {
     }
 
     .responsive-login input,
-    .responsive-register input  {
+    .responsive-register input {
         width: 440px;
     }
 
     .responsive-login button,
-    .responsive-register button  {
+    .responsive-register button {
         width: 20rem;
     }
 
-
-  .dashboard-responsive section.flex-row {
-    gap: 3rem;
-    justify-content: space-between;
-  }
-
-  
+    .dashboard-responsive section.flex-row {
+        gap: 9rem;
+        justify-content: center;
+    }
 }

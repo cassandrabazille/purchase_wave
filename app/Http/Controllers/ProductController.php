@@ -128,19 +128,28 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-         $product = Product::findOrFail($id);
-          if ($product->user_id !== auth()->id()) {
+  public function destroy(string $id)
+{
+    $product = Product::findOrFail($id);
+
+    // Vérification que l'utilisateur connecté est bien le créateur du produit
+    if ($product->user_id !== auth()->id()) {
         return redirect()->route('products.index')
             ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à supprimer ce produit.']);
     }
 
-
-        $product->delete();
+    // Vérifie si ce produit est utilisé dans des commandes (order_items par exemple)
+    if ($product->orderItems()->exists()) {
         return redirect()->route('products.index')
-            ->with('success', 'Le produit a bien été supprimé.');
+            ->withErrors(['error' => 'Impossible de supprimer ce produit car il est utilisé dans des commandes.']);
     }
+
+    $product->delete();
+
+    return redirect()->route('products.index')
+        ->with('success', 'Le produit a bien été supprimé.');
+}
+
 }
 
 

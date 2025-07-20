@@ -44,18 +44,20 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
-
         $validated = $request->validate([
             'expected_delivery_date' => 'required|date',
             'supplier_id' => 'required|exists:suppliers,id',
+        ], [
+            'expected_delivery_date.required' => 'Une date de livraison doit obligatoirement être renseignée.',
         ]);
+
 
 
         $order = Order::create([
             'order_date' => now(),
             'expected_delivery_date' => $validated['expected_delivery_date'],
             'confirmed_delivery_date' => null,
-            'status' => 'pending',
+            'status' => 'en attente',
             'order_amount' => 0,
             'supplier_id' => $validated['supplier_id'],
             'user_id' => auth()->id(),
@@ -92,7 +94,6 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
         $order = Order::findOrFail($id);
 
         if ($order->user_id !== auth()->id()) {
@@ -101,16 +102,26 @@ class OrderController extends Controller
 
         $validated = $request->validate([
             'confirmed_delivery_date' => 'nullable|date',
-            'status' => 'required|in:pending,confirmed,shipped,cancelled',
+            'status' => 'required|in:en attente,expédiée,livrée,annulée',
         ]);
 
-        $orderDate = Carbon::parse($order->order_date);
-        $confirmedDate = Carbon::parse($validated['confirmed_delivery_date']);
+        // Règle : Interdire expédiée ou livrée sans date confirmée
+        if (empty($validated['confirmed_delivery_date']) && in_array($validated['status'], ['expédiée', 'livrée'])) {
+            return back()->withErrors([
+                'confirmed_delivery_date' => 'Vous devez définir une date de livraison confirmée pour passer au statut "expédiée" ou "livrée".'
+            ])->withInput();
+        }
 
-        if ($confirmedDate->lt($orderDate)) {
+        // Vérifie si la date confirmée est après la date de commande
+        if (!empty($validated['confirmed_delivery_date'])) {
+            $orderDate = Carbon::parse($order->order_date);
+            $confirmedDate = Carbon::parse($validated['confirmed_delivery_date']);
 
-            return back()->withErrors(['confirmed_delivery_date' => 'La date de livraison doit être postérieure ou égale à la date de commande'])->withInput();
-
+            if ($confirmedDate->lt($orderDate)) {
+                return back()->withErrors([
+                    'confirmed_delivery_date' => 'La date de livraison doit être postérieure ou égale à la date de commande.'
+                ])->withInput();
+            }
         }
 
         $order->update([
@@ -118,10 +129,10 @@ class OrderController extends Controller
             'status' => $validated['status'],
         ]);
 
-
         return redirect()->route('orders.index')
             ->with('success', 'La commande a bien été modifiée.');
     }
+
 
     /**
      * Remove the specified resource from storage.

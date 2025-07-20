@@ -26,6 +26,7 @@ public function doLogin(Request $request)
             ->with('success', 'Connexion réussie. Bienvenue 👋');
     }
 
+    // Si échec de connexion
     return redirect()->back()
         ->withErrors(['email' => 'Email ou mot de passe incorrect'])
         ->withInput($request->only('email'));

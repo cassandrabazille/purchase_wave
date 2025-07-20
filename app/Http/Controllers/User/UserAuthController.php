@@ -42,18 +42,24 @@ class UserAuthController extends Controller
         return view('auth.login');
     }
 
-    public function doLogin(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|string|max:255',
-            'password' => 'required|min:8',
-        ]);
+public function doLogin(Request $request)
+{
+    $request->validate([
+        'email' => 'required|string|max:255',
+        'password' => 'required|min:8',
+    ]);
 
-       if (\Auth::guard('web')->attempt($request->only('email', 'password'))) {
-    $request->session()->regenerate();
-    return redirect()->route('dashboard.index')->with('success', 'Connexion réussie. Bienvenue 👋');
+    if (\Auth::guard('web')->attempt($request->only('email', 'password'))) {
+        $request->session()->regenerate();
+        return redirect()->route('dashboard.index')->with('success', 'Connexion réussie. Bienvenue 👋');
+    }
+
+    // Si on arrive ici, la connexion a échoué
+    return back()->withErrors([
+        'email' => 'Mauvaise adresse ou mot de passe.',
+    ])->withInput($request->only('email'));
 }
-}
+
 
 
     public function logout(Request $request)

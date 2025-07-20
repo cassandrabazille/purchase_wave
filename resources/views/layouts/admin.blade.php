@@ -21,11 +21,11 @@
 <body>
 
     {{-- Header --}}
-    <header class="flex-row space-between padding-right-2 padding-left-2">
+    <header class="responsive-header flex-row space-between padding-right-2 padding-left-2">
         <nav>
           <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo PurchaseWave">
         </nav>
-        <nav class="flex-row align-items-center gap-10">
+        <nav class="responsive-header flex-row align-items-center gap-10">
   
             <a class="font-weight-500" href="{{ route('admin.index') }}">Comptes utilisateurs</a>
 
@@ -36,11 +36,11 @@
                     <p class="user">{{ auth('admin')->user()->name }}</p>
                     <!-- ↓ Utilisez une classe ET un ID pour plus de fiabilité ↓ -->
                     <ul id="userDropdownMenu" class="white-background cursor-pointer black-box-shadow text-align-center border-radius-0-4 padding-1" style="display: none;">
-                        <li class="no-list-style font-size-1-4"><a href="{{ route('admin.profile.edit') }}" class="account font-size-1-4">Mon compte</a></li>
+                        <li class="no-list-style font-size-1-4"><a href="{{ route('admin.profile.edit') }}">Mon compte</a></li>
                         <li class="no-list-style font-size-1-4">
                             <form method="POST" action="{{ route('admin.logout') }}">
                                 @csrf
-                                <button type="submit" class="blue-background hover-blue font-poppins-ss font-size-1-4 white-color normal-font-weight width-15 height-5 margin-top-1 border-radius-3-4 no-border cursor-pointer">Déconnexion</button>
+                                <button type="submit" class="logout-button blue-background hover-blue font-poppins-ss font-size-1-4 white-color normal-font-weight width-15 height-5 margin-top-1 border-radius-3-4 no-border cursor-pointer">Déconnexion</button>
                             </form>
                         </li>
                     </ul>
@@ -54,10 +54,9 @@
         @yield('content')
     </main>
 
-   <footer>
+     <footer>
         <p class="margin-2-5">© PurchaseWave</p>
     </footer>
-
 
 
 </body>
