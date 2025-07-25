@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Category;
-
+use App\Models\Supplier;
 
 class ProductController extends Controller
 {
@@ -25,7 +25,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('products.create', compact('categories'));
+        $suppliers = Supplier::all();
+        return view('products.create', compact('categories','suppliers'));
     }
 
     //  Store a newly created resource in storage.
@@ -43,6 +44,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
             'category_id' => 'required|exists:categories,id',
+            'supplier_id' => 'required|exists:suppliers,id',
         ]);
 
 
@@ -58,6 +60,7 @@ class ProductController extends Controller
             'price' => $validated['price'],
             'image' => 'products/' . $imageName,
             'category_id' => $validated['category_id'],
+            'supplier_id' => $validated['supplier_id'],
             'user_id' => auth()->id(),
         ]);
 
@@ -86,10 +89,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
 
-         if ($product->user_id !== auth()->id()) {
-        return redirect()->route('products.index')
-            ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à modifier ce produit.']);
-    }
+        if ($product->user_id !== auth()->id()) {
+            return redirect()->route('products.index')
+                ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à modifier ce produit.']);
+        }
 
 
         $validated = $request->validate([
@@ -128,27 +131,27 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-  public function destroy(string $id)
-{
-    $product = Product::findOrFail($id);
+    public function destroy(string $id)
+    {
+        $product = Product::findOrFail($id);
 
-    // Vérification que l'utilisateur connecté est bien le créateur du produit
-    if ($product->user_id !== auth()->id()) {
+        // Vérification que l'utilisateur connecté est bien le créateur du produit
+        if ($product->user_id !== auth()->id()) {
+            return redirect()->route('products.index')
+                ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à supprimer ce produit.']);
+        }
+
+        // Vérifie si ce produit est utilisé dans des commandes (order_items par exemple)
+        if ($product->orderItems()->exists()) {
+            return redirect()->route('products.index')
+                ->withErrors(['error' => 'Impossible de supprimer ce produit car il est utilisé dans des commandes.']);
+        }
+
+        $product->delete();
+
         return redirect()->route('products.index')
-            ->withErrors(['unauthorized' => 'Vous n\'êtes pas autorisé(e) à supprimer ce produit.']);
+            ->with('success', 'Le produit a bien été supprimé.');
     }
-
-    // Vérifie si ce produit est utilisé dans des commandes (order_items par exemple)
-    if ($product->orderItems()->exists()) {
-        return redirect()->route('products.index')
-            ->withErrors(['error' => 'Impossible de supprimer ce produit car il est utilisé dans des commandes.']);
-    }
-
-    $product->delete();
-
-    return redirect()->route('products.index')
-        ->with('success', 'Le produit a bien été supprimé.');
-}
 
 }
 

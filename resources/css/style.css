@@ -161,6 +161,7 @@ td {
     background-color: #d9d9d9;
 }
 
+
 /* ================== size & fit ================== */
 
 /* .auto-width {
@@ -454,6 +455,11 @@ td {
     padding: 1.6rem 2rem;
 }
 
+.margin-0 {
+    margin: 0rem;
+}
+
+
 .margin-2-5 {
     margin: 2.5rem;
 }
@@ -558,6 +564,57 @@ td {
     gap: 7.6rem;
 }
 
+/* ================== DROP-DOWN ================== */
+.manage-reference {
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+  width: max-content;
+}
+
+.dropdown-ref {
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  display: inline-block;
+}
+
+.dropdown-ref:hover,
+.manage-reference.open .dropdown-ref {
+  background-color: #e0e0e0;
+}
+
+#referencesDropdownMenu {
+  margin-top: 4px;
+  padding: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  list-style: none;
+  min-width: 160px;
+  display: none; /* caché par défaut */
+}
+
+.manage-reference.open #referencesDropdownMenu {
+  display: block;
+}
+
+#referencesDropdownMenu li {
+  padding: 6px 16px;
+}
+
+#referencesDropdownMenu li a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
+
+#referencesDropdownMenu li a:hover {
+  background-color: #f5f5f5;
+}
+
+
 /* ================== RESPONSIVE ================== */
 
 /* -------- Mobile : < 768px -------- */
@@ -637,6 +694,10 @@ td {
     .dashboard-responsive h1 {
         margin-bottom: 3rem;
         text-align: center;
+    }
+
+    .responsive-data {
+        gap: 2.5rem;
     }
 
     .hide-mobile {

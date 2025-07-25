@@ -47,6 +47,16 @@
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                                  <p class="margin-bottom-2">Fournisseur :
+                                 <select name="supplier_id"
+                                    class="text-align-center black-background white-color border-radius-0-6 width-11 height-3 no-border"
+                                    required>
+                                    <option value="">-- Sélectionnez un fournisseur --</option>
+                                    @foreach ($suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                    @endforeach
+                                </select>
+                                 </p>
                             <p class="margin-bottom-2">
                                 Prix du produit :
                                 <input type="text" name="price" value="{{ old('price') }}" required
