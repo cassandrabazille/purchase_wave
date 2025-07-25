@@ -70,7 +70,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "doctrine/dbal": "^4.2",
+        "doctrine/dbal": "^4.3",
         "laravel/tinker": "^2.10"
     }
 }

@@ -21,6 +21,11 @@ class UserAuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
+        ], [
+            'email.email' => 'L\'adresse email n\'est pas valide.',
+            'email.unique' => 'Cette adresse email est déjà utilisée.',
+            'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
+            'password.confirmed' => 'Les mots de passe ne correspondent pas.',
         ]);
 
         $user = User::create([
@@ -30,35 +35,38 @@ class UserAuthController extends Controller
         ]);
 
         \Auth::guard('web')->login($user);
-    $request->session()->regenerate();
+        $request->session()->regenerate();
 
-    return redirect()->route('dashboard.index')->with('success', 'Inscription réussie. Bienvenue 👋');
-}
+        return redirect()->route('dashboard.index')->with('success', 'Inscription réussie. Bienvenue 👋');
+    }
 
-    
+
 
     public function showLogin()
     {
         return view('auth.login');
     }
 
-public function doLogin(Request $request)
-{
-    $request->validate([
-        'email' => 'required|string|max:255',
-        'password' => 'required|min:8',
-    ]);
+    public function doLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|max:255',
+            'password' => 'required|min:8',
+        ], [
+            'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
+        ]);
 
-    if (\Auth::guard('web')->attempt($request->only('email', 'password'))) {
-        $request->session()->regenerate();
-        return redirect()->route('dashboard.index')->with('success', 'Connexion réussie. Bienvenue 👋');
+
+        if (\Auth::guard('web')->attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+            return redirect()->route('dashboard.index')->with('success', 'Connexion réussie. Bienvenue 👋');
+        }
+
+        // Si on arrive ici, la connexion a échoué
+        return back()->withErrors([
+            'email' => 'Mauvaise adresse ou mot de passe.',
+        ])->withInput($request->only('email'));
     }
-
-    // Si on arrive ici, la connexion a échoué
-    return back()->withErrors([
-        'email' => 'Mauvaise adresse ou mot de passe.',
-    ])->withInput($request->only('email'));
-}
 
 
 

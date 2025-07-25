@@ -29,11 +29,12 @@ class SupplierController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
+            'email' => 'required|email|max:255|unique:users,email',
             'telephone' => ['required', 'regex:/^\+[1-9]\d{1,14}$/'],
             'address' => ['required', 'string', 'max:255', 'regex:/^\d+\s[\w\s\'\-]+,\s\d{5}\s[\w\s\-]+$/'],
         ], [
             'telephone.regex' => 'Le numéro de téléphone doit être au format international, exemple : +33612345678.',
+            'email.unique' => 'Cette adresse email est déjà utilisée par un autre fournisseur.',
             'address.regex' => 'L\'adresse doit être au format : 12 rue du Poteau, 75012 Paris.',
         ]);
 
@@ -62,11 +63,12 @@ class SupplierController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
+            'email' => 'required|email|max:255|unique:users,email',
             'telephone' => ['required', 'regex:/^\+[1-9]\d{1,14}$/'],
             'address' => ['required', 'string', 'max:255', 'regex:/^\d+\s[\w\s\'\-]+,\s\d{5}\s[\w\s\-]+$/'],
         ], [
             'telephone.regex' => 'Le numéro de téléphone doit être au format international, exemple : +33612345678.',
+            'email.unique' => 'Cette adresse email est déjà utilisée par un autre fournisseur.',
             'address.regex' => 'L\'adresse doit être au format : 12 rue du Poteau, 75012 Paris.',
         ]);
 

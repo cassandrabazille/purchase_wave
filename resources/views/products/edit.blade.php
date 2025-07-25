@@ -72,16 +72,6 @@
                             <p class="margin-bottom-2">
                                 <input type="file" name="image" class="margin-top-2" accept="image/jpeg,image/png,image/jpg">
                             </p>
-                            <label class="font-size-1-4">Catégorie : </label>
-                            <select name="category_id"
-                                class="text-align-center margin-bottom-2 black-background white-color border-radius-0-6 width-11 height-3 no-border">
-                                <option value="">-- Sélectionnez une catégorie --</option>
-                                @foreach ($categories as $category)
-                                    <option value={{ $category->id }} {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
                            <div class="justify-center">
                             <button type="submit"
                                 class="responsive-button justify-center align-items-center blue-background hover-blue font-poppins-ss font-size-1-4 white-color normal-font-weight width-15 height-5 margin-top-1 border-radius-3-4 no-border cursor-pointer">Confirmer</button>

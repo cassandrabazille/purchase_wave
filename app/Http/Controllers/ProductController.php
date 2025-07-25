@@ -99,7 +99,6 @@ class ProductController extends Controller
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
-            'category_id' => 'nullable|exists:categories,id',
         ]);
 
         $imagePath = $product->image; // Garder l'ancienne image par défaut
@@ -121,7 +120,6 @@ class ProductController extends Controller
             'description' => $validated['description'],
             'price' => $validated['price'],
             'image' => $imagePath,
-            'category_id' => $validated['category_id'] ?? null,
         ]);
 
         return redirect()->route('products.index')
