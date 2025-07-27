@@ -23,15 +23,15 @@
         </ul>
     </div>
 @endif
-    <main class="padding-top-2">
+    <div class="padding-top-2">
         <div>
             <div class="justify-flex-end padding-2">
-             <a href="{{ url()->previous() }}">
-                     <button class="responsive-button black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 ">
-                            <img src="{{ asset('images/return.png') }}" alt="Flèches de retour"
-                                class="object-fit-contain padding-left-2 width-4 height-4" />
-                            <span>Return</span>
-                        </button>
+                <a href="{{ url()->previous() }}"
+                        class="responsive-button black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 flex items-center">
+                        <img src="{{ asset('images/return.png') }}"
+                            alt="Flèche qui indique la possibilité de retourner sur la page précédente."
+                            class="object-fit-contain padding-left-2 width-4 height-4">
+                        <span>Return</span>
                     </a>
             </div>
              <div class="flex-row justify-center">
@@ -40,16 +40,23 @@
                 <form action="{{ route('suppliers.update', $supplier->id)}}" method="POST">
                     @csrf
                     @method('PUT')
-                    <p class="margin-bottom-2">Nom du fournisseur : <input type="text" name="name"
-                            value="{{ old('name', $supplier->name) }}"></p>
-                    <p class="margin-bottom-2">Adresse mail du fournisseur : <input type="text" name="email"
-                            value="{{ old('email', $supplier->email) }}"></p>
-                    <p class="margin-bottom-2">Numéro de téléphone : <input type="text" name="telephone"
+                    <label for="name" class="margin-bottom-2 display-block">Nom du fournisseur : 
+                        <input type="text" id="name" name="name"
+                            value="{{ old('name', $supplier->name) }}">
+                        </label>
+                    <label for="email" class="margin-bottom-2 display-block">Adresse mail du fournisseur : 
+                        <input type="text" id="email" name="email"
+                            value="{{ old('email', $supplier->email) }}">
+                        </label>
+                    <label for ="telephone" class="margin-bottom-2 display-block">Numéro de téléphone : 
+                        <input type="text" id="telephone" name="telephone"
                             value="{{ old('telephone', $supplier->telephone) }}">
-                      </p>
+                      </label>
 
-                    <p class="margin-bottom-2">Adresse : <input type="text" name="address"
-                            value="{{ old('address', $supplier->address) }}"></p>
+                    <label for ="address" class="margin-bottom-2 display-block">Adresse : 
+                        <input type="text" id="address" name="address"
+                            value="{{ old('address', $supplier->address) }}">
+                        </label>
                  <div class="justify-center">
                             <button type="submit"
                                 class="responsive-button justify-center align-items-center blue-background hover-blue font-poppins-ss font-size-1-4 white-color normal-font-weight width-15 height-5 margin-top-1 border-radius-3-4 no-border cursor-pointer">Confirmer</button>
@@ -58,7 +65,6 @@
                </div>
             </div>
         </div>
-    </main>
+    </div>
+    </div>
 @endsection
-</div>
-</html>

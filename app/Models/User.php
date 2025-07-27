@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Order;
-use App\Models\Admin;
 
 
 class User extends Authenticatable
@@ -52,10 +52,10 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'user_id', 'user_id');
     }
 
-
-    public function admin()
+    
+    public function categories()
     {
-        return $this->hasOne(Admin::class, 'user_id', 'user_id');
+        return $this->hasMany(Category::class, 'user_id', 'user_id');
     }
 
 

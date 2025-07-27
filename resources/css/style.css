@@ -51,6 +51,11 @@ p {
     font-weight: 400;
 }
 
+label {
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
 th {
     font-size: 1.6rem;
 }
@@ -67,6 +72,10 @@ td {
 
 .black-box-shadow {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.border-radius-0-1 {
+    border-radius: 0.1rem;
 }
 
 .border-radius-0-4 {
@@ -101,6 +110,9 @@ td {
     border-bottom: 1px solid #d9d9d9;
 }
 
+.with-grey-border {
+    border: 1px solid #ddd;
+}
 /* ================== style ================== */
 
 .no-list-style {
@@ -109,6 +121,10 @@ td {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.no-user-select {
+    user-select: none;
 }
 
 /* ================== colors ================== */
@@ -161,6 +177,9 @@ td {
     background-color: #d9d9d9;
 }
 
+.light-grey-background {
+    background-color: #f0f0f0;
+}
 
 /* ================== size & fit ================== */
 
@@ -351,6 +370,15 @@ td {
     flex: 1;
 }
 
+.display-block {
+    display: block;
+}
+
+.visually-hidden {
+    position: absolute;
+    left: -9999px;
+}
+
 /* ================== FONT ================== */
 
 .font-weight-500 {
@@ -451,14 +479,21 @@ td {
     padding: 0.6rem 1.2rem;
 }
 
+.padding-O-6-1-6 {
+    padding: 0.6rem 1.6rem;
+}
+
 .padding-1-6-2 {
     padding: 1.6rem 2rem;
+}
+
+.padding-0-4-0-8 {
+    padding: 0.4rem 0.8rem;
 }
 
 .margin-0 {
     margin: 0rem;
 }
-
 
 .margin-2-5 {
     margin: 2.5rem;
@@ -564,57 +599,6 @@ td {
     gap: 7.6rem;
 }
 
-/* ================== DROP-DOWN ================== */
-.manage-reference {
-  cursor: pointer;
-  user-select: none;
-  font-weight: 500;
-  width: max-content;
-}
-
-.dropdown-ref {
-  margin: 0;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background-color: #f0f0f0;
-  display: inline-block;
-}
-
-.dropdown-ref:hover,
-.manage-reference.open .dropdown-ref {
-  background-color: #e0e0e0;
-}
-
-#referencesDropdownMenu {
-  margin-top: 4px;
-  padding: 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  list-style: none;
-  min-width: 160px;
-  display: none; /* caché par défaut */
-}
-
-.manage-reference.open #referencesDropdownMenu {
-  display: block;
-}
-
-#referencesDropdownMenu li {
-  padding: 6px 16px;
-}
-
-#referencesDropdownMenu li a {
-  color: #333;
-  text-decoration: none;
-  display: block;
-}
-
-#referencesDropdownMenu li a:hover {
-  background-color: #f5f5f5;
-}
-
-
 /* ================== RESPONSIVE ================== */
 
 /* -------- Mobile : < 768px -------- */
@@ -624,7 +608,6 @@ td {
     }
     body {
         padding: 0.5rem;
-       
     }
 
     h1 {
@@ -637,7 +620,7 @@ td {
     h3 {
         font-size: 1.8rem;
     }
-    p {
+    p, label,td {
         font-size: 1.6rem;
     }
 
@@ -684,12 +667,11 @@ td {
 
     .responsive-title-and-btn {
         flex-direction: column;
-      
     }
 
-   .responsive-create-btn {
-    justify-content: center;
-   }
+    .responsive-create-btn {
+        justify-content: center;
+    }
 
     .dashboard-responsive h1 {
         margin-bottom: 3rem;
@@ -718,7 +700,7 @@ td {
 /* -------- Tablette : 768px - 1199px -------- */
 @media (min-width: 768px) and (max-width: 1199px) {
     html {
-        font-size: 56.25%;
+        font-size: 52.25%;
     }
     body {
         padding: 1.5rem 2rem;
@@ -742,9 +724,14 @@ td {
         font-size: 2rem;
     }
     p,
-    a,
-    button {
+    label,
+    a, td{
         font-size: 1.6rem;
+    }
+
+    .delete-icon {
+        width: 2.5rem;
+        height: 2.5rem;
     }
 
     .responsive-header {
@@ -824,6 +811,7 @@ td {
     }
 
     p,
+    label,
     a,
     td {
         font-size: 1.8rem;

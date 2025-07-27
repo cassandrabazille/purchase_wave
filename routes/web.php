@@ -13,6 +13,11 @@ use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminProfileController;
 
+// Route principale
+
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 // Users
 

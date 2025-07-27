@@ -4,16 +4,15 @@
 
 @section('content')
     <div class="container">
-        <main class="padding-top-2">
+        <div class="padding-top-2">
             <div>
                 <div class="justify-flex-end padding-2">
-                    <a href="{{ url()->previous() }}">
-                        <button
-                            class="responsive-button black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 ">
-                            <img src="{{ asset('images/return.png') }}" alt="Flèches de retour"
-                                class="object-fit-contain padding-left-2 width-4 height-4" />
-                            <span>Return</span>
-                        </button>
+                       <a href="{{ url()->previous() }}"
+                        class="responsive-button black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 flex items-center">
+                        <img src="{{ asset('images/return.png') }}"
+                            alt="Flèche qui indique la possibilité de retourner sur la page précédente."
+                            class="object-fit-contain padding-left-2 width-4 height-4">
+                        <span>Return</span>
                     </a>
                 </div>
                 <div class="justify-center">
@@ -28,8 +27,7 @@
                     </div>
                 </div>
             </div>
-        </main>
-@endsection
-</div>
+        </div>
+     </div>
 
-</html>
+@endsection

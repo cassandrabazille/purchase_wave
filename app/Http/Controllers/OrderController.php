@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Admin\ProductController;
-use App\Models\OrderItem;
-use App\Models\Product;
-use Illuminate\Database\Console\ShowCommand;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\User;

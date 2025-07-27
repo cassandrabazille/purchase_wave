@@ -9,11 +9,11 @@
     @vite(['resources/css/style.css', 'resources/js/navbar.js'])
 
     {{-- Fonts --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap"
-        rel="stylesheet" />
+        rel="stylesheet">
 
     <title>@yield('title', 'PurchaseWave - Auth')</title>
 </head>
@@ -23,7 +23,7 @@
     {{-- Header --}}
     <header class="responsive-header flex-row space-between padding-right-2 padding-left-2">
         <nav>
-          <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo PurchaseWave">
+          <img src="{{ asset('images/logo_desktop.png') }}" alt="Logo PurchaseWave.">
         </nav>
         <nav class="responsive-header flex-row align-items-center gap-10">
   
@@ -31,7 +31,7 @@
 
 
             <div class="user-info flex-row align-items-center gap-2 cursor-pointer" onclick="toggleDropdown()">
-                <img src="{{ asset('images/user-img.png') }}" alt="Profil" />
+                <img src="{{ asset('images/user-img.png') }}" alt="Image de profil de l'admin.">
                 <div class="user-dropdown">
                     <p class="user">{{ auth('admin')->user()->name }}</p>
                     <!-- ↓ Utilisez une classe ET un ID pour plus de fiabilité ↓ -->

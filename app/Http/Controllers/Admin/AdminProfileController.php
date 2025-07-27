@@ -37,9 +37,11 @@ class AdminProfileController extends Controller
     public function updatePassword(Request $request)
     {
         $admin = auth('admin')->user();
-
+    dd(get_class($admin), gettype($admin->password));
+        
         $request->validate([
             'current_password' => ['required', function ($attribute, $value, $fail) use ($admin) {
+                
                 if (!Hash::check($value, $admin->password)) {
                     $fail('Le mot de passe actuel est incorrect.');
                 }

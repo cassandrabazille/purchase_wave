@@ -3,30 +3,45 @@
 @section('title', 'Page de connexion')
 
 @section('content')
+
     <div class="container">
-        <main class="padding-top-2">
+
+        <div class="padding-top-2">
+
             <div>
+
                 <div class="justify-flex-end padding-2">
-                      <a href="{{ url()->previous() }}">
-                    <button class="responsive-button black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 ">
-                            <img src="{{ asset('images/return.png') }}" alt="Flèches de retour"
-                                class="object-fit-contain padding-left-2 width-4 height-4" />
-                            <span>Return</span>
-                        </button>
+                    <a href="{{ url()->previous() }}"
+                        class="responsive-button black-background white-color font-size-1-4 text-align-right width-11-7 height-4-4 cursor-pointer border-radius-1 no-border black-box-shadow align-items-center gap-1 flex items-center">
+                        <img src="{{ asset('images/return.png') }}"
+                            alt="Flèche qui indique la possibilité de retourner sur la page précédente."
+                            class="object-fit-contain padding-left-2 width-4 height-4">
+                        <span>Return</span>
                     </a>
                 </div>
-                       <div class="justify-center">
-            <div class="max-width-70pct border-radius-1 black-box-shadow padding-3">
-                    <h2 class="margin-bottom-2">Détail de la catégorie</h2>
-                    <p class="margin-bottom-2">Nom de la catégorie : <strong>{{ $category->name }}</strong></p>
-                    <p class="margin-bottom-2">Descriptif de la catégorie : <strong>{{ $category->description }}</strong> </p>
-                    <p class="margin-bottom-2">Utilisateur qui a créé la catégorie :
-                        <strong>{{ $category->user ? $category->user->name : 'Utilisateur inconnu' }}</strong> </p>
-                </div>
-                </div>
-            </div>
-        </main>
-@endsection
-</div>
 
-</html>
+                <div class="justify-center">
+
+                    <div class="max-width-70pct border-radius-1 black-box-shadow padding-3">
+
+                        <h2 class="margin-bottom-2">Détail de la catégorie</h2>
+
+                        <p class="margin-bottom-2">Nom de la catégorie : <strong>{{ $category->name }}</strong></p>
+
+                        <p class="margin-bottom-2">Descriptif de la catégorie :
+                            <strong>{{ $category->description }}</strong> </p>
+
+                        <p class="margin-bottom-2">Utilisateur qui a créé la catégorie :
+                            <strong>{{ $category->user ? $category->user->name : 'Utilisateur inconnu' }}</strong>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+
+@endsection
