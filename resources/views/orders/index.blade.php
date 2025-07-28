@@ -53,7 +53,7 @@
         <th class="hide-mobile hide-tablet font-weight-bold text-align-left padding-1-6-2">Acheteur·se</th>
         <th class="font-weight-bold text-align-left padding-1-6-2">Statut</th>
         <th class="hide-mobile font-weight-bold text-align-left padding-1-6-2">Fournisseur</th>
-        <th class="hide-mobile font-weight-bold text-align-left padding-1-6-2">Montant</th>
+        <th class="hide-mobile hide-tablet font-weight-bold text-align-left padding-1-6-2">Montant</th>
         <th class="hide-mobile font-weight-bold text-align-left padding-1-6-2 overflow-wrap word-break max-width-12">Livraison initiale</th>
         <th class="hide-mobile font-weight-bold text-align-left padding-1-6-2 overflow-wrap word-break max-width-12"><span class="max-2-lines">Livraison confirmée</span></th>
         <th class="font-weight-bold text-align-left padding-1-6-2">Actions</th>
@@ -70,7 +70,7 @@
       <td class="hide-mobile hide-tablet text-align-left padding-1-6-2 with-bottom-border">{{$order->user?->name ?? 'N/A'}}</td>
       <td class="text-align-left padding-1-6-2 with-bottom-border">{{$order->status}}</td>
       <td class="hide-mobile text-align-left padding-1-6-2 with-bottom-border">{{$order->supplier?->name ?? 'N/A'}}</td>
-      <td class="hide-mobile text-align-left padding-1-6-2 with-bottom-border">{{number_format($order->order_amount, 2, ',', ' ')}} €</td>
+      <td class="hide-mobile hide-tablet text-align-left padding-1-6-2 with-bottom-border">{{number_format($order->order_amount, 2, ',', ' ')}} €</td>
       <td class="hide-mobile text-align-left padding-1-6-2 with-bottom-border">{{ $order->expected_delivery_date ? date('d/m/Y', strtotime($order->expected_delivery_date)) : 'N/A' }}
       </td>
       <td class="hide-mobile text-align-left padding-1-6-2 with-bottom-border">

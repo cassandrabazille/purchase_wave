@@ -32,8 +32,8 @@
                         <thead>
                             <tr class="grey-background">
                                 <th class="font-weight-bold text-align-left padding-1-6-2">Nom complet</th>
-                                <th class="font-weight-bold text-align-left padding-1-6-2">Mail</th>
-                                <th class="font-weight-bold text-align-left padding-1-6-2">Date de création de compte</th>
+                                <th class="font-weight-bold text-align-left padding-1-6-2 hide-mobile">Mail</th>
+                                <th class="font-weight-bold text-align-left padding-1-6-2 hide-mobile">Date de création de compte</th>
                                 <th class="font-weight-bold text-align-left padding-1-6-2">Actions</th>
                             </tr>
                         </thead>
@@ -43,8 +43,8 @@
                             @forelse ($users as $user)
                                 <tr>
                                     <td class="text-align-left padding-1-6-2 with-bottom-border">{{ $user->name }}</td>
-                                    <td class="text-align-left padding-1-6-2 with-bottom-border">{{ $user->email }}</td>
-                                    <td class="text-align-left padding-1-6-2 with-bottom-border">{{ $user->created_at }}
+                                    <td class="text-align-left padding-1-6-2 with-bottom-border hide-mobile">{{ $user->email }}</td>
+                                    <td class="text-align-left padding-1-6-2 with-bottom-border hide-mobile">{{ $user->created_at }}
                                     </td>
                                     <td class="text-align-left padding-1-6-2 with-bottom-border">
 

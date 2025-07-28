@@ -30,17 +30,17 @@ class Order extends Model
     protected static function boot()
     {
         parent::boot();
-      static::created(function ($order) {
-    if (empty($order->reference)) {
-        $prefixNumber = 1000;
-        $order->updateQuietly([
-            'reference' => 'ORD-' . ($prefixNumber + $order->id)
-        ]);
+        static::created(function ($order) {
+            if (empty($order->reference)) {
+                $prefixNumber = 1000;
+                $order->updateQuietly([
+                    'reference' => 'ORD-' . ($prefixNumber + $order->id)
+                ]);
             }
         });
     }
 
-    public function recalculateAmount() 
+    public function recalculateAmount()
     {
         $this->order_amount = $this->orderItems()->sum('line_total');
         $this->save();

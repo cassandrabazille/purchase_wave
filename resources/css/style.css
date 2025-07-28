@@ -61,7 +61,7 @@ th {
 }
 
 td {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
 }
 
 .italic {
@@ -620,7 +620,7 @@ td {
     h3 {
         font-size: 1.8rem;
     }
-    p, label,td {
+    p, label,td,th  {
         font-size: 1.6rem;
     }
 
@@ -717,7 +717,7 @@ td {
     }
 
     h2 {
-        font-size: 2.4rem;
+        font-size: 2.1rem;
     }
 
     h3 {
@@ -725,9 +725,10 @@ td {
     }
     p,
     label,
-    a, td{
+    a, th, td{
         font-size: 1.6rem;
     }
+
 
     .delete-icon {
         width: 2.5rem;
