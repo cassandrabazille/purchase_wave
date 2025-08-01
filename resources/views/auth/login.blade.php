@@ -30,7 +30,7 @@
             </div>
         @endif
 
-        <div class="responsive-login flex-row gap-3 margin-top-2">
+        <div class="responsive-login flex-row align-items-center gap-3 margin-top-2">
             <div>
                 <img src="{{ asset('images/connexion.png') }}" alt="">
             </div>

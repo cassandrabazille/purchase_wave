@@ -50,7 +50,7 @@
 
         <tr class="grey-background">
         <th class="font-weight-bold text-align-left padding-1-6-2">Name</th>
-        <th class="font-weight-bold text-align-left padding-1-6-2">Mots clés associés</th>
+        <th class="font-weight-bold text-align-left padding-1-6-2 hide-mobile">Mots clés associés</th>
         <th class="font-weight-bold text-align-left padding-1-6-2">Actions</th>
         </tr>
 
@@ -59,7 +59,7 @@
       <tr>
 
       <td class="text-align-left padding-1-6-2 with-bottom-border">{{$category->name}}</td>
-      <td class="text-align-left padding-1-6-2 with-bottom-border">{{$category->slug}}</td>
+      <td class="text-align-left padding-1-6-2 with-bottom-border hide-mobile">{{$category->slug}}</td>
       <td class="text-align-left padding-1-6-2 with-bottom-border">
 
         <div class="align-items-center gap-1-5">

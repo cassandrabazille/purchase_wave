@@ -30,14 +30,20 @@ Route::controller(UserAuthController::class)->group(function () {
 });
 
 
+// Routes accessibles uniquement aux utilisateurs authentifiés
 Route::middleware(['auth'])->group(function () {
+
+    // Routes liées au profil utilisateur (édition, mise à jour, mot de passe)
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [UserProfileController::class, 'edit'])->name('edit');
         Route::post('/update', [UserProfileController::class, 'update'])->name('update');
         Route::post('/password', [UserProfileController::class, 'updatePassword'])->name('password');
     });
 
+    // Routes CRUD pour les commandes
     Route::resource('orders', OrderController::class);
+
+    // Routes CRUD pour les catégories/ produits/ fournisseurs/ lignes de commande/ tableau de bord
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
     Route::resource('suppliers', SupplierController::class);

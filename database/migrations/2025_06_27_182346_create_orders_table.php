@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     /**
-     * Run the migrations.
+     * Migration pour créer la table des commandes d'achat ("orders").
      */
     public function up(): void
     {
+        // Création de la table "orders" avec ses relations et colonnes clés
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('reference');
@@ -21,11 +22,15 @@ return new class extends Migration {
             $table->uuid('user_id')->nullable()->index();
             $table->unsignedBigInteger('supplier_id')->nullable()->index();
             $table->timestamps();
+
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('set null');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('set null');
         });
     }
 
+    /**
+     * Supprime la table "orders" si elle existe.
+     */
     public function down(): void
     {
         Schema::dropIfExists('orders');
