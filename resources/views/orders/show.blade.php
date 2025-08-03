@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'Page de connexion')
+@section('title', 'Détail de la commande')
 
 @section('content')
 
